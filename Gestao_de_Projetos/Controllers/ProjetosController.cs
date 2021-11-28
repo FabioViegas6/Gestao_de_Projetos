@@ -21,12 +21,15 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Projetos
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index(string NomeProjeto, int page = 1)
         {
+            var projetoSearch = _context.Projetos
+               .Where(b => NomeProjeto == null || b.Nome_projeto.Contains(NomeProjeto));
+
             var pagingInfo = new PagingInfo
             {
                 CurrentPage = page,
-                TotalItems = _context.Projetos.Count()
+                TotalItems = projetoSearch.Count()
             };
 
             if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
@@ -39,7 +42,7 @@ namespace Gestao_de_Projetos.Controllers
                 pagingInfo.CurrentPage = 1;
             }
 
-            var projetos = await _context.Projetos
+            var projetos = await projetoSearch
                            // .Include(b =>)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)

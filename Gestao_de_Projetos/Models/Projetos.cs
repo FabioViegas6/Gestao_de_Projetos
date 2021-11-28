@@ -11,13 +11,16 @@ namespace Gestao_de_Projetos.Models
         [Key]
         public int ID_projeto { get; set; }
 
-        [Display(Name ="Nome do projeto é obrigatorio")]
+        [Required]
+        [Display(Name ="Nome do Projeto")]
         public string Nome_projeto { get; set; }
 
-        [Display(Name = "Campo obrigatorio")]
+        [Required]
+        [Display(Name = "Data Inicio")]
         public DateTime Data_inicio { get; set; }
 
-        [Display(Name = "Campo obrigatorio")]
+        [Required]
+        [Display(Name = "Data Fim")]
         public DateTime Data_fim { get; set; }
     }
 }

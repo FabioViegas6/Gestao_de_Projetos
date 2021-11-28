@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Gestao_de_Projetos.Models;
 
 namespace Gestao_de_Projetos.Data
 {
@@ -12,5 +13,6 @@ namespace Gestao_de_Projetos.Data
            : base(options)
         {
         }
+        public DbSet<Gestao_de_Projetos.Models.Projetos> Projetos { get; set; }
     }
 }

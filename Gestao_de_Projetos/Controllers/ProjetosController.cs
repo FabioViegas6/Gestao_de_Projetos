@@ -52,7 +52,8 @@ namespace Gestao_de_Projetos.Controllers
                 new ProjetosListViewModels
                 {
                     ListaProjetos = projetos,
-                    PagingInfo = pagingInfo
+                    PagingInfo = pagingInfo,
+                    ProjetoSearched = NomeProjeto
                 }
             );
         }

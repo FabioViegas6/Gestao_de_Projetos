@@ -29,6 +29,16 @@ namespace Gestao_de_Projetos.Controllers
                 TotalItems = _context.Projetos.Count()
             };
 
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
             var projetos = await _context.Projetos
                            // .Include(b =>)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)

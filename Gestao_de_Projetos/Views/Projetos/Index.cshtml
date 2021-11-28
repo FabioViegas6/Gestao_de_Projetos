@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Gestao_de_Projetos.Models.Projetos>
+﻿@model ProjetosListViewModels
 
 @{
     ViewData["Title"] = "Index";
@@ -6,42 +6,23 @@
 
 <h1>Index</h1>
 
+<p>There are a total of @Model.PagingInfo.TotalItems projetos</p>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nome_projeto)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data_inicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Data_fim)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome_projeto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data_inicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data_fim)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID_projeto">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID_projeto">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID_projeto">Delete</a>
-            </td>
-        </tr>
+
+@foreach (var projeto in Model.ListaProjetos)
+{
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">@projeto.Nome_projeto</h5>
+            <p class="card-text">@projeto.Data_inicio</p>
+            <p class="card-text">@projeto.Data_fim</p>
+
+            <a asp-action="Details" asp-route-id="@projeto.ID_projeto" class="btn btn-info">Details</a>
+            <a asp-action="Edit" asp-route-id="@projeto.ID_projeto" class="btn btn-warning">Edit</a>
+            <a asp-action="Delete" asp-route-id="@projeto.ID_projeto" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
 }
-    </tbody>
-</table>

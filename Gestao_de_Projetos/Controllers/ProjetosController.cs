@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -22,7 +23,25 @@ namespace Gestao_de_Projetos.Controllers
         // GET: Projetos
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Projetos.ToListAsync());
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = 1,
+                TotalItems = _context.Projetos.Count()
+            };
+
+            var projetos = await _context.Projetos
+                           // .Include(b =>)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new ProjetosListViewModels
+                {
+                    ListaProjetos = projetos,
+                    PagingInfo = pagingInfo
+                }
+            );
         }
 
         // GET: Projetos/Details/5

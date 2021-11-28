@@ -21,11 +21,11 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Projetos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
             var pagingInfo = new PagingInfo
             {
-                CurrentPage = 1,
+                CurrentPage = page,
                 TotalItems = _context.Projetos.Count()
             };
 

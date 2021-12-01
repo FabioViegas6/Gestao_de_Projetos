@@ -15,6 +15,7 @@ namespace Gestao_de_Projetos.Models
         public DateTime dataInicio { get; set; }
         public DateTime dataFim { get; set; }
 
-        
+        public int ID_membro { get; set; }
+        public Membros Membros { get; set; }
     }
 }

@@ -34,6 +34,9 @@ namespace Gestao_de_Projetos
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
+
+            services.AddDbContext<Gestao_de_ProjetosContext>(options =>
+           options.UseSqlServer(Configuration.GetConnectionString("Gestao_de_ProjetosContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

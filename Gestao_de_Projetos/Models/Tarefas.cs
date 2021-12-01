@@ -7,5 +7,14 @@ namespace Gestao_de_Projetos.Models
 {
     public class Tarefas
     {
+
+        public int idTarefas { get; set; }
+
+        public string Descricao { get; set; }
+
+        public DateTime dataInicio { get; set; }
+        public DateTime dataFim { get; set; }
+
+        
     }
 }

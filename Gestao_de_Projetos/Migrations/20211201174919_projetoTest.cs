@@ -1,8 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gestao_de_Projetos.Migrations
 {
-    public partial class Membros_1 : Migration
+    public partial class projetoTest : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -20,12 +21,30 @@ namespace Gestao_de_Projetos.Migrations
                 {
                     table.PrimaryKey("PK_Membros", x => x.ID_membro);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Projetos",
+                columns: table => new
+                {
+                    ID_projeto = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome_projeto = table.Column<string>(nullable: false),
+                    Data_inicio = table.Column<DateTime>(nullable: false),
+                    Data_fim = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Projetos", x => x.ID_projeto);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Membros");
+
+            migrationBuilder.DropTable(
+                name: "Projetos");
         }
     }
 }

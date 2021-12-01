@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestao_de_Projetos.Migrations
 {
     [DbContext(typeof(Gestao_de_ProjetosContext))]
-    [Migration("20211128182443_projetos")]
-    partial class projetos
+    [Migration("20211201174919_projetoTest")]
+    partial class projetoTest
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,30 @@ namespace Gestao_de_Projetos.Migrations
                 .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Gestao_de_Projetos.Models.Membros", b =>
+                {
+                    b.Property<int>("ID_membro")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome_membro")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sexo")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID_membro");
+
+                    b.ToTable("Membros");
+                });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Projetos", b =>
                 {

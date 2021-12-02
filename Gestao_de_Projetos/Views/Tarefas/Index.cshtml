@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Gestao_de_Projetos.Models.Tarefas>
+﻿@model TarefasListViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,45 +9,18 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Descricao)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dataInicio)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.dataFim)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ID_membro)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dataInicio)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dataFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ID_membro)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.idTarefas">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.idTarefas">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.idTarefas">Delete</a>
-            </td>
-        </tr>
+@foreach (var tarefas in Model.ListaTarefas)
+{
+    <div class="card mt-3">
+        <div class="card-body">
+            <h5 class="card-title">@tarefas.Descricao</h5>
+            <p class="card-text">@tarefas.dataInicio</p>
+            <p class="card-text">@tarefas.dataFim</p>
+            <p class="card-text">@tarefas.Membros</p>
+
+            <a asp-action="Details" asp-route-id="@tarefas.idTarefas" class="btn btn-info">Details</a>
+            <a asp-action="Edit" asp-route-id="@tarefas.idTarefas" class="btn btn-warning">Edit</a>
+            <a asp-action="Delete" asp-route-id="@tarefas.idTarefas" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
 }
-    </tbody>
-</table>

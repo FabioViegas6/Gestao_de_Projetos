@@ -10,6 +10,20 @@
     <a asp-action="Create">Create New</a>
 </p>
 
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">Search</h5>
+        <form asp-action="Index" method="get">
+            <label for="NomeMembro" class="control-label">Nome do Membro</label>
+            <input name="NomeMembro" type="search" class="form-control" value="@Model.membroSearched" />
+            <div class="mt-3">
+                <input type="submit" value="Search" class="btn btn-info" />
+                <a asp-action="Index" class="btn btn-secondary">Clear</a>
+            </div>
+        </form>
+    </div>
+</div>
+
 @foreach (var membros in Model.ListaMembros)
 {
     <div class="card mt-3">

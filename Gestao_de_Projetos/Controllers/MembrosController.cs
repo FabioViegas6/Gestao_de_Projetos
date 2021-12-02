@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -19,11 +20,47 @@ namespace Gestao_de_Projetos.Controllers
             _context = context;
         }
 
+        public PagingInfo PagingInfo { get; private set; }
+        public List<Projetos> ListaMembros { get; private set; }
+
         // GET: Membros
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string NomeMembro, int page = 1)
         {
-            return View(await _context.Membros.ToListAsync());
+            var membroSearch = _context.Membros
+               .Where(b => NomeMembro == null || b.Nome_membro.Contains(NomeMembro));
+
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = membroSearch.Count()
+            };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var membros = await membroSearch
+                            // .Include(b =>)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new MembroListViewModel
+                {
+                    ListaMembros = membros,
+                    PagingInfo = pagingInfo,
+                    membroSearched = NomeMembro
+                }
+            );
         }
+    
 
         // GET: Membros/Details/5
         public async Task<IActionResult> Details(int? id)

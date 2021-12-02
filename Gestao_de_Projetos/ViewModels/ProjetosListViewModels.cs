@@ -11,6 +11,6 @@ namespace Gestao_de_Projetos.ViewModels
         public IEnumerable<Projetos> ListaProjetos { get; set; }
         public PagingInfo PagingInfo { get; set; }
         public string ProjetoSearched { get; set; }
-
+        public List<Projetos> ListaMembros { get; internal set; }
     }
 }

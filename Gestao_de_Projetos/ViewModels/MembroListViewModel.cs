@@ -10,5 +10,6 @@ namespace Gestao_de_Projetos.ViewModels
     {
         public IEnumerable<Membros> ListaMembros { get; set; }
         public PagingInfo PagingInfo { get; set; }
+        public string membroSearched { get; set; }
     }
 }

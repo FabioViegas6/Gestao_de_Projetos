@@ -15,5 +15,6 @@ namespace Gestao_de_Projetos.Data
         }
         public DbSet<Gestao_de_Projetos.Models.Projetos> Projetos { get; set; }
         public DbSet<Gestao_de_Projetos.Models.Membros> Membros { get; set; }
+        public DbSet<Gestao_de_Projetos.Models.Tarefas> Tarefas { get; set; }
     }
 }

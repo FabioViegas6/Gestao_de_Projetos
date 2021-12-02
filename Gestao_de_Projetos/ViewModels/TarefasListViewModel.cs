@@ -9,6 +9,8 @@ namespace Gestao_de_Projetos.ViewModels
     public class TarefasListViewModel
     {
 
+        public string tarefasSearched { get; set; }
+
         public IEnumerable<Tarefas> ListaTarefas { get; set; }
         public PagingInfo PagingInfo { get; set; }
 

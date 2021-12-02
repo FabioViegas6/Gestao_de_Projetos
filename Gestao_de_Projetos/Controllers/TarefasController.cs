@@ -21,21 +21,34 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Tarefas
-        public async Task<IActionResult> Index(int page = 1)
+        public async Task<IActionResult> Index( string tarefa, int page = 1)
         {
 
 
             //////////////////////////////////////////////////////////////////////////////////////////////////////
             ///
 
+            var tarefasSearch = _context.Tarefas
+               .Where(b => tarefa == null || b.Descricao.Contains(tarefa));
+
             var pagingInfo = new PagingInfo
             {
                 CurrentPage = page,
-                TotalItems = _context.Tarefas.Count()
+                TotalItems = tarefasSearch.Count()
             };
 
-            var tarefas = await _context.Tarefas
-                            .Include(b => b.Membros)
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var tarefas = await tarefasSearch
+                            // .Include(b =>)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
                             .ToListAsync();
@@ -44,9 +57,32 @@ namespace Gestao_de_Projetos.Controllers
                 new TarefasListViewModel
                 {
                     ListaTarefas = tarefas,
-                    PagingInfo = pagingInfo
+                    PagingInfo = pagingInfo,
+                    tarefasSearched = tarefa
                 }
             );
+
+
+
+            /* var pagingInfo = new PagingInfo
+             {
+                 CurrentPage = page,
+                 TotalItems = _context.Tarefas.Count()
+             };
+
+             var tarefas = await _context.Tarefas
+                             .Include(b => b.Membros)
+                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                             .Take(pagingInfo.PageSize)
+                             .ToListAsync();
+
+             return View(
+                 new TarefasListViewModel
+                 {
+                     ListaTarefas = tarefas,
+                     PagingInfo = pagingInfo
+                 }
+             );*/
 
             ///////////////////
 

@@ -22,5 +22,8 @@ namespace Gestao_de_Projetos.Models
         [Required]
         [Display(Name = "Telefone")]
         public string Telefone { get; set; }
+
+
+        public ICollection <Tarefas> Tarefas { get; set; }
     }
 }

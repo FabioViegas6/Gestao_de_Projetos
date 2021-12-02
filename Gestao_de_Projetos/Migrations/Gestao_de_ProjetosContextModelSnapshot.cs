@@ -64,6 +64,43 @@ namespace Gestao_de_Projetos.Migrations
 
                     b.ToTable("Projetos");
                 });
+
+            modelBuilder.Entity("Gestao_de_Projetos.Models.Tarefas", b =>
+                {
+                    b.Property<int>("idTarefas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Descricao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ID_membro")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("MembrosID_membro")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("dataFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("dataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("idTarefas");
+
+                    b.HasIndex("MembrosID_membro");
+
+                    b.ToTable("Tarefas");
+                });
+
+            modelBuilder.Entity("Gestao_de_Projetos.Models.Tarefas", b =>
+                {
+                    b.HasOne("Gestao_de_Projetos.Models.Membros", "Membros")
+                        .WithMany("Tarefas")
+                        .HasForeignKey("MembrosID_membro");
+                });
 #pragma warning restore 612, 618
         }
     }

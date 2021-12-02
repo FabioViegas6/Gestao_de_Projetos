@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gestao_de_Projetos.Migrations
 {
-    public partial class projetoTest : Migration
+    public partial class Tarefas : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -36,15 +36,46 @@ namespace Gestao_de_Projetos.Migrations
                 {
                     table.PrimaryKey("PK_Projetos", x => x.ID_projeto);
                 });
+
+            migrationBuilder.CreateTable(
+                name: "Tarefas",
+                columns: table => new
+                {
+                    idTarefas = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Descricao = table.Column<string>(nullable: false),
+                    dataInicio = table.Column<DateTime>(nullable: false),
+                    dataFim = table.Column<DateTime>(nullable: false),
+                    ID_membro = table.Column<int>(nullable: false),
+                    MembrosID_membro = table.Column<int>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Tarefas", x => x.idTarefas);
+                    table.ForeignKey(
+                        name: "FK_Tarefas_Membros_MembrosID_membro",
+                        column: x => x.MembrosID_membro,
+                        principalTable: "Membros",
+                        principalColumn: "ID_membro",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tarefas_MembrosID_membro",
+                table: "Tarefas",
+                column: "MembrosID_membro");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Membros");
+                name: "Projetos");
 
             migrationBuilder.DropTable(
-                name: "Projetos");
+                name: "Tarefas");
+
+            migrationBuilder.DropTable(
+                name: "Membros");
         }
     }
 }

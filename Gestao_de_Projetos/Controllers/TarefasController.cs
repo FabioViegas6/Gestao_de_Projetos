@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -20,9 +21,37 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Tarefas
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            return View(await _context.Tarefas.ToListAsync());
+
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////
+            ///
+
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = _context.Tarefas.Count()
+            };
+
+            var tarefas = await _context.Tarefas
+                            .Include(b => b.Membros)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new TarefasListViewModel
+                {
+                    ListaTarefas = tarefas,
+                    PagingInfo = pagingInfo
+                }
+            );
+
+            ///////////////////
+
+
+
         }
 
         // GET: Tarefas/Details/5
@@ -34,7 +63,7 @@ namespace Gestao_de_Projetos.Controllers
             }
 
             var tarefas = await _context.Tarefas
-                .FirstOrDefaultAsync(m => m.idTarefas == id);
+                .SingleOrDefaultAsync(m => m.idTarefas == id);
             if (tarefas == null)
             {
                 return NotFound();

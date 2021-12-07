@@ -22,5 +22,11 @@ namespace Gestao_de_Projetos.Models
         [Required]
         [Display(Name = "Data Fim")]
         public DateTime Data_fim { get; set; }
+
+
+        /// <summary>
+        /// ///////////////////////////////////////////////////////////////////////////////////////////////////// Para mexer 
+        /// </summary>
+       // public ICollection<Tarefas> Tarefas { get; set; }
     }
 }

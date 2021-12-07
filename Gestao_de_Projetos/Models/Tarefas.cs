@@ -17,13 +17,32 @@ namespace Gestao_de_Projetos.Models
 
         [Required]
         [Display(Name = "Data inicio ")]
+        [DataType(DataType.Date)]
         public DateTime dataInicio { get; set; }
+
+
+        [Required]
+        [Display(Name = "Data Prevista")]
+        [DataType(DataType.Date)]
+        public DateTime dataPrevista { get; set; }
+
 
         [Required]
         [Display(Name = "Data fim")]
         public DateTime dataFim { get; set; }
 
+
         public int ID_membro { get; set; }
         public Membros Membros { get; set; }
+
+
+
+        /// <summary>
+        /// ////////////////////////////////////////////////////////////////////////
+        /// </summary>
+      //  public int ID_projeto { get; set; }
+       // public Projetos Projetos{ get; set; }
+
+
     }
 }

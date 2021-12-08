@@ -20,9 +20,16 @@ namespace Gestao_de_Projetos.Models
         [Display(Name = "Apelido *", Prompt = "Apelido")]
         public String Apelido { get; set; }
 
+
+        [StringLength(20)]
+        [Display(Name = "Contacto", Prompt = "Contacto")]
         public String Contacto { get; set; }
 
+        [StringLength(10)]
+        [Display(Name = "NIF", Prompt = "NIF")]
         public String NIF { get; set; }
+
+
 
         public String Email { get; set; }
     }

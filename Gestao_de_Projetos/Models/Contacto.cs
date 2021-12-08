@@ -17,21 +17,36 @@ namespace Gestao_de_Projetos.Models
         [Required(ErrorMessage = "Insira seu Nome!")]
         [StringLength(20, MinimumLength = 4, ErrorMessage = "insira um nome entre 4 a 20 caracteres!")]
         [Display(Name = " Nome", Prompt = " ")]
-        public string nome { get; set; }
+        public string Nome { get; set; }
+
+
 
         [Required(ErrorMessage = "Insira seu Sobrenome!")]
         [StringLength(20, MinimumLength = 4, ErrorMessage = "insira um sobrenome entre 4 a 20 caracteres!")]
         [Display(Name = " Sobrenome", Prompt = " ")]
-        public string sobrenome { get; set; }
+        public string Sobrenome { get; set; }
 
-        public string email { get; set; }
+        public string Email { get; set; }
 
-        public string mensagem { get; set; }
-        public string assunto { get; set; }
 
-        public bool verificado { get; set; }
 
-        public string resposta { get; set; }
+        [Required(ErrorMessage = "Por Favor, insira o seu assunto!")]
+        [StringLength(1000, MinimumLength = 10, ErrorMessage = "insira um assunto entre 10 a 1000 caracteres!")]
+        [Display(Name = " Assunto", Prompt = " ")]
+        public string Assunto { get; set; }
+
+
+
+        [Required(ErrorMessage = "Por Favor, insira a sua mensagem!")]
+        [StringLength(1000, MinimumLength = 10, ErrorMessage = "insira uma mensagem entre 10 a 1000 caracteres!")]
+        [Display(Name = " Mensagem", Prompt = " ")]
+        public string Mensagem { get; set; }
+        
+
+        public bool Verificado { get; set; }
+
+
+        public string Resposta { get; set; }
 
     }
 }

@@ -21,11 +21,14 @@ namespace Gestao_de_Projetos.Models
 
 
 
-        [Required(ErrorMessage = "Insira seu Sobrenome!")]
-        [StringLength(20, MinimumLength = 4, ErrorMessage = "insira um sobrenome entre 4 a 20 caracteres!")]
-        [Display(Name = " Sobrenome", Prompt = " ")]
+        [Required(ErrorMessage = sms)]
+        [EmailAddress(ErrorMessage = sms)]
+        [Display(Name = "Email", Prompt = " ")]
         public string Sobrenome { get; set; }
 
+        [Required(ErrorMessage = "Por Favor, insira a sua mensagem!")]
+        [StringLength(1000, MinimumLength = 10, ErrorMessage = "insira uma mensagem entre 10 a 1000 caracteres!")]
+        [Display(Name = " Mensagem", Prompt = " ")]
         public string Email { get; set; }
 
 
@@ -45,7 +48,7 @@ namespace Gestao_de_Projetos.Models
 
         public bool Verificado { get; set; }
 
-
+        [Display(Name = " Resposta ", Prompt = " ")]
         public string Resposta { get; set; }
 
     }

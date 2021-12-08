@@ -16,24 +16,30 @@ namespace Gestao_de_Projetos.Models
         public string Descricao { get; set; }
 
         [Required]
-        [Display(Name = "Data inicio ")]
+        [Display(Name = "Data  de inicio ")]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime dataInicio { get; set; }
 
 
         [Required]
-        [Display(Name = "Data Prevista")]
+        [Display(Name = "Data Prevista Fim")]
         [DataType(DataType.Date)]
-        public DateTime dataPrevista { get; set; }
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        public DateTime dataPrevistaFim { get; set; }
 
 
-        [Required]
-        [Display(Name = "Data fim")]
+        [Display(Name = "Data de entrega")]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime dataFim { get; set; }
 
 
-        public int ID_membro { get; set; }
-        public Membros Membros { get; set; }
+
+
+
+        //public int ID_membro { get; set; }
+       // public Membros Membros { get; set; }
 
 
 

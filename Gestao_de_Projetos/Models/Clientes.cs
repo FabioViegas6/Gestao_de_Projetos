@@ -30,7 +30,13 @@ namespace Gestao_de_Projetos.Models
         public String NIF { get; set; }
 
 
-
+        [Required(ErrorMessage = "Por favor, insira o seu Email")]
+        [StringLength(50, MinimumLength = 12, ErrorMessage = "O seu Email deve ter entre 12 e 50 caracteres")]
+        [EmailAddress(ErrorMessage = "Por favor, introduza o seu Email correto")]
+        [Display(Name = "Email *", Prompt = "Email")]
         public String Email { get; set; }
+
+
+
     }
 }

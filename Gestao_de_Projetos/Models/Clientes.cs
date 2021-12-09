@@ -9,6 +9,9 @@ namespace Gestao_de_Projetos.Models
     public class Clientes
     {
 
+        [Key]
+        public int ClientesId { get; set; }
+
         [Required(ErrorMessage = "Por favor, insira o seu Nome")]
         [StringLength(20, MinimumLength = 4, ErrorMessage = "O nome deve ter entre 4 e 20 caracteres")]
         [Display(Name = "Nome *", Prompt = "Nome")]

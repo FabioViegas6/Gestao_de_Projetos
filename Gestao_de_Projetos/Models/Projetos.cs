@@ -17,10 +17,12 @@ namespace Gestao_de_Projetos.Models
 
         [Required]
         [Display(Name = "Data Inicio")]
+        [DataType(DataType.Date)]
         public DateTime Data_inicio { get; set; }
 
         [Required]
         [Display(Name = "Data Fim")]
+        [DataType(DataType.Date)]
         public DateTime Data_fim { get; set; }
 
 

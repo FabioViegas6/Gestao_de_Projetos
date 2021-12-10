@@ -27,6 +27,6 @@ namespace Gestao_de_Projetos.Models
         /// <summary>
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////// Para mexer 
         /// </summary>
-       // public ICollection<Tarefas> Tarefas { get; set; }
+        public ICollection<Tarefas> Tarefas { get; set; }
     }
 }

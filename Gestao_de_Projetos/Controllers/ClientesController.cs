@@ -10,22 +10,22 @@ using Gestao_de_Projetos.Models;
 
 namespace Gestao_de_Projetos.Controllers
 {
-    public class TarefasController : Controller
+    public class ClientesController : Controller
     {
         private readonly Gestao_de_ProjetosContext _context;
 
-        public TarefasController(Gestao_de_ProjetosContext context)
+        public ClientesController(Gestao_de_ProjetosContext context)
         {
             _context = context;
         }
 
-        // GET: Tarefas
+        // GET: Clientes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Tarefas.ToListAsync());
+            return View(await _context.Clientes.ToListAsync());
         }
 
-        // GET: Tarefas/Details/5
+        // GET: Clientes/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +33,39 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
 
-            var tarefas = await _context.Tarefas
-                .FirstOrDefaultAsync(m => m.IdTarefas == id);
-            if (tarefas == null)
+            var clientes = await _context.Clientes
+                .FirstOrDefaultAsync(m => m.ClientesId == id);
+            if (clientes == null)
             {
                 return NotFound();
             }
 
-            return View(tarefas);
+            return View(clientes);
         }
 
-        // GET: Tarefas/Create
+        // GET: Clientes/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Tarefas/Create
+        // POST: Clientes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("idTarefas,Nome_Tarefa,Descricao,dataPrevistaInicio,dataPrevistaFim,ID_projeto")] Tarefas tarefas)
+        public async Task<IActionResult> Create([Bind("ClientesId,Nome,Apelido,Contacto,NIF,Email,Password")] Clientes clientes)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(tarefas);
+                _context.Add(clientes);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(tarefas);
+            return View(clientes);
         }
 
-        // GET: Tarefas/Edit/5
+        // GET: Clientes/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +73,22 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
 
-            var tarefas = await _context.Tarefas.FindAsync(id);
-            if (tarefas == null)
+            var clientes = await _context.Clientes.FindAsync(id);
+            if (clientes == null)
             {
                 return NotFound();
             }
-            return View(tarefas);
+            return View(clientes);
         }
 
-        // POST: Tarefas/Edit/5
+        // POST: Clientes/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("idTarefas,Nome_Tarefa,Descricao,dataPrevistaInicio,dataPrevistaFim,ID_projeto")] Tarefas tarefas)
+        public async Task<IActionResult> Edit(int id, [Bind("ClientesId,Nome,Apelido,Contacto,NIF,Email,Password")] Clientes clientes)
         {
-            if (id != tarefas.IdTarefas)
+            if (id != clientes.ClientesId)
             {
                 return NotFound();
             }
@@ -97,12 +97,12 @@ namespace Gestao_de_Projetos.Controllers
             {
                 try
                 {
-                    _context.Update(tarefas);
+                    _context.Update(clientes);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!TarefasExists(tarefas.IdTarefas))
+                    if (!ClientesExists(clientes.ClientesId))
                     {
                         return NotFound();
                     }
@@ -113,10 +113,10 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(tarefas);
+            return View(clientes);
         }
 
-        // GET: Tarefas/Delete/5
+        // GET: Clientes/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +124,30 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
 
-            var tarefas = await _context.Tarefas
-                .FirstOrDefaultAsync(m => m.IdTarefas == id);
-            if (tarefas == null)
+            var clientes = await _context.Clientes
+                .FirstOrDefaultAsync(m => m.ClientesId == id);
+            if (clientes == null)
             {
                 return NotFound();
             }
 
-            return View(tarefas);
+            return View(clientes);
         }
 
-        // POST: Tarefas/Delete/5
+        // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var tarefas = await _context.Tarefas.FindAsync(id);
-            _context.Tarefas.Remove(tarefas);
+            var clientes = await _context.Clientes.FindAsync(id);
+            _context.Clientes.Remove(clientes);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool TarefasExists(int id)
+        private bool ClientesExists(int id)
         {
-            return _context.Tarefas.Any(e => e.IdTarefas == id);
+            return _context.Clientes.Any(e => e.ClientesId == id);
         }
     }
 }

@@ -39,7 +39,10 @@ namespace Gestao_de_Projetos.Models
         [Display(Name = "Email *", Prompt = "Email")]
         public String Email { get; set; }
 
-
+        [Required(ErrorMessage = "A sua Password deve ter entre 8 e 20 caracteres")]
+        [StringLength(20, MinimumLength = 8, ErrorMessage = "A sua Password deve ter entre 8 e 20 caracteres")]
+        [Display(Name = "Password *", Prompt = "Password")]
+        public String Password { get; set; }
 
     }
 }

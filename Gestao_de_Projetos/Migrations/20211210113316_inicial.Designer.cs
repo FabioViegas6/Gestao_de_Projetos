@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestao_de_Projetos.Migrations
 {
     [DbContext(typeof(Gestao_de_ProjetosContext))]
-    [Migration("20211202173317_Tarefas")]
-    partial class Tarefas
+    [Migration("20211210113316_inicial")]
+    partial class inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,62 @@ namespace Gestao_de_Projetos.Migrations
                 .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Gestao_de_Projetos.Models.Clientes", b =>
+                {
+                    b.Property<int>("ClientesId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Apelido")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Contacto")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<string>("NIF")
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
+
+                    b.Property<string>("Nome")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.HasKey("ClientesId");
+
+                    b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("Gestao_de_Projetos.Models.Funcao", b =>
+                {
+                    b.Property<int>("ID_funcao")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Nome_Funcao")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID_funcao");
+
+                    b.ToTable("Funcao");
+                });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Membros", b =>
                 {
@@ -69,10 +125,16 @@ namespace Gestao_de_Projetos.Migrations
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Tarefas", b =>
                 {
-                    b.Property<int>("idTarefas")
+                    b.Property<int>("IdTarefas")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DataPrevistaFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataPrevistaInicio")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Descricao")
                         .IsRequired()
@@ -81,18 +143,24 @@ namespace Gestao_de_Projetos.Migrations
                     b.Property<int>("ID_membro")
                         .HasColumnType("int");
 
+                    b.Property<int>("ID_projeto")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MembrosID_membro")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("dataFim")
-                        .HasColumnType("datetime2");
+                    b.Property<string>("Nome_Tarefa")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("dataInicio")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("ProjetosID_projeto")
+                        .HasColumnType("int");
 
-                    b.HasKey("idTarefas");
+                    b.HasKey("IdTarefas");
 
                     b.HasIndex("MembrosID_membro");
+
+                    b.HasIndex("ProjetosID_projeto");
 
                     b.ToTable("Tarefas");
                 });
@@ -102,6 +170,10 @@ namespace Gestao_de_Projetos.Migrations
                     b.HasOne("Gestao_de_Projetos.Models.Membros", "Membros")
                         .WithMany("Tarefas")
                         .HasForeignKey("MembrosID_membro");
+
+                    b.HasOne("Gestao_de_Projetos.Models.Projetos", "Projetos")
+                        .WithMany("Tarefas")
+                        .HasForeignKey("ProjetosID_projeto");
                 });
 #pragma warning restore 612, 618
         }

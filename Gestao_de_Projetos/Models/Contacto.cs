@@ -9,7 +9,7 @@ namespace Gestao_de_Projetos.Models
     public class Contacto
     {
 
-        private const string sms = "Introduza um email valido !";
+       // private const string sms = "Introduza um email valido !";
 
         public int contactoID { get; set; }
 
@@ -20,16 +20,23 @@ namespace Gestao_de_Projetos.Models
         public string Nome { get; set; }
 
 
+        [Required(ErrorMessage = "Por favor, insira o seu Sobrenome")]
+        [StringLength(20, MinimumLength = 4, ErrorMessage = "O Sobrenome deve ter entre 4 e 20 caracteres")]
+        [Display(Name = "Sobrenome *", Prompt = "Apelido")]
+        public String Sobrenome { get; set; }
 
-        [Required(ErrorMessage = sms)]
-        [EmailAddress(ErrorMessage = sms)]
+
+
+
+        [Required(ErrorMessage = "Introduza um email valido ! ")]
+         [EmailAddress(ErrorMessage = "Introduza um email valido !")]
         [Display(Name = "Email", Prompt = " ")]
-        public string Sobrenome { get; set; }
+        public string Email { get; set; }
 
         [Required(ErrorMessage = "Por Favor, insira a sua mensagem!")]
         [StringLength(1000, MinimumLength = 10, ErrorMessage = "insira uma mensagem entre 10 a 1000 caracteres!")]
         [Display(Name = " Mensagem", Prompt = " ")]
-        public string Email { get; set; }
+        public string Mensagem { get; set; }
 
 
 
@@ -38,12 +45,6 @@ namespace Gestao_de_Projetos.Models
         [Display(Name = " Assunto", Prompt = " ")]
         public string Assunto { get; set; }
 
-
-
-        [Required(ErrorMessage = "Por Favor, insira a sua mensagem!")]
-        [StringLength(1000, MinimumLength = 10, ErrorMessage = "insira uma mensagem entre 10 a 1000 caracteres!")]
-        [Display(Name = " Mensagem", Prompt = " ")]
-        public string Mensagem { get; set; }
         
 
         public bool Verificado { get; set; }

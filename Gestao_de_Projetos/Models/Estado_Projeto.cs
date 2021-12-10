@@ -14,6 +14,6 @@ namespace Gestao_de_Projetos.Models
 
         [Required]
         [Display(Name = "Estado Projeto")]
-        public string Estado_Projeto { get; set; }
+        public string Projeto_Estado { get; set; }
     }
 }

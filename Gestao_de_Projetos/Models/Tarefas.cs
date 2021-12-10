@@ -30,14 +30,14 @@ namespace Gestao_de_Projetos.Models
         [Required]
         [Display(Name = "Data  prevista de inicio ")]
         [DataType(DataType.Date)]
-       // [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DataPrevistaInicio { get; set; }
 
 
         [Required]
         [Display(Name = "Data Prevista Fim")]
-        [DataType(DataType.Date)]
-      //  [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
+       [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DataPrevistaFim { get; set; }
 
 

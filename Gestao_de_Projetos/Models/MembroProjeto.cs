@@ -9,6 +9,9 @@ namespace Gestao_de_Projetos.Models
 {
     public class MembroProjeto
     {
+        [Key]
+        public int ID_MembroProjeto { get; set; }
+
         [ForeignKey("FK_ID_projeto")]
         public int ID_projeto { get; set; }
         public Projetos Projeto { get; set; }

@@ -9,6 +9,9 @@ namespace Gestao_de_Projetos.Models
 {
     public class MembroTarefa
     {
+        [Key]
+        public int ID_MembroTarefa { get; set; }
+
         [ForeignKey("FK_IdTarefas")]
         public int IdTarefas { get; set; }
         public Tarefas Tarefas { get; set; }

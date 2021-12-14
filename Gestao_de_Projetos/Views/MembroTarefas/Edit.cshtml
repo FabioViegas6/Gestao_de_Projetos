@@ -1,0 +1,59 @@
+﻿@model Gestao_de_Projetos.Models.MembroTarefa
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>MembroTarefa</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID_MembroTarefa" />
+            <div class="form-group">
+                <label asp-for="IdTarefas" class="control-label"></label>
+                <input asp-for="IdTarefas" class="form-control" />
+                <span asp-validation-for="IdTarefas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ID_membro" class="control-label"></label>
+                <input asp-for="ID_membro" class="form-control" />
+                <span asp-validation-for="ID_membro" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataPrevistaInicio" class="control-label"></label>
+                <input asp-for="DataPrevistaInicio" class="form-control" />
+                <span asp-validation-for="DataPrevistaInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataEfetivaInicio" class="control-label"></label>
+                <input asp-for="DataEfetivaInicio" class="form-control" />
+                <span asp-validation-for="DataEfetivaInicio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataPrevistaFim" class="control-label"></label>
+                <input asp-for="DataPrevistaFim" class="form-control" />
+                <span asp-validation-for="DataPrevistaFim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DataEfetivaFim" class="control-label"></label>
+                <input asp-for="DataEfetivaFim" class="form-control" />
+                <span asp-validation-for="DataEfetivaFim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

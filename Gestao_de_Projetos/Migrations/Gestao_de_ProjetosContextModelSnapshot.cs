@@ -212,17 +212,24 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("Data_fim")
-                        .HasColumnType("datetime2");
+                    b.Property<int>("ClientesId")
+                        .HasColumnType("int");
 
-                    b.Property<DateTime>("Data_inicio")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("Estado_ProjetosID_Estado")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ID_Estado")
+                        .HasColumnType("int");
 
                     b.Property<string>("Nome_projeto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("ID_projeto");
+
+                    b.HasIndex("ClientesId");
+
+                    b.HasIndex("Estado_ProjetosID_Estado");
 
                     b.ToTable("Projetos");
                 });
@@ -289,6 +296,19 @@ namespace Gestao_de_Projetos.Migrations
                     b.HasOne("Gestao_de_Projetos.Models.Tarefas", "Tarefas")
                         .WithMany()
                         .HasForeignKey("TarefasIdTarefas");
+                });
+
+            modelBuilder.Entity("Gestao_de_Projetos.Models.Projetos", b =>
+                {
+                    b.HasOne("Gestao_de_Projetos.Models.Clientes", "Clientes")
+                        .WithMany()
+                        .HasForeignKey("ClientesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gestao_de_Projetos.Models.Estado_Projeto", "Estado_Projetos")
+                        .WithMany()
+                        .HasForeignKey("Estado_ProjetosID_Estado");
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Tarefas", b =>

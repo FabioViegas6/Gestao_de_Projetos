@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,10 @@ namespace Gestao_de_Projetos.Models
     {
         [Key]
         public int ID_membro { get; set; }
+
+        [ForeignKey("FK_ID_funcao")]
+        public int ID_funcao { get; set; }
+        public Funcao Funcao { get; set; }
 
         [Required]
         [Display(Name = "Nome do Membro")]

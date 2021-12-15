@@ -21,7 +21,7 @@ namespace Gestao_de_Projetos.Models
 
         [Required]
         [Display(Name = "Telefone")]
-        public string Telefone { get; set; }
+        public int Telefone { get; set; }
 
         [StringLength(10)]
         [Display(Name = "NIF", Prompt = "NIF")]

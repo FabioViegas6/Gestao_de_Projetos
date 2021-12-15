@@ -26,7 +26,7 @@ namespace Gestao_de_Projetos.Models
 
         [StringLength(20)]
         [Display(Name = "Contacto", Prompt = "Contacto")]
-        public String Contacto { get; set; }
+        public int Contacto { get; set; }
 
         [StringLength(10)]
         [Display(Name = "NIF", Prompt = "NIF")]

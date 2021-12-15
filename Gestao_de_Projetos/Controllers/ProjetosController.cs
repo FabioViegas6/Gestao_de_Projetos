@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
-using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -21,41 +20,9 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Projetos
-        public async Task<IActionResult> Index(string NomeProjeto, int page = 1)
+        public async Task<IActionResult> Index()
         {
-            var projetoSearch = _context.Projetos
-               .Where(b => NomeProjeto == null || b.Nome_projeto.Contains(NomeProjeto));
-
-            var pagingInfo = new PagingInfo
-            {
-                CurrentPage = page,
-                TotalItems = projetoSearch.Count()
-            };
-
-            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
-            {
-                pagingInfo.CurrentPage = pagingInfo.TotalPages;
-            }
-
-            if (pagingInfo.CurrentPage < 1)
-            {
-                pagingInfo.CurrentPage = 1;
-            }
-
-            var projetos = await projetoSearch
-                           // .Include(b =>)
-                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
-                            .Take(pagingInfo.PageSize)
-                            .ToListAsync();
-
-            return View(
-                new ProjetosListViewModels
-                {
-                    ListaProjetos = projetos,
-                    PagingInfo = pagingInfo,
-                    ProjetoSearched = NomeProjeto
-                }
-            );
+            return View(await _context.Projetos.ToListAsync());
         }
 
         // GET: Projetos/Details/5

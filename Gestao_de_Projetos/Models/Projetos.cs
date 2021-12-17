@@ -20,10 +20,28 @@ namespace Gestao_de_Projetos.Models
         [Display(Name ="Nome do Projetos")]
         public string Nome_projeto { get; set; }
 
-        public Estado_Projeto Estado_Projeto { get; set; }
+       
         [ForeignKey("FK_ID_Estado")]
         public int ID_Estado { get; set; }
-        
+        public EstadoProjeto Estado_Projeto { get; set; }
+
+       
+
+        [Required]
+        [Display(Name = "Data Inicio ")]
+        [DataType(DataType.Date)]
+        public DateTime DataInicio { get; set; }
+
+        [Required]
+        [Display(Name = "Data  prevista Fim ")]
+        [DataType(DataType.Date)]
+        public DateTime DataPrevistaFim { get; set; }
+
+        [Required]
+        [Display(Name = "Data Efetiva Fim ")]
+        [DataType(DataType.Date)]
+        public DateTime DataEfetivaFim { get; set; }
+
 
 
 
@@ -31,5 +49,6 @@ namespace Gestao_de_Projetos.Models
         /// ///////////////////////////////////////////////////////////////////////////////////////////////////// Para mexer 
         /// </summary>
         public ICollection<Tarefas> Tarefas { get; set; }
+        
     }
 }

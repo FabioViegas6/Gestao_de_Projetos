@@ -54,7 +54,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_Estado,Nome")] Estado_Projeto estado_Projeto)
+        public async Task<IActionResult> Create([Bind("ID_Estado,Nome")] EstadoProjeto estado_Projeto)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID_Estado,Nome")] Estado_Projeto estado_Projeto)
+        public async Task<IActionResult> Edit(int id, [Bind("ID_Estado,Nome")] EstadoProjeto estado_Projeto)
         {
             if (id != estado_Projeto.ID_Estado)
             {

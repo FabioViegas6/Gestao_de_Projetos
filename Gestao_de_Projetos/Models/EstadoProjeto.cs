@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Gestao_de_Projetos.Models
 {
-    public class Estado_Projeto
+    public class EstadoProjeto
     {
         [Key]
         public int ID_Estado { get; set; }
@@ -14,5 +14,7 @@ namespace Gestao_de_Projetos.Models
         [Required]
         [Display(Name = "Nome Estado")]
         public string Nome { get; set; }
+
+        public ICollection<Projetos> Projeto { get; set; }
     }
 }

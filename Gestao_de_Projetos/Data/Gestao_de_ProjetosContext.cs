@@ -18,7 +18,7 @@ namespace Gestao_de_Projetos.Data
         public DbSet<Gestao_de_Projetos.Models.Tarefas> Tarefas { get; set; }
         public DbSet<Gestao_de_Projetos.Models.Funcao> Funcao { get; set; }
         public DbSet<Gestao_de_Projetos.Models.Clientes> Clientes { get; set; }
-        public DbSet<Gestao_de_Projetos.Models.Estado_Projeto> Estado_Projeto { get; set; }
+        public DbSet<Gestao_de_Projetos.Models.EstadoProjeto> Estado_Projeto { get; set; }
         public DbSet<Gestao_de_Projetos.Models.MembroProjeto> MembroProjeto { get; set; }
         public DbSet<Gestao_de_Projetos.Models.MembroTarefa> MembroTarefa { get; set; }
     }

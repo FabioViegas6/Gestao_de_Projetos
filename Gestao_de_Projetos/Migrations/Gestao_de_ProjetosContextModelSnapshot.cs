@@ -223,6 +223,15 @@ namespace Gestao_de_Projetos.Migrations
                     b.Property<int>("ClientesId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("DataEfetivaFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataPrevistaFim")
+                        .HasColumnType("datetime2");
+
                     b.Property<int?>("Estado_ProjetoID_Estado")
                         .HasColumnType("int");
 
@@ -322,7 +331,7 @@ namespace Gestao_de_Projetos.Migrations
                         .IsRequired();
 
                     b.HasOne("Gestao_de_Projetos.Models.Estado_Projeto", "Estado_Projeto")
-                        .WithMany()
+                        .WithMany("Projeto")
                         .HasForeignKey("Estado_ProjetoID_Estado");
                 });
 

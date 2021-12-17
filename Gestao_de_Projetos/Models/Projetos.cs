@@ -17,12 +17,13 @@ namespace Gestao_de_Projetos.Models
         public Clientes Clientes { get; set; }
 
         [Required]
-        [Display(Name ="Nome do Projeto")]
+        [Display(Name ="Nome do Projetos")]
         public string Nome_projeto { get; set; }
 
+        public Estado_Projeto Estado_Projeto { get; set; }
         [ForeignKey("FK_ID_Estado")]
         public int ID_Estado { get; set; }
-        public Estado_Projeto Estado_Projetos { get; set; }
+        
 
 
 

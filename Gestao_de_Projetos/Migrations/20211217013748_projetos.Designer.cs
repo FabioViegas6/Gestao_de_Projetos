@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestao_de_Projetos.Migrations
 {
     [DbContext(typeof(Gestao_de_ProjetosContext))]
-    [Migration("20211215102157_membro")]
-    partial class membro
+    [Migration("20211217013748_projetos")]
+    partial class projetos
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -33,8 +33,8 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<int>("Contacto")
-                        .HasColumnType("int")
+                    b.Property<string>("Contacto")
+                        .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
                     b.Property<string>("Email")
@@ -225,7 +225,7 @@ namespace Gestao_de_Projetos.Migrations
                     b.Property<int>("ClientesId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("Estado_ProjetosID_Estado")
+                    b.Property<int?>("Estado_ProjetoID_Estado")
                         .HasColumnType("int");
 
                     b.Property<int>("ID_Estado")
@@ -239,7 +239,7 @@ namespace Gestao_de_Projetos.Migrations
 
                     b.HasIndex("ClientesId");
 
-                    b.HasIndex("Estado_ProjetosID_Estado");
+                    b.HasIndex("Estado_ProjetoID_Estado");
 
                     b.ToTable("Projetos");
                 });
@@ -323,9 +323,9 @@ namespace Gestao_de_Projetos.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Gestao_de_Projetos.Models.Estado_Projeto", "Estado_Projetos")
+                    b.HasOne("Gestao_de_Projetos.Models.Estado_Projeto", "Estado_Projeto")
                         .WithMany()
-                        .HasForeignKey("Estado_ProjetosID_Estado");
+                        .HasForeignKey("Estado_ProjetoID_Estado");
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Tarefas", b =>

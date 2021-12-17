@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -20,10 +21,45 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Projetos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nomeProjeto, int page = 1)
         {
-            var gestao_de_ProjetosContext = _context.Projetos.Include(p => p.Clientes);
-            return View(await gestao_de_ProjetosContext.ToListAsync());
+
+            var gestao_de_ProjetosContext = _context.Projetos
+              .Include(p => p.Clientes)
+              .Include(p => p.Estado_Projeto)
+              .Where(b => nomeProjeto == null || b.Nome_projeto.Contains(nomeProjeto));
+
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = gestao_de_ProjetosContext.Count()
+            };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var projetos = await gestao_de_ProjetosContext
+                            .Include(b => b.Clientes)
+                            .Include(b => b.Estado_Projeto)
+                            .OrderBy(b => b.Nome_projeto)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+            return View(
+                new ProjetosListViewModels
+                {
+                    ListaProjetos = projetos,
+                    PagingInfo = pagingInfo,
+                    ProjetoSearched = nomeProjeto
+                });
+
         }
 
         // GET: Projetos/Details/5
@@ -36,6 +72,7 @@ namespace Gestao_de_Projetos.Controllers
 
             var projetos = await _context.Projetos
                 .Include(p => p.Clientes)
+                .Include(p => p.Estado_Projeto)
                 .FirstOrDefaultAsync(m => m.ID_projeto == id);
             if (projetos == null)
             {
@@ -49,6 +86,7 @@ namespace Gestao_de_Projetos.Controllers
         public IActionResult Create()
         {
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido");
+            ViewData["EstadoID"] = new SelectList(_context.Estado_Projeto, "ID_Estado", "Nome");
             return View();
         }
 
@@ -66,6 +104,7 @@ namespace Gestao_de_Projetos.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido", projetos.ClientesId);
+            ViewData["EstadoID"] = new SelectList(_context.Estado_Projeto, "ID_Estado", "Nome", projetos.ID_Estado);
             return View(projetos);
         }
 

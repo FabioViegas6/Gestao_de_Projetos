@@ -39,13 +39,14 @@ namespace Gestao_de_Projetos.Controllers
             {
                 return NotFound();
             }
-
+            ViewData["ID_funcao"] = new SelectList(_context.Funcao, "ID_funcao", "Nome_Funcao");
             return View(membros);
         }
 
         // GET: Membros/Create
         public IActionResult Create()
         {
+            ViewData["ID_funcao"] = new SelectList(_context.Funcao, "ID_funcao", "Nome_Funcao");
             return View();
         }
 
@@ -54,7 +55,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_membro,ID_funcao,Nome_membro,Sobrenome,Telefone,NIF,Email,Password")] Membros membros)
+        public async Task<IActionResult> Create([Bind("ID_membro,Nome_membro,Sobrenome,Telefone,NIF,Email,Password,ID_funcao")] Membros membros)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +63,7 @@ namespace Gestao_de_Projetos.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ID_funcao"] = new SelectList(_context.Funcao, "ID_funcao", "Nome_Funcao");
             return View(membros);
         }
 
@@ -78,6 +80,7 @@ namespace Gestao_de_Projetos.Controllers
             {
                 return NotFound();
             }
+            ViewData["ID_funcao"] = new SelectList(_context.Funcao, "ID_funcao", "Nome_Funcao");
             return View(membros);
         }
 
@@ -86,7 +89,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID_membro,ID_funcao,Nome_membro,Sobrenome,Telefone,NIF,Email,Password")] Membros membros)
+        public async Task<IActionResult> Edit(int id, [Bind("ID_membro,Nome_membro,Sobrenome,Telefone,NIF,Email,Password,ID_funcao")] Membros membros)
         {
             if (id != membros.ID_membro)
             {
@@ -113,6 +116,7 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["ID_funcao"] = new SelectList(_context.Funcao, "ID_funcao", "Nome_Funcao");
             return View(membros);
         }
 

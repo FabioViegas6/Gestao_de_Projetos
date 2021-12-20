@@ -7,25 +7,21 @@ using System.Threading.Tasks;
 
 namespace Gestao_de_Projetos.Models
 {
-    public class Projetos
-    {
+    public class Project
+    { 
         [Key]
         public int ID_projeto { get; set; }
 
-        [ForeignKey("FK_ClientesId")]
-        public int ClientesId { get; set; }
-        public Clientes Clientes { get; set; }
 
         [Required]
-        [Display(Name ="Nome do Projetos")]
+        [Display(Name = "Nome do Projetos")]
         public string Nome_projeto { get; set; }
 
-       
-        [ForeignKey("FK_ID_Estado")]
-        public int ID_Estado { get; set; }
-        public EstadoProjeto Estado_Projeto { get; set; }
 
        
+        [Display(Name = "Estado Projeto")]
+        public string EstadoProjeto { get; set; }
+
 
         [Required]
         [Display(Name = "Data Inicio ")]
@@ -45,10 +41,8 @@ namespace Gestao_de_Projetos.Models
 
 
 
-        /// <summary>
-        /// ///////////////////////////////////////////////////////////////////////////////////////////////////// Para mexer 
-        /// </summary>
-        public ICollection<Tarefas> Tarefas { get; set; }
-        
+        [ForeignKey("FK_ClientesId")]
+        public int ClientesId { get; set; }
+        public Clientes Clientes { get; set; }
     }
 }

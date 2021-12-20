@@ -13,9 +13,9 @@ namespace Gestao_de_Projetos.Models
         public int IdTarefas { get; set; }
 
 
-        [ForeignKey("FK_ID_projeto")]
-        public int ID_projeto { get; set; }
-        public Projetos Projetos { get; set; }
+        //[ForeignKey("FK_ID_projeto")]
+        //public int ID_projeto { get; set; }
+        //public Projetos Projetos { get; set; }
 
 
 

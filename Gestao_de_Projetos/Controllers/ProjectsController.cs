@@ -10,22 +10,23 @@ using Gestao_de_Projetos.Models;
 
 namespace Gestao_de_Projetos.Controllers
 {
-    public class MembroTarefasController : Controller
+    public class ProjectsController : Controller
     {
         private readonly Gestao_de_ProjetosContext _context;
 
-        public MembroTarefasController(Gestao_de_ProjetosContext context)
+        public ProjectsController(Gestao_de_ProjetosContext context)
         {
             _context = context;
         }
 
-        // GET: MembroTarefas
+        // GET: Projects
         public async Task<IActionResult> Index()
         {
-            return View(await _context.MembroTarefa.ToListAsync());
+            var gestao_de_ProjetosContext = _context.Project.Include(p => p.Clientes);
+            return View(await gestao_de_ProjetosContext.ToListAsync());
         }
 
-        // GET: MembroTarefas/Details/5
+        // GET: Projects/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,39 +34,42 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
 
-            var membroTarefa = await _context.MembroTarefa
-                .FirstOrDefaultAsync(m => m.ID_MembroTarefa == id);
-            if (membroTarefa == null)
+            var project = await _context.Project
+                .Include(p => p.Clientes)
+                .FirstOrDefaultAsync(m => m.ID_projeto == id);
+            if (project == null)
             {
                 return NotFound();
             }
 
-            return View(membroTarefa);
+            return View(project);
         }
 
-        // GET: MembroTarefas/Create
+        // GET: Projects/Create
         public IActionResult Create()
         {
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido");
             return View();
         }
 
-        // POST: MembroTarefas/Create
+        // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_MembroTarefa,IdTarefas,ID_membro,DataPrevistaInicio,DataEfetivaInicio,DataPrevistaFim,DataEfetivaFim")] MembroTarefa membroTarefa)
+        public async Task<IActionResult> Create([Bind("ID_projeto,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId")] Project project)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(membroTarefa);
+                _context.Add(project);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(membroTarefa);
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido", project.ClientesId);
+            return View(project);
         }
 
-        // GET: MembroTarefas/Edit/5
+        // GET: Projects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -73,22 +77,23 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
 
-            var membroTarefa = await _context.MembroTarefa.FindAsync(id);
-            if (membroTarefa == null)
+            var project = await _context.Project.FindAsync(id);
+            if (project == null)
             {
                 return NotFound();
             }
-            return View(membroTarefa);
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido", project.ClientesId);
+            return View(project);
         }
 
-        // POST: MembroTarefas/Edit/5
+        // POST: Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID_MembroTarefa,IdTarefas,ID_membro,DataPrevistaInicio,DataEfetivaInicio,DataPrevistaFim,DataEfetivaFim")] MembroTarefa membroTarefa)
+        public async Task<IActionResult> Edit(int id, [Bind("ID_projeto,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId")] Project project)
         {
-            if (id != membroTarefa.ID_MembroTarefa)
+            if (id != project.ID_projeto)
             {
                 return NotFound();
             }
@@ -97,12 +102,12 @@ namespace Gestao_de_Projetos.Controllers
             {
                 try
                 {
-                    _context.Update(membroTarefa);
+                    _context.Update(project);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MembroTarefaExists(membroTarefa.ID_MembroTarefa))
+                    if (!ProjectExists(project.ID_projeto))
                     {
                         return NotFound();
                     }
@@ -113,10 +118,11 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(membroTarefa);
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido", project.ClientesId);
+            return View(project);
         }
 
-        // GET: MembroTarefas/Delete/5
+        // GET: Projects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -124,30 +130,31 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
 
-            var membroTarefa = await _context.MembroTarefa
-                .FirstOrDefaultAsync(m => m.ID_MembroTarefa == id);
-            if (membroTarefa == null)
+            var project = await _context.Project
+                .Include(p => p.Clientes)
+                .FirstOrDefaultAsync(m => m.ID_projeto == id);
+            if (project == null)
             {
                 return NotFound();
             }
 
-            return View(membroTarefa);
+            return View(project);
         }
 
-        // POST: MembroTarefas/Delete/5
+        // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var membroTarefa = await _context.MembroTarefa.FindAsync(id);
-            _context.MembroTarefa.Remove(membroTarefa);
+            var project = await _context.Project.FindAsync(id);
+            _context.Project.Remove(project);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool MembroTarefaExists(int id)
+        private bool ProjectExists(int id)
         {
-            return _context.MembroTarefa.Any(e => e.ID_MembroTarefa == id);
+            return _context.Project.Any(e => e.ID_projeto == id);
         }
     }
 }

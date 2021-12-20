@@ -12,21 +12,20 @@ namespace Gestao_de_Projetos.Models
         [Key]
         public int ID_membro { get; set; }
 
-        [ForeignKey("FK_ID_funcao")]
-        public int ID_funcao { get; set; }
-        public Funcao Funcao { get; set; }
 
         [Required]
         [Display(Name = "Nome do Membro")]
-        public string Nome_membro { get; set; }
+        public String Nome_membro { get; set; }
 
         [Required]
         [Display(Name = "Sobrenome")]
-        public string Sobrenome { get; set; }
+        public String Sobrenome { get; set; }
 
-        [Required]
-        [Display(Name = "Telefone")]
-        public int Telefone { get; set; }
+        
+
+        [StringLength(20)]
+        [Display(Name = "Telefone", Prompt = "Telefone")]
+        public String Telefone { get; set; }
 
         [StringLength(10)]
         [Display(Name = "NIF", Prompt = "NIF")]
@@ -46,5 +45,13 @@ namespace Gestao_de_Projetos.Models
 
 
         public ICollection <Tarefas> Tarefas { get; set; }
+
+
+
+
+        [ForeignKey("FK_ID_funcao")]
+        public int ID_funcao { get; set; }
+        public Funcao Funcao { get; set; }
+
     }
 }

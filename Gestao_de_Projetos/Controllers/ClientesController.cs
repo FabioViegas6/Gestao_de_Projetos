@@ -47,7 +47,8 @@ namespace Gestao_de_Projetos.Controllers
                 new ClientesListViewModel
                 {
                     ListaClientes = cliente,
-                    PagingInfo = pagingInfo
+                    PagingInfo = pagingInfo,
+                    ClienteSearched = Nome
                 }
             );
         }

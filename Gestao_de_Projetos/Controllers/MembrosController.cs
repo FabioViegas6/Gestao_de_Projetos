@@ -23,12 +23,15 @@ namespace Gestao_de_Projetos.Controllers
         // GET: Membros
         public async Task<IActionResult> Index(string Nome_membro, int page = 1)
         {
-            
+
+
+            var membroSearch = _context.Membros
+               .Where(b => Nome_membro == null || b.Nome_membro.Contains(Nome_membro));
 
             var pagingInfo = new PagingInfo
             {
                 CurrentPage = page,
-                TotalItems = _context.Membros.Count()
+                TotalItems = membroSearch.Count()
             };
 
             if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
@@ -36,7 +39,12 @@ namespace Gestao_de_Projetos.Controllers
                 pagingInfo.CurrentPage = pagingInfo.TotalPages;
             }
 
-            var membros = await _context.Membros
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var membros = await membroSearch
                             // .Include(b =>)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
@@ -46,7 +54,8 @@ namespace Gestao_de_Projetos.Controllers
                 new MembroListViewModel
                 {
                     ListaMembros = membros,
-                    PagingInfo = pagingInfo
+                    PagingInfo = pagingInfo,
+                    membroSearched = Nome_membro
                 }
             );
         }

@@ -36,15 +36,7 @@
             <th>
                 Data Inicio
             </th>
-            <th>
-                Data Prevista Fim
-            </th>
-            <th>
-                Data Efetiva Fim
-            </th>
-            <th>
-                Clientes
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -60,15 +52,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DataInicio)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataPrevistaFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataEfetivaFim)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Clientes.Apelido)
-            </td>
+            
+            
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID_projeto">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.ID_projeto">Details</a> |

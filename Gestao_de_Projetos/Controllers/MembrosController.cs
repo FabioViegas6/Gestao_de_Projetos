@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -20,9 +21,34 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Membros
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Nome_membro, int page = 1)
         {
-            return View(await _context.Membros.ToListAsync());
+            
+
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = _context.Membros.Count()
+            };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            var membros = await _context.Membros
+                            // .Include(b =>)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new MembroListViewModel
+                {
+                    ListaMembros = membros,
+                    PagingInfo = pagingInfo
+                }
+            );
         }
 
         // GET: Membros/Details/5

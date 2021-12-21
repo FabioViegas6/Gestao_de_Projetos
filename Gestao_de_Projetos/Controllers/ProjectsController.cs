@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -20,10 +21,29 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Projects
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string nome_projeto, int page = 1)
         {
-            var gestao_de_ProjetosContext = _context.Project.Include(p => p.Clientes);
-            return View(await gestao_de_ProjetosContext.ToListAsync());
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = 1,
+                TotalItems = _context.Project.Count()
+            };
+
+            var projetos = await _context.Project
+                            // .Include(b =>)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new ProjetosListViewModels
+                {
+                    ListaProjetos = projetos,
+                    PagingInfo = pagingInfo
+                }
+            );
+
+
         }
 
         // GET: Projects/Details/5
@@ -63,7 +83,10 @@ namespace Gestao_de_Projetos.Controllers
             {
                 _context.Add(project);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                ViewBag.Title = "Projeto criado";
+                ViewBag.Message = "Projeto sucessfully .";
+                return View("Sucess");
+                //return RedirectToAction(nameof(Index));
             }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido", project.ClientesId);
             return View(project);

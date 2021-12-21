@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Gestao_de_Projetos.ViewModels
 {
-    public class ProjetosListViewModels
+    public class ClientesListViewModel
     {
-        public IEnumerable<Project> ListaProjetos { get; set; }
+        public IEnumerable<Clientes> ListaClientes { get; set; }
         public PagingInfo PagingInfo { get; set; }
-        public string ProjetoSearched { get; set; }
-        public List<Project> ListaMembros { get; internal set; }
+        public string ClienteSearched { get; set; }
+       // public List<Clientes> ListaMembros { get; internal set; }
     }
 }

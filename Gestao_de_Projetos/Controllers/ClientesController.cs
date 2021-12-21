@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -20,27 +21,35 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Clientes
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Nome, int page = 1)
         {
-            return View(await _context.Clientes.ToListAsync());
-        }
+            var ClienteSearched = _context.Clientes
+                .Where(b => Nome == null || b.Nome.Contains(Nome));
 
-        // GET: Clientes/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
+            var pagingInfo = new PagingInfo
             {
-                return NotFound();
+                CurrentPage = page,
+                TotalItems = _context.Clientes.Count()
+            };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
             }
 
-            var clientes = await _context.Clientes
-                .FirstOrDefaultAsync(m => m.ClientesId == id);
-            if (clientes == null)
-            {
-                return NotFound();
-            }
+            var cliente = await _context.Clientes
+                            // .Include(b =>)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
 
-            return View(clientes);
+            return View(
+                new ClientesListViewModel
+                {
+                    ListaClientes = cliente,
+                    PagingInfo = pagingInfo
+                }
+            );
         }
 
         // GET: Clientes/Create

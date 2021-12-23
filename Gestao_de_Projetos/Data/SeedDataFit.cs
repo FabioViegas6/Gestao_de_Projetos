@@ -23,7 +23,7 @@ namespace Gestao_de_Projetos.Data
                 {
                     Nome_projeto = "Remodelação exterior",
                     DataInicio = DateTime.Parse("12/12/2021"),
-                    ClientesId = 1,
+                    ClientesId = 2,
                     DataPrevistaFim = DateTime.Parse("12/26/2021")
                 },
 
@@ -31,14 +31,14 @@ namespace Gestao_de_Projetos.Data
                  {
                      Nome_projeto = "Remodelação Interior",
                      DataInicio = DateTime.Parse("12/12/2021"),
-                     ClientesId = 1,
+                     ClientesId = 3,
                      DataPrevistaFim = DateTime.Parse("12/27/2021")
                  },
                   new Project
                   {
                       Nome_projeto = "Contrução do Jardim",
                       DataInicio = DateTime.Parse("12/12/2021"),
-                      ClientesId = 1,
+                      ClientesId = 2,
                       DataPrevistaFim = DateTime.Parse("12/30/2021")
                   },
 
@@ -46,10 +46,11 @@ namespace Gestao_de_Projetos.Data
                    {
                        Nome_projeto = "Remodelação exterior",
                        DataInicio = DateTime.Parse("12/12/2021"),
-                       ClientesId = 1,
+                       ClientesId = 3,
                        DataPrevistaFim = DateTime.Parse("12/30/2021")
                    }
                   );
+            bd.SaveChanges();
 
         }
 
@@ -63,6 +64,7 @@ namespace Gestao_de_Projetos.Data
                     Email = "joseraf@gmail.com",
                     Contacto = "931184481",
                     NIF = "289761182",
+                    Password = ""
 
                 },
 
@@ -72,6 +74,7 @@ namespace Gestao_de_Projetos.Data
                        Email = "joseraf@gmail.com",
                        Contacto = "931184481",
                        NIF = "289761182",
+                       Password = ""
 
                    },
 
@@ -81,6 +84,7 @@ namespace Gestao_de_Projetos.Data
                          Email = "joseraf@gmail.com",
                          Contacto = "931184481",
                          NIF = "289761182",
+                         Password =""
 
                      },
 
@@ -91,6 +95,7 @@ namespace Gestao_de_Projetos.Data
                          Email = "joseraf@gmail.com",
                          Contacto = "931184481",
                          NIF = "289761182",
+                         Password = ""
 
                      }
                      );

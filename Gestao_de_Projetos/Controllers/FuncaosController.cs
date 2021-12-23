@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Gestao_de_Projetos.ViewModels;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -20,10 +21,44 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Funcaos
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string NomeFuncao, int page = 1)
         {
-            return View(await _context.Funcao.ToListAsync());
+            var FuncaosSearch = _context.Funcao
+                  .Where(b => NomeFuncao == null || b.Nome_Funcao.Contains(NomeFuncao));
+
+            var pagingInfo = new PagingInfo
+            {
+                CurrentPage = page,
+                TotalItems = FuncaosSearch.Count()
+            };
+
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var funcaos = await FuncaosSearch
+                            //.Include(b => b.Author)
+                            .OrderBy(b => b.Nome_Funcao)
+                            .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
+                            .Take(pagingInfo.PageSize)
+                            .ToListAsync();
+
+            return View(
+                new FuncaoListViewModel
+                {
+                    ListFuncao = funcaos,
+                    PagingInfo = pagingInfo,
+                    FuncaoSearched = NomeFuncao
+                }
+            );
         }
+    
 
         // GET: Funcaos/Details/5
         public async Task<IActionResult> Details(int? id)

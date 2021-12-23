@@ -40,12 +40,14 @@ namespace Gestao_de_Projetos
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Gestao_de_ProjetosContext bd
+            )
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
+                SeedDataDadosFIT.Populate(bd);
             }
             else
             {

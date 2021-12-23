@@ -18,10 +18,7 @@ namespace Gestao_de_Projetos.Models
         public String Nome { get; set; }
 
 
-        [Required(ErrorMessage = "Por favor, insira o seu Apelido")]
-        [StringLength(20, MinimumLength = 4, ErrorMessage = "O apelido deve ter entre 4 e 20 caracteres")]
-        [Display(Name = "Apelido *", Prompt = "Apelido")]
-        public String Apelido { get; set; }
+    
 
 
         [StringLength(20)]

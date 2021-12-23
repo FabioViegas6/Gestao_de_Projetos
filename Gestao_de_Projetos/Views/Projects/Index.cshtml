@@ -24,45 +24,25 @@
     </div>
 </div>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                Nome Projeto
-            </th>
-            <th>
-                Estado Projeto
-            </th>
-            <th>
-                Data Inicio
-            </th>
+@foreach (var projetos in Model.ListaProjetos)
+{
+    <div class="card mt-3">
+        <div class="card-body">
             
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model.ListaProjetos) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nome_projeto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EstadoProjeto)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DataInicio)
-            </td>
-            
-            
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID_projeto">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID_projeto">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID_projeto">Delete</a>
-            </td>
-        </tr>
+            <p class="card-text lead">@projetos.Nome_projeto</p>
+            <p class="card-text lead">@projetos.EstadoProjeto</p>
+            <p class="card-text lead">@projetos.Clientes</p>
+            <p class="card-text">@projetos.DataInicio</p>
+
+            <a asp-action="Details" asp-route-id="@projetos.ID_projeto" class="btn btn-info">Details</a>
+            @*@if (User.IsInRole("product_manager"))
+            {*@
+                <a asp-action="Edit" asp-route-id="@projetos.ID_projeto" class="btn btn-warning">Edit</a>
+                <a asp-action="Delete" asp-route-id="@projetos.ID_projeto" class="btn btn-danger">Delete</a>
+            @*}*@
+        </div>
+    </div>
 }
-    </tbody>
-</table>
 <nav class="mt-3">
     <ul class="pagination">
         @{

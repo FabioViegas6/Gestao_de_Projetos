@@ -21,15 +21,15 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Clientes
-        public async Task<IActionResult> Index(string Nome, int page = 1)
+        public async Task<IActionResult> Index(string NomeCliente, int page = 1)
         {
-            var ClienteSearched = _context.Clientes
-                .Where(b => Nome == null || b.Nome.Contains(Nome));
+            var ClientesSearch = _context.Clientes
+                .Where(b => NomeCliente == null || b.Nome.Contains(NomeCliente));
 
             var pagingInfo = new PagingInfo
             {
                 CurrentPage = page,
-                TotalItems = _context.Clientes.Count()
+                TotalItems = ClientesSearch.Count()
             };
 
             if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
@@ -37,8 +37,14 @@ namespace Gestao_de_Projetos.Controllers
                 pagingInfo.CurrentPage = pagingInfo.TotalPages;
             }
 
-            var cliente = await _context.Clientes
-                            // .Include(b =>)
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var cliente = await ClientesSearch
+                            //.Include(b => b.Author)
+                            .OrderBy(b => b.Nome)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
                             .ToListAsync();
@@ -48,11 +54,10 @@ namespace Gestao_de_Projetos.Controllers
                 {
                     ListaClientes = cliente,
                     PagingInfo = pagingInfo,
-                    ClienteSearched = Nome
+                    ClienteSearched = NomeCliente
                 }
             );
         }
-
         // GET: Clientes/Create
         public IActionResult Create()
         {

@@ -14,10 +14,10 @@
     <div class="card-body">
         <h5 class="card-title">Pesquisar</h5>
         <form asp-action="Index" method="get">
-            <label for="title" class="control-label">Nome</label>
-            <input name="title" type="search" class="form-control" value="@Model.membroSearched" />
+            <label for="NomeMembro" class="control-label">Nome</label>
+            <input name="NomeMembro" type="search" class="form-control" value="@Model.membroSearched" />
             <div class="mt-3">
-                <input type="submit" value="Search" class="btn btn-info" />
+                <input type="submit" value="Pesquisar" class="btn btn-info" />
                 <a asp-action="Index" class="btn btn-secondary">Limpar</a>
             </div>
         </form>
@@ -28,8 +28,6 @@
         <tr>
             <th>
                 Nome membro
-            </th>
-            <th>
                Sobrenome
             </th>
             <th>
@@ -52,8 +50,7 @@
             <tr>
                 <td>
                     @Html.DisplayFor(modelItem => item.Nome_membro)
-                </td>
-                <td>
+                
                     @Html.DisplayFor(modelItem => item.Sobrenome)
                 </td>
                 <td>

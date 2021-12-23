@@ -12,7 +12,11 @@ using Gestao_de_Projetos.ViewModels;
 namespace Gestao_de_Projetos.Controllers
 {
     public class ProjectsController : Controller
-    {
+    { public IActionResult Sucess()
+        {
+            return View();
+
+        }
         private readonly Gestao_de_ProjetosContext _context;
 
         public ProjectsController(Gestao_de_ProjetosContext context)
@@ -21,16 +25,30 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Projects
-        public async Task<IActionResult> Index(string nome_projeto, int page = 1)
+        public async Task<IActionResult> Index(string nomeProjeto, int page = 1)
         {
+            var ProjectSearch = _context.Project
+               .Where(b => nomeProjeto == null || b.Nome_projeto.Contains(nomeProjeto));
+
             var pagingInfo = new PagingInfo
             {
-                CurrentPage = 1,
-                TotalItems = _context.Project.Count()
+                CurrentPage = page,
+                TotalItems = ProjectSearch.Count()
             };
 
-            var projetos = await _context.Project
-                            // .Include(b =>)
+            if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
+            {
+                pagingInfo.CurrentPage = pagingInfo.TotalPages;
+            }
+
+            if (pagingInfo.CurrentPage < 1)
+            {
+                pagingInfo.CurrentPage = 1;
+            }
+
+            var projetos = await ProjectSearch
+                            .Include(b => b.Clientes)
+                            .OrderBy(b => b.Nome_projeto)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
                             .ToListAsync();
@@ -39,11 +57,10 @@ namespace Gestao_de_Projetos.Controllers
                 new ProjetosListViewModels
                 {
                     ListaProjetos = projetos,
-                    PagingInfo = pagingInfo
+                    PagingInfo = pagingInfo,
+                    ProjetoSearched = nomeProjeto
                 }
             );
-
-
         }
 
         // GET: Projects/Details/5

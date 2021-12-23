@@ -21,17 +21,17 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Membros
-        public async Task<IActionResult> Index(string Nome_membro, int page = 1)
+        public async Task<IActionResult> Index(string NomeMembro, int page = 1)
         {
 
 
-            var membroSearch = _context.Membros
-               .Where(b => Nome_membro == null || b.Nome_membro.Contains(Nome_membro));
+            var MembroSearched = _context.Membros
+                .Where(b => NomeMembro == null || b.Nome_membro.Contains(NomeMembro));
 
             var pagingInfo = new PagingInfo
             {
                 CurrentPage = page,
-                TotalItems = membroSearch.Count()
+                TotalItems = MembroSearched.Count()
             };
 
             if (pagingInfo.CurrentPage > pagingInfo.TotalPages)
@@ -44,8 +44,9 @@ namespace Gestao_de_Projetos.Controllers
                 pagingInfo.CurrentPage = 1;
             }
 
-            var membros = await membroSearch
-                            // .Include(b =>)
+            var membros = await MembroSearched
+                            .Include(b => b.Funcao)
+                            .OrderBy(b => b.Nome_membro)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
                             .ToListAsync();
@@ -55,10 +56,11 @@ namespace Gestao_de_Projetos.Controllers
                 {
                     ListaMembros = membros,
                     PagingInfo = pagingInfo,
-                    membroSearched = Nome_membro
+                    membroSearched = NomeMembro
                 }
             );
         }
+
 
         // GET: Membros/Details/5
         public async Task<IActionResult> Details(int? id)

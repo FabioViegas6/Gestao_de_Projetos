@@ -12,6 +12,8 @@ namespace Gestao_de_Projetos.Data
         {
             PopulateClientes(bd);
             PopulateProject(bd);
+            PopulateMembro(bd);
+            PopulateFuncao(bd);
 
         }
 
@@ -104,5 +106,103 @@ namespace Gestao_de_Projetos.Data
 
         }
 
+        private static void PopulateMembro(Gestao_de_ProjetosContext bd)
+        {
+            if (bd.Membros.Any()) return;
+            bd.Membros.AddRange(
+                new Membros
+                {
+                   Nome_membro = "Selmira",
+                   Sobrenome = "Fernandes",
+                   Email = "self@gmail.com",
+                   Telefone = "931184481",
+                   NIF = "289761182",
+                   Password = "",
+                   ID_funcao = 1
+
+                },
+
+                new Membros
+                {
+                     Nome_membro = "mira ",
+                    Sobrenome = "Ibrahim",
+                     Email = "mira@gmail.com",
+                     Telefone = "931184481",
+                     NIF = "289761182",
+                     Password = "",
+                     //
+                     ID_funcao = 2
+                 },
+                  new Membros
+                  {
+                      Nome_membro = "Sel ",
+                      Sobrenome = "nandes",
+                      Email = "miraf@gmail.com",
+                      Telefone = "931184481",
+                      NIF = "289761182",
+                      Password = "",
+                      ID_funcao = 3
+                  },
+
+                   new Membros
+                   {
+                       Nome_membro = "Selmira ",
+                       Sobrenome = "Fernandes",
+                       Email = "self@gmail.com",
+                       Telefone = "931184481",
+                       NIF = "289761182",
+                       Password = "",
+                       ID_funcao = 2
+                   }
+                 );
+
+            bd.SaveChanges();
+        }
+
+        private static void PopulateFuncao(Gestao_de_ProjetosContext bd)
+        {
+            if (bd.Funcao.Any()) return;
+            bd.Funcao.AddRange(
+                new Funcao
+                 {
+                    Nome_Funcao = "Gestor"
+                 },
+                 new Funcao
+                 {
+                     Nome_Funcao = "Decorador"
+                 },
+                 new Funcao
+                 {
+                     Nome_Funcao = "Pedreiro"
+                 },
+                 new Funcao
+                 {
+                     Nome_Funcao = "canalizador"
+                 },
+                 new Funcao
+                 {
+                     Nome_Funcao = "Electricista"
+                 },
+                  new Funcao
+                 {
+                     Nome_Funcao = "Engenheiro Civil"
+                 },
+                   new Funcao
+                 {
+                     Nome_Funcao = "Carpinteiro"
+                 },
+                    new Funcao
+                 {
+                     Nome_Funcao = "Pintor"
+                 },
+                    new Funcao
+                 {
+                     Nome_Funcao = "Arquitecto"
+                 }
+            
+                 );
+
+            bd.SaveChanges();
+        }
     }
 }

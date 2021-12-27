@@ -33,6 +33,11 @@ namespace Gestao_de_Projetos.Models
        // [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime DataPrevistaInicio { get; set; }
 
+        [Required]
+        [Display(Name = "Data  Efetiva inicio ")]
+        [DataType(DataType.Date)]
+        public DateTime DataEfetivaInicio { get; set; }
+
 
         [Required]
         [Display(Name = "Data Prevista Fim")]
@@ -41,9 +46,20 @@ namespace Gestao_de_Projetos.Models
         public DateTime DataPrevistaFim { get; set; }
 
 
+        [Required]
+        [Display(Name = "Data  Efetiva Fim ")]
+        [DataType(DataType.Date)]
+        public DateTime DataEfetivaFim { get; set; }
 
+
+        [ForeignKey("FK_ID_projeto")]
+        public int ID_projeto { get; set; }
+        public Project Projetos { get; set; }
+
+        [ForeignKey("FK_ID_membro")]
         public int ID_membro { get; set; }
         public Membros Membros { get; set; }
+
 
 
       

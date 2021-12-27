@@ -96,7 +96,11 @@ namespace Gestao_de_Projetos.Migrations
                     Nome_Tarefa = table.Column<string>(nullable: false),
                     Descricao = table.Column<string>(nullable: false),
                     DataPrevistaInicio = table.Column<DateTime>(nullable: false),
+                    DataEfetivaInicio = table.Column<DateTime>(nullable: false),
                     DataPrevistaFim = table.Column<DateTime>(nullable: false),
+                    DataEfetivaFim = table.Column<DateTime>(nullable: false),
+                    ID_projeto = table.Column<int>(nullable: false),
+                    ProjetosID_projeto = table.Column<int>(nullable: true),
                     ID_membro = table.Column<int>(nullable: false),
                     MembrosID_membro = table.Column<int>(nullable: true)
                 },
@@ -108,6 +112,12 @@ namespace Gestao_de_Projetos.Migrations
                         column: x => x.MembrosID_membro,
                         principalTable: "Membros",
                         principalColumn: "ID_membro",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Tarefas_Project_ProjetosID_projeto",
+                        column: x => x.ProjetosID_projeto,
+                        principalTable: "Project",
+                        principalColumn: "ID_projeto",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -125,24 +135,29 @@ namespace Gestao_de_Projetos.Migrations
                 name: "IX_Tarefas_MembrosID_membro",
                 table: "Tarefas",
                 column: "MembrosID_membro");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Tarefas_ProjetosID_projeto",
+                table: "Tarefas",
+                column: "ProjetosID_projeto");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Project");
-
-            migrationBuilder.DropTable(
                 name: "Tarefas");
-
-            migrationBuilder.DropTable(
-                name: "Clientes");
 
             migrationBuilder.DropTable(
                 name: "Membros");
 
             migrationBuilder.DropTable(
+                name: "Project");
+
+            migrationBuilder.DropTable(
                 name: "Funcao");
+
+            migrationBuilder.DropTable(
+                name: "Clientes");
         }
     }
 }

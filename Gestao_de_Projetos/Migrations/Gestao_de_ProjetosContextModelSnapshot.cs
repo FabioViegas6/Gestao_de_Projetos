@@ -155,6 +155,12 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<DateTime>("DataEfetivaFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataEfetivaInicio")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("DataPrevistaFim")
                         .HasColumnType("datetime2");
 
@@ -168,6 +174,9 @@ namespace Gestao_de_Projetos.Migrations
                     b.Property<int>("ID_membro")
                         .HasColumnType("int");
 
+                    b.Property<int>("ID_projeto")
+                        .HasColumnType("int");
+
                     b.Property<int?>("MembrosID_membro")
                         .HasColumnType("int");
 
@@ -175,9 +184,14 @@ namespace Gestao_de_Projetos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ProjetosID_projeto")
+                        .HasColumnType("int");
+
                     b.HasKey("IdTarefas");
 
                     b.HasIndex("MembrosID_membro");
+
+                    b.HasIndex("ProjetosID_projeto");
 
                     b.ToTable("Tarefas");
                 });
@@ -203,6 +217,10 @@ namespace Gestao_de_Projetos.Migrations
                     b.HasOne("Gestao_de_Projetos.Models.Membros", "Membros")
                         .WithMany("Tarefas")
                         .HasForeignKey("MembrosID_membro");
+
+                    b.HasOne("Gestao_de_Projetos.Models.Project", "Projetos")
+                        .WithMany()
+                        .HasForeignKey("ProjetosID_projeto");
                 });
 #pragma warning restore 612, 618
         }

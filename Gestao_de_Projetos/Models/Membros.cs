@@ -17,10 +17,6 @@ namespace Gestao_de_Projetos.Models
         [Display(Name = "Nome do Membro")]
         public String Nome_membro { get; set; }
 
-        [Required]
-        [Display(Name = "Sobrenome")]
-        public String Sobrenome { get; set; }
-
         
 
         [StringLength(20)]

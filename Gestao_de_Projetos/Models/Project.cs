@@ -24,6 +24,11 @@ namespace Gestao_de_Projetos.Models
 
 
         [Required]
+        [Display(Name = "Data Prevista Inicio ")]
+        [DataType(DataType.Date)]
+        public DateTime DataPrevistaInicio { get; set; }
+
+        [Required]
         [Display(Name = "Data Inicio ")]
         [DataType(DataType.Date)]
         public DateTime DataInicio { get; set; }

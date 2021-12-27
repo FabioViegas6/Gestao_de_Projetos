@@ -45,6 +45,7 @@ namespace Gestao_de_Projetos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome_projeto = table.Column<string>(nullable: false),
                     EstadoProjeto = table.Column<string>(nullable: true),
+                    DataPrevistaInicio = table.Column<DateTime>(nullable: false),
                     DataInicio = table.Column<DateTime>(nullable: false),
                     DataPrevistaFim = table.Column<DateTime>(nullable: false),
                     DataEfetivaFim = table.Column<DateTime>(nullable: false),
@@ -68,7 +69,6 @@ namespace Gestao_de_Projetos.Migrations
                     ID_membro = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome_membro = table.Column<string>(nullable: false),
-                    Sobrenome = table.Column<string>(nullable: false),
                     Telefone = table.Column<string>(maxLength: 20, nullable: true),
                     NIF = table.Column<string>(maxLength: 10, nullable: true),
                     Email = table.Column<string>(maxLength: 50, nullable: false),

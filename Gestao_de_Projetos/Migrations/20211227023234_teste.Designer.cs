@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestao_de_Projetos.Migrations
 {
     [DbContext(typeof(Gestao_de_ProjetosContext))]
-    [Migration("20211223155622_teste")]
+    [Migration("20211227023234_teste")]
     partial class teste
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -103,10 +103,6 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.Property<string>("Sobrenome")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Telefone")
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
@@ -135,6 +131,9 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataPrevistaFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataPrevistaInicio")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("EstadoProjeto")

@@ -113,7 +113,6 @@ namespace Gestao_de_Projetos.Data
                 new Membros
                 {
                    Nome_membro = "Selmira",
-                   Sobrenome = "Fernandes",
                    Email = "self@gmail.com",
                    Telefone = "931184481",
                    NIF = "289761182",
@@ -125,7 +124,6 @@ namespace Gestao_de_Projetos.Data
                 new Membros
                 {
                      Nome_membro = "mira ",
-                    Sobrenome = "Ibrahim",
                      Email = "mira@gmail.com",
                      Telefone = "931184481",
                      NIF = "289761182",
@@ -136,7 +134,6 @@ namespace Gestao_de_Projetos.Data
                   new Membros
                   {
                       Nome_membro = "Sel ",
-                      Sobrenome = "nandes",
                       Email = "miraf@gmail.com",
                       Telefone = "931184481",
                       NIF = "289761182",
@@ -147,7 +144,6 @@ namespace Gestao_de_Projetos.Data
                    new Membros
                    {
                        Nome_membro = "Selmira ",
-                       Sobrenome = "Fernandes",
                        Email = "self@gmail.com",
                        Telefone = "931184481",
                        NIF = "289761182",

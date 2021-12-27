@@ -75,7 +75,10 @@ namespace Gestao_de_Projetos.Controllers
             {
                 _context.Add(clientes);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Cliente adicionado";
+                ViewBag.Message = "Cliente adicionado com sucesso.";
+                return View("Success");
             }
             return View(clientes);
         }

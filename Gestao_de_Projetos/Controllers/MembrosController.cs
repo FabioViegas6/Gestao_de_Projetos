@@ -98,7 +98,10 @@ namespace Gestao_de_Projetos.Controllers
             {
                 _context.Add(membros);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Membro adicionado";
+                ViewBag.Message = "Membro adicionado com sucesso.";
+                return View("Success");
             }
             ViewData["ID_funcao"] = new SelectList(_context.Funcao, "ID_funcao", "Nome_Funcao");
             return View(membros);

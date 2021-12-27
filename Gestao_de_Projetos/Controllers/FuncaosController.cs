@@ -95,7 +95,10 @@ namespace Gestao_de_Projetos.Controllers
             {
                 _context.Add(funcao);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Funcão adicionada";
+                ViewBag.Message = "Funcão adicionada com sucesso.";
+                return View("Success");
             }
             return View(funcao);
         }

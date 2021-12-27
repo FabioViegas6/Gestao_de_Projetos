@@ -100,8 +100,9 @@ namespace Gestao_de_Projetos.Controllers
             {
                 _context.Add(project);
                 await _context.SaveChangesAsync();
+
                 ViewBag.Title = "Projeto criado";
-                ViewBag.Message = "Projeto sucessfully .";
+                ViewBag.Message = "Projeto adicionado com sucesso .";
                 return View("Sucess");
                 //return RedirectToAction(nameof(Index));
             }

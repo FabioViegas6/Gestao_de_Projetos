@@ -95,7 +95,10 @@ namespace Gestao_de_Projetos.Controllers
             {
                 _context.Add(tarefas);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Tarefa adicionada";
+                ViewBag.Message = "Tarefa adicionada com sucesso.";
+                return View("Success");
             }
             return View(tarefas);
         }

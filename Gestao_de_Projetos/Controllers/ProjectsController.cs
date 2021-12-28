@@ -85,7 +85,7 @@ namespace Gestao_de_Projetos.Controllers
         // GET: Projects/Create
         public IActionResult Create()
         {
-            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido");
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome");
             return View();
         }
 
@@ -106,7 +106,7 @@ namespace Gestao_de_Projetos.Controllers
                 return View("Sucess");
                 //return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido", project.ClientesId);
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
             return View(project);
         }
 
@@ -123,7 +123,7 @@ namespace Gestao_de_Projetos.Controllers
             {
                 return NotFound();
             }
-            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido", project.ClientesId);
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
             return View(project);
         }
 
@@ -159,7 +159,7 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Apelido", project.ClientesId);
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
             return View(project);
         }
 

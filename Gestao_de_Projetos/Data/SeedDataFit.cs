@@ -14,6 +14,7 @@ namespace Gestao_de_Projetos.Data
             PopulateProject(bd);
             PopulateMembro(bd);
             PopulateFuncao(bd);
+            PopulateEstado(bd);
 
         }
 
@@ -27,6 +28,7 @@ namespace Gestao_de_Projetos.Data
                     DataInicio = DateTime.Parse("12/12/2021"),
                     DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                     ClientesId = 2,
+                    estadoID = 2,
                     DataPrevistaFim = DateTime.Parse("26/12/2021")
                 },
 
@@ -36,6 +38,7 @@ namespace Gestao_de_Projetos.Data
                      DataInicio = DateTime.Parse("12/12/2021"),
                      DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                      ClientesId = 3,
+                     estadoID = 3,
                      DataPrevistaFim = DateTime.Parse("27/12/2021")
                  },
                   new Project
@@ -44,6 +47,7 @@ namespace Gestao_de_Projetos.Data
                       DataInicio = DateTime.Parse("12/12/2021"),
                       DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                       ClientesId = 2,
+                      estadoID = 2,
                       DataPrevistaFim = DateTime.Parse("30/12/2021")
                   },
 
@@ -53,7 +57,9 @@ namespace Gestao_de_Projetos.Data
                        DataInicio = DateTime.Parse("12/12/2021"),
                        DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                        ClientesId = 3,
+                       estadoID = 1,
                        DataPrevistaFim = DateTime.Parse("30/12/2021")
+                       
                    }
                   );
             bd.SaveChanges();
@@ -204,5 +210,27 @@ namespace Gestao_de_Projetos.Data
 
             bd.SaveChanges();
         }
-    }
+
+        private static void PopulateEstado(Gestao_de_ProjetosContext bd)
+        {
+            if (bd.Estado.Any()) return;
+            bd.Estado.AddRange(
+                new Estado
+                {
+                    NomeEstado = "Atrasado"
+                },
+                 new Estado
+                 {
+                     NomeEstado = "Em progresso"
+                 },
+                 new Estado
+                 {
+                     NomeEstado = "Concluido"
+                 }
+   
+                 );
+
+            bd.SaveChanges();
+        }
+        }
 }

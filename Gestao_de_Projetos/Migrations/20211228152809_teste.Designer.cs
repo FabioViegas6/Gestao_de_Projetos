@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestao_de_Projetos.Migrations
 {
     [DbContext(typeof(Gestao_de_ProjetosContext))]
-    [Migration("20211228150912_teste")]
+    [Migration("20211228152809_teste")]
     partial class teste
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,22 @@ namespace Gestao_de_Projetos.Migrations
                     b.HasKey("ClientesId");
 
                     b.ToTable("Clientes");
+                });
+
+            modelBuilder.Entity("Gestao_de_Projetos.Models.Estado", b =>
+                {
+                    b.Property<int>("estadoID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("NomeEstado")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("estadoID");
+
+                    b.ToTable("Estado");
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Funcao", b =>
@@ -143,9 +159,14 @@ namespace Gestao_de_Projetos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("estadoID")
+                        .HasColumnType("int");
+
                     b.HasKey("ID_projeto");
 
                     b.HasIndex("ClientesId");
+
+                    b.HasIndex("estadoID");
 
                     b.ToTable("Project");
                 });
@@ -210,6 +231,12 @@ namespace Gestao_de_Projetos.Migrations
                     b.HasOne("Gestao_de_Projetos.Models.Clientes", "Clientes")
                         .WithMany()
                         .HasForeignKey("ClientesId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gestao_de_Projetos.Models.Estado", "Estado")
+                        .WithMany("Projects")
+                        .HasForeignKey("estadoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

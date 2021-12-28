@@ -25,6 +25,19 @@ namespace Gestao_de_Projetos.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Estado",
+                columns: table => new
+                {
+                    estadoID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    NomeEstado = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Estado", x => x.estadoID);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Funcao",
                 columns: table => new
                 {
@@ -49,7 +62,8 @@ namespace Gestao_de_Projetos.Migrations
                     DataInicio = table.Column<DateTime>(nullable: false),
                     DataPrevistaFim = table.Column<DateTime>(nullable: false),
                     DataEfetivaFim = table.Column<DateTime>(nullable: true),
-                    ClientesId = table.Column<int>(nullable: false)
+                    ClientesId = table.Column<int>(nullable: false),
+                    estadoID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -59,6 +73,12 @@ namespace Gestao_de_Projetos.Migrations
                         column: x => x.ClientesId,
                         principalTable: "Clientes",
                         principalColumn: "ClientesId",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Project_Estado_estadoID",
+                        column: x => x.estadoID,
+                        principalTable: "Estado",
+                        principalColumn: "estadoID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -132,6 +152,11 @@ namespace Gestao_de_Projetos.Migrations
                 column: "ClientesId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Project_estadoID",
+                table: "Project",
+                column: "estadoID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tarefas_MembrosID_membro",
                 table: "Tarefas",
                 column: "MembrosID_membro");
@@ -158,6 +183,9 @@ namespace Gestao_de_Projetos.Migrations
 
             migrationBuilder.DropTable(
                 name: "Clientes");
+
+            migrationBuilder.DropTable(
+                name: "Estado");
         }
     }
 }

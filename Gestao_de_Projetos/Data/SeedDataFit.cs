@@ -25,6 +25,7 @@ namespace Gestao_de_Projetos.Data
                 {
                     Nome_projeto = "Remodelação exterior",
                     DataInicio = DateTime.Parse("12/12/2021"),
+                    DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                     ClientesId = 2,
                     DataPrevistaFim = DateTime.Parse("26/12/2021")
                 },
@@ -33,6 +34,7 @@ namespace Gestao_de_Projetos.Data
                  {
                      Nome_projeto = "Remodelação Interior",
                      DataInicio = DateTime.Parse("12/12/2021"),
+                     DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                      ClientesId = 3,
                      DataPrevistaFim = DateTime.Parse("27/12/2021")
                  },
@@ -40,6 +42,7 @@ namespace Gestao_de_Projetos.Data
                   {
                       Nome_projeto = "Contrução do Jardim",
                       DataInicio = DateTime.Parse("12/12/2021"),
+                      DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                       ClientesId = 2,
                       DataPrevistaFim = DateTime.Parse("30/12/2021")
                   },
@@ -48,6 +51,7 @@ namespace Gestao_de_Projetos.Data
                    {
                        Nome_projeto = "Remodelação exterior",
                        DataInicio = DateTime.Parse("12/12/2021"),
+                       DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                        ClientesId = 3,
                        DataPrevistaFim = DateTime.Parse("30/12/2021")
                    }

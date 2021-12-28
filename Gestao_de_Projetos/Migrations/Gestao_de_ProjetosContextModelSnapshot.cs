@@ -122,7 +122,7 @@ namespace Gestao_de_Projetos.Migrations
                     b.Property<int>("ClientesId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("DataEfetivaFim")
+                    b.Property<DateTime?>("DataEfetivaFim")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataInicio")
@@ -155,7 +155,7 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime>("DataEfetivaFim")
+                    b.Property<DateTime?>("DataEfetivaFim")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataEfetivaInicio")

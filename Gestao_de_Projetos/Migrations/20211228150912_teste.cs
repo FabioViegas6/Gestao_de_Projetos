@@ -48,7 +48,7 @@ namespace Gestao_de_Projetos.Migrations
                     DataPrevistaInicio = table.Column<DateTime>(nullable: false),
                     DataInicio = table.Column<DateTime>(nullable: false),
                     DataPrevistaFim = table.Column<DateTime>(nullable: false),
-                    DataEfetivaFim = table.Column<DateTime>(nullable: false),
+                    DataEfetivaFim = table.Column<DateTime>(nullable: true),
                     ClientesId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -98,7 +98,7 @@ namespace Gestao_de_Projetos.Migrations
                     DataPrevistaInicio = table.Column<DateTime>(nullable: false),
                     DataEfetivaInicio = table.Column<DateTime>(nullable: false),
                     DataPrevistaFim = table.Column<DateTime>(nullable: false),
-                    DataEfetivaFim = table.Column<DateTime>(nullable: false),
+                    DataEfetivaFim = table.Column<DateTime>(nullable: true),
                     ID_projeto = table.Column<int>(nullable: false),
                     ProjetosID_projeto = table.Column<int>(nullable: true),
                     ID_membro = table.Column<int>(nullable: false),

@@ -48,6 +48,7 @@ namespace Gestao_de_Projetos.Controllers
 
             var projetos = await ProjectSearch
                             .Include(b => b.Clientes)
+                            .Include(b => b.Estado)
                             .OrderBy(b => b.Nome_projeto)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
@@ -73,6 +74,7 @@ namespace Gestao_de_Projetos.Controllers
 
             var project = await _context.Project
                 .Include(p => p.Clientes)
+                 .Include(b => b.Estado)
                 .FirstOrDefaultAsync(m => m.ID_projeto == id);
             if (project == null)
             {
@@ -86,6 +88,7 @@ namespace Gestao_de_Projetos.Controllers
         public IActionResult Create()
         {
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome");
+            ViewData["estadoID"] = new SelectList(_context.Estado, "estadoID", "NomeEstado");
             return View();
         }
 
@@ -94,7 +97,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_projeto,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId")] Project project)
+        public async Task<IActionResult> Create([Bind("ID_projeto,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId,estadoID")] Project project)
         {
             if (ModelState.IsValid)
             {
@@ -107,6 +110,7 @@ namespace Gestao_de_Projetos.Controllers
                 //return RedirectToAction(nameof(Index));
             }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
+            ViewData["estadoID"] = new SelectList(_context.Estado, "estadoID", "NomeEstado", project.estadoID);
             return View(project);
         }
 
@@ -124,6 +128,7 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
+            ViewData["estadoID"] = new SelectList(_context.Estado, "estadoID", "NomeEstado", project.estadoID);
             return View(project);
         }
 
@@ -132,7 +137,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID_projeto,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("ID_projeto,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId,estadoID")] Project project)
         {
             if (id != project.ID_projeto)
             {
@@ -160,6 +165,7 @@ namespace Gestao_de_Projetos.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
+            ViewData["estadoID"] = new SelectList(_context.Estado, "estadoID", "NomeEstado", project.estadoID);
             return View(project);
         }
 
@@ -173,6 +179,7 @@ namespace Gestao_de_Projetos.Controllers
 
             var project = await _context.Project
                 .Include(p => p.Clientes)
+                 .Include(b => b.Estado)
                 .FirstOrDefaultAsync(m => m.ID_projeto == id);
             if (project == null)
             {

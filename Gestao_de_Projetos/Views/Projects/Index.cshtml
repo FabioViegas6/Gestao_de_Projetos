@@ -28,16 +28,17 @@
 {
     <div class="card mt-3">
         <div class="card-body">
-            
+
             <p class="card-text lead">@projetos.Nome_projeto</p>
-            <p class="card-text lead">@projetos.Clientes</p>
+            <p class="card-text lead">@projetos.Clientes.Nome</p>
             <p class="card-text">@projetos.DataInicio</p>
+            <p class="card-text">@projetos.Estado.NomeEstado</p>
 
             <a asp-action="Details" asp-route-id="@projetos.ID_projeto" class="btn btn-info">Details</a>
             @*@if (User.IsInRole("product_manager"))
-            {*@
-                <a asp-action="Edit" asp-route-id="@projetos.ID_projeto" class="btn btn-warning">Edit</a>
-                <a asp-action="Delete" asp-route-id="@projetos.ID_projeto" class="btn btn-danger">Delete</a>
+        {*@
+            <a asp-action="Edit" asp-route-id="@projetos.ID_projeto" class="btn btn-warning">Edit</a>
+            <a asp-action="Delete" asp-route-id="@projetos.ID_projeto" class="btn btn-danger">Delete</a>
             @*}*@
         </div>
     </div>

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestao_de_Projetos.Migrations
 {
     [DbContext(typeof(Gestao_de_ProjetosContext))]
-    [Migration("20211228152809_teste")]
-    partial class teste
+    [Migration("20211228154837_testev2")]
+    partial class testev2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -151,9 +151,6 @@ namespace Gestao_de_Projetos.Migrations
 
                     b.Property<DateTime>("DataPrevistaInicio")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("EstadoProjeto")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Nome_projeto")
                         .IsRequired()

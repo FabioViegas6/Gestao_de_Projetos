@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gestao_de_Projetos.Migrations
 {
-    public partial class teste : Migration
+    public partial class testev2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -57,7 +57,6 @@ namespace Gestao_de_Projetos.Migrations
                     ID_projeto = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome_projeto = table.Column<string>(nullable: false),
-                    EstadoProjeto = table.Column<string>(nullable: true),
                     DataPrevistaInicio = table.Column<DateTime>(nullable: false),
                     DataInicio = table.Column<DateTime>(nullable: false),
                     DataPrevistaFim = table.Column<DateTime>(nullable: false),

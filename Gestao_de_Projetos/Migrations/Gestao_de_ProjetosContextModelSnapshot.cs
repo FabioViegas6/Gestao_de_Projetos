@@ -150,9 +150,6 @@ namespace Gestao_de_Projetos.Migrations
                     b.Property<DateTime>("DataPrevistaInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("EstadoProjeto")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Nome_projeto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");

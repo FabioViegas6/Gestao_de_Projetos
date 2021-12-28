@@ -46,10 +46,10 @@ namespace Gestao_de_Projetos.Models
         public DateTime DataPrevistaFim { get; set; }
 
 
-        [Required]
+        
         [Display(Name = "Data  Efetiva Fim ")]
         [DataType(DataType.Date)]
-        public DateTime DataEfetivaFim { get; set; }
+        public DateTime? DataEfetivaFim { get; set; }
 
 
         [ForeignKey("FK_ID_projeto")]

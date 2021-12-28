@@ -18,9 +18,7 @@ namespace Gestao_de_Projetos.Models
         public String Nome { get; set; }
 
 
-    
-
-
+   
         [StringLength(20)]
         [Display(Name = "Contacto", Prompt = "Contacto")]
         public String Contacto { get; set; }

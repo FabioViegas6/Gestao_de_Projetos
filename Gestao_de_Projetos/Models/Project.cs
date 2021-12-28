@@ -18,10 +18,6 @@ namespace Gestao_de_Projetos.Models
         public string Nome_projeto { get; set; }
 
 
-       
-        [Display(Name = "Estado Projeto")]
-        public string EstadoProjeto { get; set; }
-
 
         [Required]
         [Display(Name = "Data Prevista Inicio ")]
@@ -49,5 +45,10 @@ namespace Gestao_de_Projetos.Models
         [ForeignKey("FK_ClientesId")]
         public int ClientesId { get; set; }
         public Clientes Clientes { get; set; }
+
+        [ForeignKey("FK_estadoID")]
+        public int estadoID { get; set; }
+        public Estado Estado { get; set; }
+
     }
 }

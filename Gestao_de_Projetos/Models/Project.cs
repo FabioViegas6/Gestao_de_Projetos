@@ -10,7 +10,7 @@ namespace Gestao_de_Projetos.Models
     public class Project
     { 
         [Key]
-        public int ID_projeto { get; set; }
+        public int ProjectID { get; set; }
 
 
         [Required]
@@ -46,9 +46,11 @@ namespace Gestao_de_Projetos.Models
         public int ClientesId { get; set; }
         public Clientes Clientes { get; set; }
 
-        [ForeignKey("FK_estadoID")]
-        public int estadoID { get; set; }
+        [ForeignKey("FK_EstadoID")]
+        public int EstadoID { get; set; }
         public Estado Estado { get; set; }
+
+        public ICollection<Tarefas> Tarefas { get; set; }
 
     }
 }

@@ -10,7 +10,7 @@ namespace Gestao_de_Projetos.Models
     public class Funcao
     {
         [Key]
-        public int ID_funcao { get; set; }
+        public int FuncaoID { get; set; }
 
         [Required]
         [Display(Name = "Nome Função")]

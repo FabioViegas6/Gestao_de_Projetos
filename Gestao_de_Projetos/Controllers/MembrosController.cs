@@ -71,7 +71,7 @@ namespace Gestao_de_Projetos.Controllers
             }
 
             var membros = await _context.Membros
-                .FirstOrDefaultAsync(m => m.ID_membro == id);
+                .FirstOrDefaultAsync(m => m.MembrosID == id);
             if (membros == null)
             {
                 return NotFound();
@@ -131,7 +131,7 @@ namespace Gestao_de_Projetos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID_membro,Nome_membro,Sobrenome,Telefone,NIF,Email,Password,ID_funcao")] Membros membros)
         {
-            if (id != membros.ID_membro)
+            if (id != membros.MembrosID)
             {
                 return NotFound();
             }
@@ -145,7 +145,7 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MembrosExists(membros.ID_membro))
+                    if (!MembrosExists(membros.MembrosID))
                     {
                         return NotFound();
                     }
@@ -169,7 +169,7 @@ namespace Gestao_de_Projetos.Controllers
             }
 
             var membros = await _context.Membros
-                .FirstOrDefaultAsync(m => m.ID_membro == id);
+                .FirstOrDefaultAsync(m => m.MembrosID == id);
             if (membros == null)
             {
                 return NotFound();
@@ -191,7 +191,7 @@ namespace Gestao_de_Projetos.Controllers
 
         private bool MembrosExists(int id)
         {
-            return _context.Membros.Any(e => e.ID_membro == id);
+            return _context.Membros.Any(e => e.MembrosID == id);
         }
     }
 }

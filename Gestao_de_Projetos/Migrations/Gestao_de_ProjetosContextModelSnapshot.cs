@@ -56,7 +56,7 @@ namespace Gestao_de_Projetos.Migrations
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Estado", b =>
                 {
-                    b.Property<int>("estadoID")
+                    b.Property<int>("EstadoID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -65,14 +65,14 @@ namespace Gestao_de_Projetos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("estadoID");
+                    b.HasKey("EstadoID");
 
                     b.ToTable("Estado");
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Funcao", b =>
                 {
-                    b.Property<int>("ID_funcao")
+                    b.Property<int>("FuncaoID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -81,14 +81,14 @@ namespace Gestao_de_Projetos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID_funcao");
+                    b.HasKey("FuncaoID");
 
                     b.ToTable("Funcao");
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Membros", b =>
                 {
-                    b.Property<int>("ID_membro")
+                    b.Property<int>("MembrosID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -98,10 +98,7 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("nvarchar(50)")
                         .HasMaxLength(50);
 
-                    b.Property<int?>("FuncaoID_funcao")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ID_funcao")
+                    b.Property<int>("FuncaoID")
                         .HasColumnType("int");
 
                     b.Property<string>("NIF")
@@ -121,16 +118,16 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("nvarchar(20)")
                         .HasMaxLength(20);
 
-                    b.HasKey("ID_membro");
+                    b.HasKey("MembrosID");
 
-                    b.HasIndex("FuncaoID_funcao");
+                    b.HasIndex("FuncaoID");
 
                     b.ToTable("Membros");
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Project", b =>
                 {
-                    b.Property<int>("ID_projeto")
+                    b.Property<int>("ProjectID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -150,25 +147,25 @@ namespace Gestao_de_Projetos.Migrations
                     b.Property<DateTime>("DataPrevistaInicio")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("EstadoID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Nome_projeto")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("estadoID")
-                        .HasColumnType("int");
-
-                    b.HasKey("ID_projeto");
+                    b.HasKey("ProjectID");
 
                     b.HasIndex("ClientesId");
 
-                    b.HasIndex("estadoID");
+                    b.HasIndex("EstadoID");
 
                     b.ToTable("Project");
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Tarefas", b =>
                 {
-                    b.Property<int>("IdTarefas")
+                    b.Property<int>("TarefasID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -189,27 +186,26 @@ namespace Gestao_de_Projetos.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ID_membro")
+                    b.Property<int>("EstadoID")
                         .HasColumnType("int");
 
-                    b.Property<int>("ID_projeto")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("MembrosID_membro")
+                    b.Property<int>("MembrosID")
                         .HasColumnType("int");
 
                     b.Property<string>("Nome_Tarefa")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProjetosID_projeto")
+                    b.Property<int?>("ProjectID")
                         .HasColumnType("int");
 
-                    b.HasKey("IdTarefas");
+                    b.HasKey("TarefasID");
 
-                    b.HasIndex("MembrosID_membro");
+                    b.HasIndex("EstadoID");
 
-                    b.HasIndex("ProjetosID_projeto");
+                    b.HasIndex("MembrosID");
+
+                    b.HasIndex("ProjectID");
 
                     b.ToTable("Tarefas");
                 });
@@ -218,7 +214,9 @@ namespace Gestao_de_Projetos.Migrations
                 {
                     b.HasOne("Gestao_de_Projetos.Models.Funcao", "Funcao")
                         .WithMany()
-                        .HasForeignKey("FuncaoID_funcao");
+                        .HasForeignKey("FuncaoID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Project", b =>
@@ -231,20 +229,28 @@ namespace Gestao_de_Projetos.Migrations
 
                     b.HasOne("Gestao_de_Projetos.Models.Estado", "Estado")
                         .WithMany("Projects")
-                        .HasForeignKey("estadoID")
+                        .HasForeignKey("EstadoID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Tarefas", b =>
                 {
+                    b.HasOne("Gestao_de_Projetos.Models.Estado", "Estado")
+                        .WithMany("Tarefas")
+                        .HasForeignKey("EstadoID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Gestao_de_Projetos.Models.Membros", "Membros")
                         .WithMany("Tarefas")
-                        .HasForeignKey("MembrosID_membro");
+                        .HasForeignKey("MembrosID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("Gestao_de_Projetos.Models.Project", "Projetos")
-                        .WithMany()
-                        .HasForeignKey("ProjetosID_projeto");
+                    b.HasOne("Gestao_de_Projetos.Models.Project", "Project")
+                        .WithMany("Tarefas")
+                        .HasForeignKey("ProjectID");
                 });
 #pragma warning restore 612, 618
         }

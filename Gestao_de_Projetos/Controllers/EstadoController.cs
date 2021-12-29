@@ -34,7 +34,7 @@ namespace Gestao_de_Projetos.Controllers
             }
 
             var estado = await _context.Estado
-                .FirstOrDefaultAsync(m => m.estadoID == id);
+                .FirstOrDefaultAsync(m => m.EstadoID == id);
             if (estado == null)
             {
                 return NotFound();
@@ -88,7 +88,7 @@ namespace Gestao_de_Projetos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("estadoID,NomeEstado")] Estado estado)
         {
-            if (id != estado.estadoID)
+            if (id != estado.EstadoID)
             {
                 return NotFound();
             }
@@ -102,7 +102,7 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!EstadoExists(estado.estadoID))
+                    if (!EstadoExists(estado.EstadoID))
                     {
                         return NotFound();
                     }
@@ -125,7 +125,7 @@ namespace Gestao_de_Projetos.Controllers
             }
 
             var estado = await _context.Estado
-                .FirstOrDefaultAsync(m => m.estadoID == id);
+                .FirstOrDefaultAsync(m => m.EstadoID == id);
             if (estado == null)
             {
                 return NotFound();
@@ -147,7 +147,7 @@ namespace Gestao_de_Projetos.Controllers
 
         private bool EstadoExists(int id)
         {
-            return _context.Estado.Any(e => e.estadoID == id);
+            return _context.Estado.Any(e => e.EstadoID == id);
         }
     }
 }

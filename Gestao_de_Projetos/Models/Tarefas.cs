@@ -10,7 +10,7 @@ namespace Gestao_de_Projetos.Models
     public class Tarefas
     {
         [Key]
-        public int IdTarefas { get; set; }
+        public int TarefasID { get; set; }
 
 
         //[ForeignKey("FK_ID_projeto")]
@@ -52,17 +52,21 @@ namespace Gestao_de_Projetos.Models
         public DateTime? DataEfetivaFim { get; set; }
 
 
-        [ForeignKey("FK_ID_projeto")]
-        public int ID_projeto { get; set; }
-        public Project Projetos { get; set; }
+        //[ForeignKey("FK_ProjectID")]
+        public int? ProjectID { get; set; }
+        public Project Project { get; set; }
 
-        [ForeignKey("FK_ID_membro")]
-        public int ID_membro { get; set; }
+        //[ForeignKey("FK_MembrosID")]
+        public int MembrosID { get; set; }
         public Membros Membros { get; set; }
 
+        //[ForeignKey("FK_estadoID")]
+        public int EstadoID { get; set; }
+        public Estado Estado { get; set; }
 
 
-      
+
+
 
 
     }

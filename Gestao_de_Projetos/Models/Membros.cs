@@ -10,7 +10,7 @@ namespace Gestao_de_Projetos.Models
     public class Membros
     {
         [Key]
-        public int ID_membro { get; set; }
+        public int MembrosID { get; set; }
 
 
         [Required]
@@ -46,7 +46,7 @@ namespace Gestao_de_Projetos.Models
 
 
         [ForeignKey("FK_ID_funcao")]
-        public int ID_funcao { get; set; }
+        public int FuncaoID { get; set; }
         public Funcao Funcao { get; set; }
 
     }

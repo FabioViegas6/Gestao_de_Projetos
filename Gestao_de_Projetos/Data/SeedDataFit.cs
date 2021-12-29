@@ -13,8 +13,9 @@ namespace Gestao_de_Projetos.Data
             PopulateEstado(bd);
             PopulateClientes(bd);
             PopulateProject(bd);
-            PopulateMembro(bd);
             PopulateFuncao(bd);
+            PopulateMembro(bd);
+            
             
 
         }
@@ -29,7 +30,7 @@ namespace Gestao_de_Projetos.Data
                     DataInicio = DateTime.Parse("12/12/2021"),
                     DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                     ClientesId = 2,
-                    estadoID = 2,
+                    EstadoID = 2,
                     DataPrevistaFim = DateTime.Parse("26/12/2021")
                 },
 
@@ -39,7 +40,7 @@ namespace Gestao_de_Projetos.Data
                      DataInicio = DateTime.Parse("12/12/2021"),
                      DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                      ClientesId = 3,
-                     estadoID = 3,
+                     EstadoID = 3,
                      DataPrevistaFim = DateTime.Parse("27/12/2021")
                  },
                   new Project
@@ -48,7 +49,7 @@ namespace Gestao_de_Projetos.Data
                       DataInicio = DateTime.Parse("12/12/2021"),
                       DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                       ClientesId = 2,
-                      estadoID = 2,
+                      EstadoID = 2,
                       DataPrevistaFim = DateTime.Parse("30/12/2021")
                   },
 
@@ -58,7 +59,7 @@ namespace Gestao_de_Projetos.Data
                        DataInicio = DateTime.Parse("12/12/2021"),
                        DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                        ClientesId = 3,
-                       estadoID = 1,
+                       EstadoID = 1,
                        DataPrevistaFim = DateTime.Parse("30/12/2021")
                        
                    }
@@ -128,7 +129,7 @@ namespace Gestao_de_Projetos.Data
                    Telefone = "931184481",
                    NIF = "289761182",
                    Password = "",
-                   ID_funcao = 1
+                    FuncaoID = 1
 
                 },
 
@@ -139,8 +140,8 @@ namespace Gestao_de_Projetos.Data
                      Telefone = "931184481",
                      NIF = "289761182",
                      Password = "",
-                     //
-                     ID_funcao = 2
+                    //
+                    FuncaoID = 2
                  },
                   new Membros
                   {
@@ -149,7 +150,7 @@ namespace Gestao_de_Projetos.Data
                       Telefone = "931184481",
                       NIF = "289761182",
                       Password = "",
-                      ID_funcao = 3
+                      FuncaoID = 3
                   },
 
                    new Membros
@@ -159,7 +160,7 @@ namespace Gestao_de_Projetos.Data
                        Telefone = "931184481",
                        NIF = "289761182",
                        Password = "",
-                       ID_funcao = 2
+                       FuncaoID = 2
                    }
                  );
 

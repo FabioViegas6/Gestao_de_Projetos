@@ -11,58 +11,64 @@
     <h4>Tarefas</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nome_Tarefa)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nome_Tarefa)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Descricao)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Descricao)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataPrevistaInicio)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataPrevistaInicio)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataEfetivaInicio)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataEfetivaInicio)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataPrevistaFim)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataPrevistaFim)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataEfetivaFim)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataEfetivaFim)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ID_projeto)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Project)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ID_projeto)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Project.Nome_projeto)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ID_membro)
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Membros)
         </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ID_membro)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Membros.Nome_membro)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Estado)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Estado.NomeEstado)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="IdTarefas" />
+        <input type="hidden" asp-for="TarefasID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

@@ -10,12 +10,15 @@ namespace Gestao_de_Projetos.Models
     {
 
         [Key]
-        public int estadoID { get; set; }
+        public int EstadoID { get; set; }
 
         [Required]
         [Display(Name = "Nome estado")]
         public string NomeEstado { get; set; }
 
+
+
         public ICollection<Project> Projects { get; set; }
+        public ICollection<Tarefas> Tarefas { get; set; }
     }
 }

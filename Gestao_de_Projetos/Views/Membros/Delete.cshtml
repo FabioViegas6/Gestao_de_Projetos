@@ -43,15 +43,15 @@
             @Html.DisplayFor(model => model.Password)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.ID_funcao)
+            @Html.DisplayNameFor(model => model.FuncaoID)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.ID_funcao)
+            @Html.DisplayFor(model => model.FuncaoID)
         </dd>
     </dl>
     
     <form asp-action="Delete">
-        <input type="hidden" asp-for="ID_membro" />
+        <input type="hidden" asp-for="MembrosID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

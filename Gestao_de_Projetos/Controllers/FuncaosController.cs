@@ -69,7 +69,7 @@ namespace Gestao_de_Projetos.Controllers
             }
 
             var funcao = await _context.Funcao
-                .FirstOrDefaultAsync(m => m.ID_funcao == id);
+                .FirstOrDefaultAsync(m => m.FuncaoID == id);
             if (funcao == null)
             {
                 return NotFound();
@@ -126,7 +126,7 @@ namespace Gestao_de_Projetos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID_funcao,Nome_Funcao")] Funcao funcao)
         {
-            if (id != funcao.ID_funcao)
+            if (id != funcao.FuncaoID)
             {
                 return NotFound();
             }
@@ -140,7 +140,7 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!FuncaoExists(funcao.ID_funcao))
+                    if (!FuncaoExists(funcao.FuncaoID))
                     {
                         return NotFound();
                     }
@@ -163,7 +163,7 @@ namespace Gestao_de_Projetos.Controllers
             }
 
             var funcao = await _context.Funcao
-                .FirstOrDefaultAsync(m => m.ID_funcao == id);
+                .FirstOrDefaultAsync(m => m.FuncaoID == id);
             if (funcao == null)
             {
                 return NotFound();
@@ -185,7 +185,7 @@ namespace Gestao_de_Projetos.Controllers
 
         private bool FuncaoExists(int id)
         {
-            return _context.Funcao.Any(e => e.ID_funcao == id);
+            return _context.Funcao.Any(e => e.FuncaoID == id);
         }
     }
 }

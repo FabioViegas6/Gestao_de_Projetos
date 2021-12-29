@@ -77,7 +77,7 @@ namespace Gestao_de_Projetos.Controllers
             var project = await _context.Project
                 .Include(p => p.Clientes)
                  .Include(b => b.Estado)
-                .FirstOrDefaultAsync(m => m.ID_projeto == id);
+                .FirstOrDefaultAsync(m => m.ProjectID == id);
             if (project == null)
             {
                 return NotFound();
@@ -107,12 +107,12 @@ namespace Gestao_de_Projetos.Controllers
                 await _context.SaveChangesAsync();
 
                 ViewBag.Title = "Projeto criado";
-                ViewBag.Message = "Projeto adicionado com sucesso .";
+                ViewBag.Message = "Projeto adicionado com sucesso.";
                 return View("Sucess");
                 //return RedirectToAction(nameof(Index));
             }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
-            ViewData["estadoID"] = new SelectList(_context.Estado, "estadoID", "NomeEstado", project.estadoID);
+            ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
             return View(project);
         }
 
@@ -130,7 +130,7 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
-            ViewData["estadoID"] = new SelectList(_context.Estado, "estadoID", "NomeEstado", project.estadoID);
+            ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
             return View(project);
         }
 
@@ -139,9 +139,9 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID_projeto,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId,estadoID")] Project project)
+        public async Task<IActionResult> Edit(int id, [Bind("ProjectID,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId,EstadoID")] Project project)
         {
-            if (id != project.ID_projeto)
+            if (id != project.ProjectID)
             {
                 return NotFound();
             }
@@ -155,7 +155,7 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProjectExists(project.ID_projeto))
+                    if (!ProjectExists(project.ProjectID))
                     {
                         return NotFound();
                     }
@@ -167,7 +167,7 @@ namespace Gestao_de_Projetos.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
-            ViewData["estadoID"] = new SelectList(_context.Estado, "estadoID", "NomeEstado", project.estadoID);
+            ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
             return View(project);
         }
 
@@ -182,7 +182,7 @@ namespace Gestao_de_Projetos.Controllers
             var project = await _context.Project
                 .Include(p => p.Clientes)
                  .Include(b => b.Estado)
-                .FirstOrDefaultAsync(m => m.ID_projeto == id);
+                .FirstOrDefaultAsync(m => m.ProjectID == id);
             if (project == null)
             {
                 return NotFound();
@@ -204,7 +204,7 @@ namespace Gestao_de_Projetos.Controllers
 
         private bool ProjectExists(int id)
         {
-            return _context.Project.Any(e => e.ID_projeto == id);
+            return _context.Project.Any(e => e.ProjectID == id);
         }
     }
 }

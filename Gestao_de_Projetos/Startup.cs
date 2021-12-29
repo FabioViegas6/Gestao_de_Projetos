@@ -26,25 +26,40 @@ namespace Gestao_de_Projetos
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
+        {      
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
-            services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
             services.AddRazorPages();
 
             services.AddDbContext<Gestao_de_ProjetosContext>(options =>
            options.UseSqlServer(Configuration.GetConnectionString("Gestao_de_ProjetosContext")));
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                    .AddEntityFrameworkStores<ApplicationDbContext>()
+                    .AddDefaultUI()
+                   .AddDefaultTokenProviders();
+
+
+
+            services.AddAuthorization(options => {
+                options.AddPolicy("OnlyAdminAccess",
+                policy => policy.RequireRole("Gestor"));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Gestao_de_ProjetosContext bd
-            )
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Gestao_de_ProjetosContext bd, 
+            UserManager<IdentityUser> userManager,
+            RoleManager<IdentityRole> roleManager)
         {
+            RolesConfig.CreateRolesAndUsers(userManager, roleManager).Wait();
             if (env.IsDevelopment())
             {
+                //RolesConfig.CreateTestUsersAsync(userManager, roleManager).Wait();
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 SeedDataDadosFIT.Populate(bd);
@@ -55,6 +70,7 @@ namespace Gestao_de_Projetos
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 

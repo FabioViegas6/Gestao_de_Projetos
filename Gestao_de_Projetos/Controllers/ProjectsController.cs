@@ -90,7 +90,7 @@ namespace Gestao_de_Projetos.Controllers
         public IActionResult Create()
         {
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome");
-            ViewData["estadoID"] = new SelectList(_context.Estado, "estadoID", "NomeEstado");
+            ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado");
             return View();
         }
 
@@ -99,7 +99,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_projeto,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId,estadoID")] Project project)
+        public async Task<IActionResult> Create([Bind("ProjectID,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId,EstadoID")] Project project)
         {
             if (ModelState.IsValid)
             {

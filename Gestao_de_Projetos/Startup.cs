@@ -38,18 +38,39 @@ namespace Gestao_de_Projetos
             services.AddDbContext<Gestao_de_ProjetosContext>(options =>
            options.UseSqlServer(Configuration.GetConnectionString("Gestao_de_ProjetosContext")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>()
-                    .AddEntityFrameworkStores<ApplicationDbContext>()
-                    .AddDefaultUI()
-                   .AddDefaultTokenProviders();
+            services.AddIdentity<IdentityUser, IdentityRole>(
+                 options => {
+                    // Sign in
+                    options.SignIn.RequireConfirmedAccount = false;
+                     options.SignIn.RequireConfirmedPhoneNumber = false;
+                     options.SignIn.RequireConfirmedEmail = false;
 
+                    // Password
+                    options.Password.RequireUppercase = true;
+                     options.Password.RequireLowercase = true;
+                     options.Password.RequireDigit = true;
+                     options.Password.RequireNonAlphanumeric = true;
+                     options.Password.RequiredUniqueChars = 4;
+                     options.Password.RequiredLength = 8;
 
+                    // User
+                    options.User.RequireUniqueEmail = true;
+
+                    // Lockout
+                    options.Lockout.AllowedForNewUsers = true;
+                 })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultUI();
+
+            services.AddControllersWithViews();
 
             services.AddAuthorization(options => {
                 options.AddPolicy("OnlyAdminAccess",
                 policy => policy.RequireRole("Gestor"));
             });
         }
+
+
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, Gestao_de_ProjetosContext bd, 

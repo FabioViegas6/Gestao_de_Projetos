@@ -18,8 +18,10 @@ namespace Gestao_de_Projetos.Models
         public String Nome { get; set; }
 
    
-        [StringLength(20)]
+        [StringLength(9)]
         [Display(Name = "Contacto", Prompt = "Contacto")]
+        [Required(ErrorMessage = "Por favor insira o seu numero de telefone")]
+        [RegularExpression(@"(9\d{8})", ErrorMessage = "Numero invalido.")]
         public String Contacto { get; set; }
 
       

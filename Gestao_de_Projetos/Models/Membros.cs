@@ -19,8 +19,10 @@ namespace Gestao_de_Projetos.Models
 
         
 
-        [StringLength(20)]
+        [StringLength(9)]
         [Display(Name = "Telefone", Prompt = "Telefone")]
+        [Required(ErrorMessage = "Por favor insira o seu numero de telefone")]
+        [RegularExpression(@"(9\d{8})", ErrorMessage = "Numero invalido.")]
         public String Telefone { get; set; }
 
        

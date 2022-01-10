@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Gestao_de_Projetos.Migrations
 {
-    public partial class testev2 : Migration
+    public partial class teste : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -15,9 +15,7 @@ namespace Gestao_de_Projetos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(maxLength: 20, nullable: false),
                     Contacto = table.Column<string>(maxLength: 20, nullable: true),
-                    NIF = table.Column<string>(maxLength: 10, nullable: true),
-                    Email = table.Column<string>(maxLength: 50, nullable: false),
-                    Password = table.Column<string>(maxLength: 20, nullable: false)
+                    Email = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -89,9 +87,7 @@ namespace Gestao_de_Projetos.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome_membro = table.Column<string>(nullable: false),
                     Telefone = table.Column<string>(maxLength: 20, nullable: true),
-                    NIF = table.Column<string>(maxLength: 10, nullable: true),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
-                    Password = table.Column<string>(maxLength: 20, nullable: false),
                     FuncaoID = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

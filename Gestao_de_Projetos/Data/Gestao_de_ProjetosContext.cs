@@ -19,5 +19,6 @@ namespace Gestao_de_Projetos.Data
         public DbSet<Gestao_de_Projetos.Models.Project> Project { get; set; }
         public DbSet<Gestao_de_Projetos.Models.Membros> Membros { get; set; }
         public DbSet<Gestao_de_Projetos.Models.Estado> Estado { get; set; }
+        public DbSet<Gestao_de_Projetos.Models.MembroProjeto> MembroProjeto { get; set; }
         }
 }

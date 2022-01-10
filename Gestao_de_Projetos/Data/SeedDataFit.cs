@@ -76,9 +76,8 @@ namespace Gestao_de_Projetos.Data
                 {
                     Nome = "José",
                     Email = "joseraf@gmail.com",
-                    Contacto = "931184481",
-                    NIF = "289761182",
-                    Password = ""
+                    Contacto = "931184481"
+                    
 
                 },
 
@@ -86,9 +85,7 @@ namespace Gestao_de_Projetos.Data
                    {
                        Nome = "José",
                        Email = "joseraf@gmail.com",
-                       Contacto = "931184481",
-                       NIF = "289761182",
-                       Password = ""
+                       Contacto = "931184481"
 
                    },
 
@@ -96,9 +93,7 @@ namespace Gestao_de_Projetos.Data
                      {
                          Nome = "José",
                          Email = "joseraf@gmail.com",
-                         Contacto = "931184481",
-                         NIF = "289761182",
-                         Password =""
+                         Contacto = "931184481"
 
                      },
 
@@ -107,9 +102,7 @@ namespace Gestao_de_Projetos.Data
                      {
                          Nome = "José",
                          Email = "joseraf@gmail.com",
-                         Contacto = "931184481",
-                         NIF = "289761182",
-                         Password = ""
+                         Contacto = "931184481"
 
                      }
                      );
@@ -127,8 +120,6 @@ namespace Gestao_de_Projetos.Data
                    Nome_membro = "Selmira",
                    Email = "self@gmail.com",
                    Telefone = "931184481",
-                   NIF = "289761182",
-                   Password = "",
                     FuncaoID = 1
 
                 },
@@ -138,8 +129,6 @@ namespace Gestao_de_Projetos.Data
                      Nome_membro = "mira ",
                      Email = "mira@gmail.com",
                      Telefone = "931184481",
-                     NIF = "289761182",
-                     Password = "",
                     //
                     FuncaoID = 2
                  },
@@ -148,8 +137,6 @@ namespace Gestao_de_Projetos.Data
                       Nome_membro = "Sel ",
                       Email = "miraf@gmail.com",
                       Telefone = "931184481",
-                      NIF = "289761182",
-                      Password = "",
                       FuncaoID = 3
                   },
 
@@ -158,8 +145,6 @@ namespace Gestao_de_Projetos.Data
                        Nome_membro = "Selmira ",
                        Email = "self@gmail.com",
                        Telefone = "931184481",
-                       NIF = "289761182",
-                       Password = "",
                        FuncaoID = 2
                    }
                  );

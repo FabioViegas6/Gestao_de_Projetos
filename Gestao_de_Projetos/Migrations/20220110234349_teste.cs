@@ -14,7 +14,7 @@ namespace Gestao_de_Projetos.Migrations
                     ClientesId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(maxLength: 20, nullable: false),
-                    Contacto = table.Column<string>(maxLength: 20, nullable: true),
+                    Contacto = table.Column<string>(maxLength: 9, nullable: false),
                     Email = table.Column<string>(maxLength: 50, nullable: false)
                 },
                 constraints: table =>
@@ -86,7 +86,7 @@ namespace Gestao_de_Projetos.Migrations
                     MembrosID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Nome_membro = table.Column<string>(nullable: false),
-                    Telefone = table.Column<string>(maxLength: 20, nullable: true),
+                    Telefone = table.Column<string>(maxLength: 9, nullable: false),
                     Email = table.Column<string>(maxLength: 50, nullable: false),
                     FuncaoID = table.Column<int>(nullable: false)
                 },
@@ -98,6 +98,35 @@ namespace Gestao_de_Projetos.Migrations
                         column: x => x.FuncaoID,
                         principalTable: "Funcao",
                         principalColumn: "FuncaoID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MembroProjeto",
+                columns: table => new
+                {
+                    membroProjeto = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MembrosID = table.Column<int>(nullable: false),
+                    ProjectID = table.Column<int>(nullable: false),
+                    DataInicio = table.Column<DateTime>(nullable: false),
+                    DataPrevistaFim = table.Column<DateTime>(nullable: false),
+                    DataEfetivaFim = table.Column<DateTime>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_MembroProjeto", x => x.membroProjeto);
+                    table.ForeignKey(
+                        name: "FK_MembroProjeto_Membros_MembrosID",
+                        column: x => x.MembrosID,
+                        principalTable: "Membros",
+                        principalColumn: "MembrosID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_MembroProjeto_Project_ProjectID",
+                        column: x => x.ProjectID,
+                        principalTable: "Project",
+                        principalColumn: "ProjectID",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -141,6 +170,16 @@ namespace Gestao_de_Projetos.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_MembroProjeto_MembrosID",
+                table: "MembroProjeto",
+                column: "MembrosID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_MembroProjeto_ProjectID",
+                table: "MembroProjeto",
+                column: "ProjectID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Membros_FuncaoID",
                 table: "Membros",
                 column: "FuncaoID");
@@ -173,6 +212,9 @@ namespace Gestao_de_Projetos.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "MembroProjeto");
+
             migrationBuilder.DropTable(
                 name: "Tarefas");
 

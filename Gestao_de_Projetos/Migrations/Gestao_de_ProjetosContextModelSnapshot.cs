@@ -27,8 +27,9 @@ namespace Gestao_de_Projetos.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Contacto")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .IsRequired()
+                        .HasColumnType("nvarchar(9)")
+                        .HasMaxLength(9);
 
                     b.Property<string>("Email")
                         .IsRequired()
@@ -77,6 +78,37 @@ namespace Gestao_de_Projetos.Migrations
                     b.ToTable("Funcao");
                 });
 
+            modelBuilder.Entity("Gestao_de_Projetos.Models.MembroProjeto", b =>
+                {
+                    b.Property<int>("membroProjeto")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DataEfetivaFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataInicio")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("DataPrevistaFim")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MembrosID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProjectID")
+                        .HasColumnType("int");
+
+                    b.HasKey("membroProjeto");
+
+                    b.HasIndex("MembrosID");
+
+                    b.HasIndex("ProjectID");
+
+                    b.ToTable("MembroProjeto");
+                });
+
             modelBuilder.Entity("Gestao_de_Projetos.Models.Membros", b =>
                 {
                     b.Property<int>("MembrosID")
@@ -97,8 +129,9 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telefone")
-                        .HasColumnType("nvarchar(20)")
-                        .HasMaxLength(20);
+                        .IsRequired()
+                        .HasColumnType("nvarchar(9)")
+                        .HasMaxLength(9);
 
                     b.HasKey("MembrosID");
 
@@ -190,6 +223,21 @@ namespace Gestao_de_Projetos.Migrations
                     b.HasIndex("ProjectID");
 
                     b.ToTable("Tarefas");
+                });
+
+            modelBuilder.Entity("Gestao_de_Projetos.Models.MembroProjeto", b =>
+                {
+                    b.HasOne("Gestao_de_Projetos.Models.Membros", "Membros")
+                        .WithMany()
+                        .HasForeignKey("MembrosID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Gestao_de_Projetos.Models.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Gestao_de_Projetos.Models.Membros", b =>

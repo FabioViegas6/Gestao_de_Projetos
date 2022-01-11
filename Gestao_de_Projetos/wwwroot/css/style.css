@@ -1381,7 +1381,7 @@ ul.navbar-nav > li.header-get-a-quote:hover > a:after {
           transform: translateY(-50%);
   background-color: transparent;
   opacity: 0;
-  filter: alpha(opacity=0);
+  /*filter: alpha(opacity=0);*/
   text-shadow: none;
   transition: all .25s ease;
   padding: 0;
@@ -1397,7 +1397,7 @@ ul.navbar-nav > li.header-get-a-quote:hover > a:after {
 
 .banner-carousel .slick-dots {
   opacity: 0;
-  filter: alpha(opacity=0);
+ /* filter: alpha(opacity=0);*/
   bottom: 60px;
 }
 
@@ -1419,7 +1419,7 @@ ul.navbar-nav > li.header-get-a-quote:hover > a:after {
 .banner-carousel:hover .carousel-control,
 .banner-carousel:hover .slick-dots {
   opacity: 1;
-  filter: alpha(opacity=100);
+ /* filter: alpha(opacity=100);*/
 }
 
 .banner-carousel .carousel-control.left {
@@ -2211,8 +2211,8 @@ ul.navbar-nav > li.header-get-a-quote:hover > a:after {
 .clients-logo img {
   -webkit-filter: grayscale(100%);
           filter: grayscale(100%);
-  -webkit-filter: gray;
-          filter: gray;
+  /*-webkit-filter: gray;
+          filter: gray;*/
 }
 
 /* Testimonial
@@ -2568,13 +2568,17 @@ img.testimonial-thumb {
 
 /*-- Copyright --*/
 .copyright {
-  background: #ffb600;
-  color: #111;
-  padding: 25px 0 15px;
-  position: relative;
-  z-index: 1;
-  font-weight: 600;
-  font-size: 12px;
+    position: fixed;
+    height: 100px;
+    bottom: 0;
+    width: 100%;
+   /* background: #ffb600;*/
+    color: #111;
+    padding: 25px 0 15px;
+    position: relative;
+    z-index: 1;
+    font-weight: 600;
+    font-size: 12px;
 }
 
 .footer-menu ul li {
@@ -2772,15 +2776,7 @@ img.testimonial-thumb {
   font-weight: 900;
 }
 
-/*-- Get a quote page --*/
-.page-quote-form {
-  background: #f2f2f2;
-  padding: 30px 50px 50px;
-}
 
-.get-a-quote-img {
-  margin-bottom: -190px;
-}
 
 /*-- Partners carousel --*/
 .partner-logo {
@@ -2953,114 +2949,7 @@ img.testimonial-thumb {
   color: #ffb600;
 }
 
-/*-- Pricing table  --*/
-.ts-pricing-box {
-  margin: 20px 0;
-  padding: 0;
-  text-align: center;
-  background: #f9f9f9;
-}
 
-.ts-pricing-box .ts-pricing-header {
-  background: #252525;
-  color: #fff;
-  position: relative;
-  padding: 30px 20px;
-}
-
-.ts-pricing-box .ts-pricing-name {
-  font-size: 18px;
-  line-height: normal;
-  margin: 0 0 5px 0;
-  color: #fff;
-}
-
-.ts-pricing-box .ts-pricing-price {
-  font-size: 44px;
-  color: #fff;
-  margin: 15px 0 0;
-  display: inline-block;
-}
-
-.ts-pricing-box .ts-pricing-price > small {
-  font-size: 16px;
-  line-height: 16px;
-  display: block;
-  margin-top: 15px;
-  color: #fff;
-}
-
-.ts-pricing-box .ts-pricing-features {
-  padding: 15px 0;
-}
-
-.ts-pricing-box .ts-pricing-features ul {
-  padding: 0 20px;
-}
-
-.ts-pricing-box .ts-pricing-features ul > li {
-  padding: 20px 0;
-  border-top: 1px dotted #e5e5e5;
-}
-
-.ts-pricing-box .ts-pricing-features ul > li:first-child {
-  border-top: 0;
-}
-
-.ts-pricing-box .plan-action {
-  padding-bottom: 40px;
-}
-
-/* Pricing featured */
-.ts-pricing-box.ts-pricing-featured .ts-pricing-header {
-  background: #ff9800;
-}
-
-/* Contact Us
-================================================== */
-.map {
-  height: 450px;
-  z-index: 1;
-}
-
-.contact-info-box {
-  margin-top: 20px;
-}
-
-.contact-info-box i {
-  float: left;
-  font-size: 24px;
-  color: #ffb600;
-}
-
-.contact-info-box-content {
-  padding-left: 40px;
-}
-
-.contact-info-box-content h4 {
-  font-size: 16px;
-  margin-top: 0;
-  line-height: normal;
-  font-weight: 700;
-}
-
-.contact-info-box-content p {
-  margin-bottom: 0;
-}
-
-label {
-  font-weight: 400;
-}
-
-/* Contact page 2 */
-.ts-service-box.text-center .ts-service-icon.icon-squre i {
-  float: none;
-  margin-bottom: 20px;
-}
-
-.ts-service-box.text-center .ts-service-box-content {
-  margin: 0;
-}
 
 /* News Listing
 ================================================== */

@@ -4,7 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<<h1>Projetos</h1>
+<h1>Projetos</h1>
 
 <p>
     <a asp-action="Create">Criar Novo</a>
@@ -31,7 +31,7 @@
 
             <p class="card-text lead">@projetos.Nome_projeto</p>
             <p class="card-text lead">@projetos.Clientes.Nome</p>
-            <p class="card-text">@projetos.DataInicio</p>
+            @Html.DisplayFor(m=>@projetos.DataInicio)
             <p class="card-text">@projetos.Estado.NomeEstado</p>
 
             <a asp-action="Details" asp-route-id="@projetos.ProjectID" class="btn btn-info">Details</a>

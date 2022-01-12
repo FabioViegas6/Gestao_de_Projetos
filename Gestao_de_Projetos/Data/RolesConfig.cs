@@ -23,7 +23,7 @@ namespace Gestao_de_Projetos.Data
 
         public static async Task CreateRolesAndUsers(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
-            const string GESTOR_USER = "admin@noemail.com";
+            const string GESTOR_USER = "admin@gmail.com";
             const string GESTOR_PASSWORD = "sECRET$123";
             const string MEMBRO = "Lua@gmail.com";
             const string MEMBRO_PASSWORD = "sECREDO$123";

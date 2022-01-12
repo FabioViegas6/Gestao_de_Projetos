@@ -101,18 +101,32 @@ namespace Gestao_de_Projetos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ProjectID,Nome_projeto,EstadoProjeto,DataInicio,DataPrevistaFim,DataEfetivaFim,ClientesId,EstadoID")] Project project)
         {
+            if (project.DataPrevistaFim < project.DataPrevistaInicio || project.DataPrevistaFim < project.DataPrevistaInicio)
+            {
+                ModelState.AddModelError("DataPrevistaFim", "Data prevista de fim não deve ser " +
+                    "menor do que a data prevista ou efetiva de inicio");
+            }
             if (ModelState.IsValid)
             {
+                if (project.DataPrevistaInicio < project.DataInicio)
+                {
+                    project.EstadoID = 1;
+                }
+                if (project.DataPrevistaInicio >= project.DataInicio)
+                {
+                    project.EstadoID = 2;
+                }
                 _context.Add(project);
                 await _context.SaveChangesAsync();
+                //   return RedirectToAction(nameof(Index));
 
-                ViewBag.Title = "Projeto criado";
-                ViewBag.Message = "Projeto adicionado com sucesso.";
+                ViewBag.Title = "Projeto adicionado";
+                ViewBag.Message = "Projeto adicionado com sucesso!!!";
                 return View("Sucess");
-                //return RedirectToAction(nameof(Index));
             }
-            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
-            ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
+            ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome");
+            ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado");
+
             return View(project);
         }
 
@@ -146,10 +160,29 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
 
+            if (project.DataPrevistaFim < project.DataInicio || project.DataPrevistaFim < project.DataPrevistaInicio)
+            {
+                ModelState.AddModelError("DataPrevistaFim", "Data prevista de fim não deve ser " +
+                    "menor do que a data prevista ou efetiva de inicio");
+            }
+
             if (ModelState.IsValid)
             {
                 try
                 {
+                    if (project.DataPrevistaInicio < project.DataInicio)
+                    {
+                        project.EstadoID = 1;
+                    }
+                    if (project.DataPrevistaInicio >= project.DataInicio)
+                    {
+                        project.EstadoID = 2;
+                    }
+
+                    if (project.DataEfetivaFim != null && project.DataEfetivaFim >= project.DataInicio)
+                    {
+                        project.EstadoID= 3;
+                    }
                     _context.Update(project);
                     await _context.SaveChangesAsync();
                 }
@@ -164,8 +197,13 @@ namespace Gestao_de_Projetos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
-            }
+                // return RedirectToAction(nameof(Index));
+
+                ViewBag.Title = "Projeto alterado";
+                ViewBag.Message = "projeto alterado com sucesso!!!.";
+                return View("Sucess");
+            
+        }
             ViewData["ClientesId"] = new SelectList(_context.Clientes, "ClientesId", "Nome", project.ClientesId);
             ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
             return View(project);
@@ -181,7 +219,7 @@ namespace Gestao_de_Projetos.Controllers
 
             var project = await _context.Project
                 .Include(p => p.Clientes)
-                 .Include(b => b.Estado)
+                .Include(b => b.Estado)
                 .FirstOrDefaultAsync(m => m.ProjectID == id);
             if (project == null)
             {
@@ -196,12 +234,25 @@ namespace Gestao_de_Projetos.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var project = await _context.Project.FindAsync(id);
+            try
+            {
+
+                var project = await _context.Project.FindAsync(id);
             _context.Project.Remove(project);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+                // return RedirectToAction(nameof(Index));
+                ViewBag.Title = "Projeto Apagado";
+                ViewBag.Message = "Projeto apagado com sucesso!!!";
+                return View("Sucess");
+            }
 
+            catch (DbUpdateException /* ex */)
+            {
+                ViewBag.Title = "Este projeto não pode ser apagado.";
+                ViewBag.Message = "Verifique as ligações entre as tabelas!!!";
+                return View("MensagemErro");
+            }
+        }
         private bool ProjectExists(int id)
         {
             return _context.Project.Any(e => e.ProjectID == id);

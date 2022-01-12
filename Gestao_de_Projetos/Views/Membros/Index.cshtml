@@ -27,14 +27,10 @@
     <thead>
         <tr>
             <th>
-                Nome membro
-               Sobrenome
+                Nome
             </th>
             <th>
                Telefone
-            </th>
-            <th>
-               NIF
             </th>
             <th>
                 Email
@@ -65,9 +61,9 @@
                     @Html.DisplayFor(modelItem => item.ID_funcao)
                 </td>*@
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.MembrosID">Edit</a> |
-                    <a asp-action="Details" asp-route-id="@item.MembrosID">Details</a> |
-                    <a asp-action="Delete" asp-route-id="@item.MembrosID">Delete</a>
+                    <a asp-action="Edit" asp-route-id="@item.MembrosID">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.MembrosID">Detalhes</a> |
+                    <a asp-action="Delete" asp-route-id="@item.MembrosID">Apagar</a>
                 </td>
             </tr>
         }

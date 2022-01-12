@@ -30,7 +30,7 @@
         <form asp-action="Index" method="get">
             <input name="NomeCliente" type="search" class="form-control rounded" placeholder="Search" aria-label="Search"
                    aria-describedby="search-addon" value="@Model.ClienteSearched" />
-            <button type="button" class="btn btn-outline-primary">search</button>
+            <button type="button" class="btn btn-outline-primary">Pesquisar</button>
         </form>
     </div>
 
@@ -39,13 +39,9 @@
             <tr>
                 <th>
                     Nome
-                    Apelido
                 </th>
                 <th>
                     Contacto
-                </th>
-                <th>
-                    NIF
                 </th>
                 <th>
                     Email
@@ -72,9 +68,9 @@
                     </td>
 
                     <td>
-                        <a asp-action="Edit" asp-route-id="@item.ClientesId">Edit</a> |
-                        <a asp-action="Details" asp-route-id="@item.ClientesId">Details</a> |
-                        <a asp-action="Delete" asp-route-id="@item.ClientesId">Delete</a>
+                        <a asp-action="Edit" asp-route-id="@item.ClientesId">Editar</a> |
+                        <a asp-action="Details" asp-route-id="@item.ClientesId">Detalhes</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ClientesId">Apagar</a>
                     </td>
                 </tr>
             }

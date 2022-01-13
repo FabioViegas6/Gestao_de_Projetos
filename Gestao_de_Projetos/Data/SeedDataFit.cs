@@ -84,7 +84,7 @@ namespace Gestao_de_Projetos.Data
 
                    new Clientes
                    {
-                       Nome = "José",
+                       Nome = "Maria",
                        Email = "joseraf@gmail.com",
                        Contacto = "931184481"
 
@@ -92,7 +92,7 @@ namespace Gestao_de_Projetos.Data
 
                      new Clientes
                      {
-                         Nome = "José",
+                         Nome = "Fernando",
                          Email = "joseraf@gmail.com",
                          Contacto = "931184481"
 
@@ -101,7 +101,7 @@ namespace Gestao_de_Projetos.Data
 
                      new Clientes
                      {
-                         Nome = "José",
+                         Nome = "Antonio",
                          Email = "joseraf@gmail.com",
                          Contacto = "931184481"
 

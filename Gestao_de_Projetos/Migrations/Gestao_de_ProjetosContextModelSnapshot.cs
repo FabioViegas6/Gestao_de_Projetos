@@ -69,7 +69,7 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("Nome_Funcao")
+                    b.Property<string>("NomeFuncao")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 

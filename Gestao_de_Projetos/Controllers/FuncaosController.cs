@@ -26,7 +26,7 @@ namespace Gestao_de_Projetos.Controllers
         public async Task<IActionResult> Index(string NomeFuncao, int page = 1)
         {
             var FuncaosSearch = _context.Funcao
-                  .Where(b => NomeFuncao == null || b.Nome_Funcao.Contains(NomeFuncao));
+                  .Where(b => NomeFuncao == null || b.NomeFuncao.Contains(NomeFuncao));
 
             var pagingInfo = new PagingInfo
             {
@@ -46,7 +46,7 @@ namespace Gestao_de_Projetos.Controllers
 
             var funcaos = await FuncaosSearch
                             //.Include(b => b.Author)
-                            .OrderBy(b => b.Nome_Funcao)
+                            .OrderBy(b => b.NomeFuncao)
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
                             .ToListAsync();
@@ -91,7 +91,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID_funcao,Nome_Funcao")] Funcao funcao)
+        public async Task<IActionResult> Create([Bind("FuncaoID,NomeFuncao")] Funcao funcao)
         {
             if (ModelState.IsValid)
             {
@@ -126,7 +126,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID_funcao,Nome_Funcao")] Funcao funcao)
+        public async Task<IActionResult> Edit(int id, [Bind("FuncaoID,NomeFuncao")] Funcao funcao)
         {
             if (id != funcao.FuncaoID)
             {

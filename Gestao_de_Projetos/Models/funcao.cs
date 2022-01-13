@@ -14,7 +14,7 @@ namespace Gestao_de_Projetos.Models
 
         [Required]
         [Display(Name = "Nome Função")]
-        public string Nome_Funcao { get; set; }
+        public string NomeFuncao { get; set; }
 
     }
 }

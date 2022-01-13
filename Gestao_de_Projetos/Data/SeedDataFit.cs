@@ -121,7 +121,7 @@ namespace Gestao_de_Projetos.Data
                    Nome_membro = "Selmira",
                    Email = "self@gmail.com",
                    Telefone = "931184481",
-                    FuncaoID = 1
+                    FuncaoID = 6
 
                 },
 
@@ -131,14 +131,14 @@ namespace Gestao_de_Projetos.Data
                      Email = "mira@gmail.com",
                      Telefone = "931184481",
                     //
-                    FuncaoID = 2
+                    FuncaoID = 4
                  },
                   new Membros
                   {
                       Nome_membro = "Sel ",
                       Email = "miraf@gmail.com",
                       Telefone = "931184481",
-                      FuncaoID = 3
+                      FuncaoID = 5
                   },
 
                    new Membros
@@ -146,7 +146,7 @@ namespace Gestao_de_Projetos.Data
                        Nome_membro = "Selmira ",
                        Email = "self@gmail.com",
                        Telefone = "931184481",
-                       FuncaoID = 2
+                       FuncaoID = 5
                    }
                  );
 
@@ -159,39 +159,39 @@ namespace Gestao_de_Projetos.Data
             bd.Funcao.AddRange(
                 new Funcao
                  {
-                    Nome_Funcao = "Gestor"
+                    NomeFuncao = "Gestor"
                  },
                  new Funcao
                  {
-                     Nome_Funcao = "Decorador"
+                     NomeFuncao = "Decorador"
                  },
                  new Funcao
                  {
-                     Nome_Funcao = "Pedreiro"
+                     NomeFuncao = "Pedreiro"
                  },
                  new Funcao
                  {
-                     Nome_Funcao = "canalizador"
+                     NomeFuncao = "canalizador"
                  },
                  new Funcao
                  {
-                     Nome_Funcao = "Electricista"
+                     NomeFuncao = "Electricista"
                  },
                   new Funcao
                  {
-                     Nome_Funcao = "Engenheiro Civil"
+                     NomeFuncao = "Engenheiro Civil"
                  },
                    new Funcao
                  {
-                     Nome_Funcao = "Carpinteiro"
+                     NomeFuncao = "Carpinteiro"
                  },
                     new Funcao
                  {
-                     Nome_Funcao = "Pintor"
+                     NomeFuncao = "Pintor"
                  },
                     new Funcao
                  {
-                     Nome_Funcao = "Arquitecto"
+                     NomeFuncao = "Arquitecto"
                  }
             
                  );

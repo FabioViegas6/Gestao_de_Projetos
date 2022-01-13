@@ -41,7 +41,7 @@ namespace Gestao_de_Projetos.Migrations
                 {
                     FuncaoID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome_Funcao = table.Column<string>(nullable: false)
+                    NomeFuncao = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {

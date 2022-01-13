@@ -19,6 +19,11 @@
             </div>
 
             <div class="form-group">
+                <label asp-for="DataPrevistaInicio " class="control-label"></label>
+                <input asp-for="DataPrevistaInicio " class="form-control" />
+                <span asp-validation-for="DataPrevistaInicio " class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <label asp-for="DataInicio" class="control-label"></label>
                 <input asp-for="DataInicio" class="form-control" />
                 <span asp-validation-for="DataInicio" class="text-danger"></span>
@@ -29,19 +34,10 @@
                 <span asp-validation-for="DataPrevistaFim" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataPrevistaFim" class="control-label"></label>
-                <input asp-for="DataPrevistaFim" class="form-control" />
-                <span asp-validation-for="DataPrevistaFim" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="ClientesId" class="control-label">Clientes</label>
                 <select asp-for="ClientesId" class="form-control" asp-items="ViewBag.ClientesId"></select>
             </div>
-            <div class="form-group">
-                <label asp-for="EstadoID" class="control-label">Estado</label>
-                <select asp-for="EstadoID" class="form-control" asp-items="ViewBag.EstadoID"></select>
-                <span asp-validation-for="EstadoID" class="text-danger"></span>
-            </div>
+            
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

@@ -27,13 +27,8 @@ namespace Gestao_de_Projetos.Models
         [DataType(DataType.Date)]
         public DateTime DataInicio { get; set; }
 
-        [Required]
-        [Display(Name = "Data  prevista Fim ")]
-        [DataType(DataType.Date)]
-        public DateTime DataPrevistaFim { get; set; }
 
-
-        [Display(Name = "Data Efetiva Fim ")]
+        [Display(Name = "Data Fim ")]
         [DataType(DataType.Date)]
         public DateTime? DataEfetivaFim { get; set; }
 

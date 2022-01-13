@@ -91,9 +91,6 @@ namespace Gestao_de_Projetos.Migrations
                     b.Property<DateTime>("DataInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime>("DataPrevistaFim")
-                        .HasColumnType("datetime2");
-
                     b.Property<int>("MembrosID")
                         .HasColumnType("int");
 

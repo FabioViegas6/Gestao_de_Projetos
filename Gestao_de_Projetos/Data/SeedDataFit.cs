@@ -11,7 +11,7 @@ namespace Gestao_de_Projetos.Data
         internal static void Populate(Gestao_de_ProjetosContext bd)
         {
             PopulateEstado(bd);
-            PopulateTarefas(bd);
+            //PopulateTarefas(bd);
             PopulateClientes(bd);
             PopulateProject(bd);
             PopulateFuncao(bd);
@@ -221,73 +221,73 @@ namespace Gestao_de_Projetos.Data
             bd.SaveChanges();
         }
 
-        private static void PopulateTarefas(Gestao_de_ProjetosContext bd)
+        //private static void PopulateTarefas(Gestao_de_ProjetosContext bd)
 
-        {
-            if (bd.Tarefas.Any()) return;
-            bd.Tarefas.AddRange(
-            new Tarefas
+        //{
+        //    if (bd.Tarefas.Any()) return;
+        //    bd.Tarefas.AddRange(
+        //    new Tarefas
 
-            {
-                Nome_Tarefa = "Contrucao do chão",
-                Descricao = "O chao da sala",
-                DataPrevistaInicio = DateTime.Parse("12/12/2021"),
-                DataEfetivaInicio = DateTime.Parse("12/12/2021"),
-                DataPrevistaFim = DateTime.Parse("30/12/2021"),
-                DataEfetivaFim = DateTime.Parse("31/12/2021"),
-                MembrosID = 3,
-                ProjectID = 2,
-                EstadoID = 1
-            },
+        //    {
+        //        Nome_Tarefa = "Contrucao do chão",
+        //        Descricao = "O chao da sala",
+        //        DataPrevistaInicio = DateTime.Parse("12/12/2021"),
+        //        DataEfetivaInicio = DateTime.Parse("12/12/2021"),
+        //        DataPrevistaFim = DateTime.Parse("30/12/2021"),
+        //        DataEfetivaFim = DateTime.Parse("31/12/2021"),
+        //        MembrosID = 3,
+        //        ProjectID = 2,
+        //        EstadoID = 1
+        //    },
 
-             new Tarefas
+        //     new Tarefas
 
-             {
-                 Nome_Tarefa = "Contrucao do chão",
-                 Descricao = "O chao da cozinha",
-                 DataPrevistaInicio = DateTime.Parse("01/01/2022"),
-                 DataEfetivaInicio = DateTime.Parse("02/01/2022"),
-                 DataPrevistaFim = DateTime.Parse("15/01/2022"),
-                 DataEfetivaFim = DateTime.Parse("14/01/2022"),
-                 MembrosID = 4,
-                 ProjectID = 2,
-                 EstadoID = 2
-             },
+        //     {
+        //         Nome_Tarefa = "Contrucao do chão",
+        //         Descricao = "O chao da cozinha",
+        //         DataPrevistaInicio = DateTime.Parse("01/01/2022"),
+        //         DataEfetivaInicio = DateTime.Parse("02/01/2022"),
+        //         DataPrevistaFim = DateTime.Parse("15/01/2022"),
+        //         DataEfetivaFim = DateTime.Parse("14/01/2022"),
+        //         MembrosID = 4,
+        //         ProjectID = 2,
+        //         EstadoID = 2
+        //     },
 
-              new Tarefas
+        //      new Tarefas
 
-              {
-                  Nome_Tarefa = "Contrucao do chão",
-                  Descricao = "O chao do quarto",
-                  DataPrevistaInicio = DateTime.Parse("01/01/2022"),
-                  DataEfetivaInicio = DateTime.Parse("02/01/2022"),
-                  DataPrevistaFim = DateTime.Parse("15/01/2022"),
-                  DataEfetivaFim = DateTime.Parse("14/01/2022"),
-                  MembrosID = 1,
-                  ProjectID = 3,
-                  EstadoID = 1
-              },
+        //      {
+        //          Nome_Tarefa = "Contrucao do chão",
+        //          Descricao = "O chao do quarto",
+        //          DataPrevistaInicio = DateTime.Parse("01/01/2022"),
+        //          DataEfetivaInicio = DateTime.Parse("02/01/2022"),
+        //          DataPrevistaFim = DateTime.Parse("15/01/2022"),
+        //          DataEfetivaFim = DateTime.Parse("14/01/2022"),
+        //          MembrosID = 1,
+        //          ProjectID = 3,
+        //          EstadoID = 1
+        //      },
 
-               new Tarefas
+        //       new Tarefas
 
-               {
-                   Nome_Tarefa = "Contrucao do chão",
-                   Descricao = "O chao da sala",
-                   DataPrevistaInicio = DateTime.Parse("01/01/2022"),
-                   DataEfetivaInicio = DateTime.Parse("02/01/2022"),
-                   DataPrevistaFim = DateTime.Parse("15/01/2022"),
-                   DataEfetivaFim = DateTime.Parse("14/01/2022"),
-                   MembrosID = 1,
-                   ProjectID = 2,
-                   EstadoID = 2
-               }
-
-
-            ); ;
-            bd.SaveChanges();
+        //       {
+        //           Nome_Tarefa = "Contrucao do chão",
+        //           Descricao = "O chao da sala",
+        //           DataPrevistaInicio = DateTime.Parse("01/01/2022"),
+        //           DataEfetivaInicio = DateTime.Parse("02/01/2022"),
+        //           DataPrevistaFim = DateTime.Parse("15/01/2022"),
+        //           DataEfetivaFim = DateTime.Parse("14/01/2022"),
+        //           MembrosID = 1,
+        //           ProjectID = 2,
+        //           EstadoID = 2
+        //       }
 
 
-        }
+        //    ); 
+        //    bd.SaveChanges();
+
+
+        //}
 
     }
 }

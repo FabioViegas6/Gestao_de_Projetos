@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Gestao_de_Projetos.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class FuncaosController : Controller
     {
         private readonly Gestao_de_ProjetosContext _context;

@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Gestao_de_Projetos.Controllers
 {
-    [Authorize]
+   // [Authorize]
     public class ProjectsController : Controller
     { public IActionResult Sucess()
         {

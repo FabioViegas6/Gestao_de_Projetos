@@ -64,6 +64,31 @@ namespace Gestao_de_Projetos.Controllers
             return View();
         }
 
+        // GET: Clientes/Details/5
+        public async Task<IActionResult> Details(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var clientes = await _context.Clientes
+                .FirstOrDefaultAsync(m => m.ClientesId == id);
+            if (clientes == null)
+            {
+                return NotFound();
+            }
+            //ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
+            return View(clientes);
+        }
+
+        // GET: Membros/Create
+        //public IActionResult Create()
+        //{
+        //    ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
+        //    return View();
+        //}
+
         // POST: Clientes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

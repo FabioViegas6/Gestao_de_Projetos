@@ -1,0 +1,58 @@
+﻿@model Gestao_de_Projetos.Models.MembroProjeto
+
+@{ ViewData["Title"] = "Create"; }
+
+@foreach (var projeto in ViewData["ProjectID"] as List<Project>)
+{
+<h1>@projeto.Nome_projeto</h1>}
+<h4>Membros</h4>
+<hr />
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Função
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach (var item in ViewData["MembroProjetoID"] as List<MembroProjeto>)
+        {
+<tr>
+    <td>
+        @item.Membros.Nome_membro
+    </td>
+    <td>
+        @item.Membros.Email
+    </td>
+
+    <td>
+        @item.Membros.Funcao.NomeFuncao
+    </td>
+
+    <td>
+
+        <a asp-action="Delete" asp-controller="MembroProjeto" asp-route-id="@item.membroProjeto" class="btn btn-danger">Remover</a>
+
+    </td>
+
+</tr>}
+    </tbody>
+</table>
+
+<div>
+    <a asp-controller="Projects" asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -58,33 +58,29 @@
     </thead>
     <tbody>
 
-        @foreach (var item in ViewData["MembrosID"] as List<Membros>)
+        @foreach (var item in ViewData["MembroProjetoID"] as List<MembroProjeto>)
         {
 <tr>
     <td>
-        @item.Nome_membro
+        @item.Membros.Nome_membro
     </td>
     <td>
-        @item.Email
-    </td>
-
-    <td>
-        @item.Funcao.NomeFuncao
+        @item.Membros.Email
     </td>
 
     <td>
-        @using (Html.BeginForm("Create", "MembroProjeto", FormMethod.Post))
-        {
-@foreach (var projeto in ViewData["ProjectID"] as List<Project>)
-{
+        @item.Membros.Funcao.NomeFuncao
+    </td>
 
-<input type="hidden" name="ProjectID" value="@projeto.ProjectID" class="btn btn-success">
-                        <input type="hidden" name="MembrosID" value="@item.MembrosID" class="btn btn-success">
-                                                <input type="submit" value="Adicionar" class="btn btn-success">}
+    <td>
+
+        <a asp-action="Details" asp-controller="MembroProjeto" asp-route-id="@item.membroProjeto" class="btn btn-danger">Detalhes</a>
+        <a asp-action="Edit" asp-controller="MembroProjeto" asp-route-id="@item.membroProjeto" class="btn btn-warning">Editar</a>
+
+    </td>
+
+</tr>
 }
-    </td>
-
-</tr>}
     </tbody>
 </table>
 

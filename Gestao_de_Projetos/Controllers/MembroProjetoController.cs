@@ -47,10 +47,50 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: MembroProjeto/Create
-        public IActionResult Create()
+        [HttpGet]
+        public async Task<IActionResult> Create(int? id)
         {
-            ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email");
-            ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto");
+            List<MembroProjeto> membroProjetos = new List<MembroProjeto>();
+            List<Membros> membros = new List<Membros>();
+            List<Membros> membros_fora_projeto = new List<Membros>();
+
+            membros = _context.Membros.Include(b => b.Funcao).ToList();
+
+            foreach (var item in membros)
+            {
+                if (!_context.MembroProjeto.Any(mp => mp.MembrosID == item.MembrosID && mp.ProjectID == id))
+                {
+                    membros_fora_projeto.Add(item);
+                }
+            }
+            // ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email");
+            // ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto");
+
+            ViewData["ProjectID"] = _context.Project.Where(p => p.ProjectID == id).ToList();
+            //ViewData["MembrosID"] = _context.Membros.Include(b => b.Funcao).ToList();
+            ViewData["MembrosID"] = membros_fora_projeto;
+
+            return View();
+        }
+        // GET: MembroProjeto/ShowAllDelete
+        [HttpGet]
+        public IActionResult ShowAllDelete(int? id)
+        {
+
+            ViewData["ProjectID"] = _context.Project.Where(p => p.ProjectID == id).ToList();
+            ViewData["MembroProjetoID"] = _context.MembroProjeto.Include(m => m.Membros).Include(m => m.Membros.Funcao).Include(m => m.Project).Where(mp => mp.ProjectID == id).ToList();
+
+            return View();
+        }
+
+        // GET: MembroProjeto/ShowAll
+        [HttpGet]
+        public IActionResult ShowAll(int? id)
+        {
+
+            ViewData["ProjectID"] = _context.Project.Where(p => p.ProjectID == id).ToList();
+            ViewData["MembroProjetoID"] = _context.MembroProjeto.Include(m => m.Membros).Include(m => m.Membros.Funcao).Include(m => m.Project).Where(mp => mp.ProjectID == id).ToList();
+
             return View();
         }
 
@@ -59,17 +99,18 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("membroProjeto,MembrosID,ProjectID,DataInicio,DataPrevistaFim,DataEfetivaFim")] MembroProjeto membroProjeto)
+        public async Task<IActionResult> Create([Bind("MembrosID,ProjectID")] MembroProjeto membroProjeto)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(membroProjeto);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                //    return RedirectToAction(nameof(Index));
             }
-            ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email", membroProjeto.MembrosID);
-            ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", membroProjeto.ProjectID);
-            return View(membroProjeto);
+            //ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email", membroProjeto.MembrosID);
+            //ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", membroProjeto.ProjectID);
+            //return View(membroProjeto);
+            return RedirectToAction("Create", "MembroProjeto", new { id = membroProjeto.ProjectID });
         }
 
         // GET: MembroProjeto/Edit/5
@@ -122,9 +163,10 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email", membroProjeto.MembrosID);
-            ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", membroProjeto.ProjectID);
-            return View(membroProjeto);
+            //ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email", membroProjeto.MembrosID);
+            //ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", membroProjeto.ProjectID);
+            //return View(membroProjeto);
+            return RedirectToAction("ShowAll", new { id = membroProjeto.ProjectID });
         }
 
         // GET: MembroProjeto/Delete/5
@@ -155,7 +197,8 @@ namespace Gestao_de_Projetos.Controllers
             var membroProjeto = await _context.MembroProjeto.FindAsync(id);
             _context.MembroProjeto.Remove(membroProjeto);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            //  return RedirectToAction(nameof(Index));
+            return RedirectToAction("ShowAllDelete", new { id = membroProjeto.ProjectID });
         }
 
         private bool MembroProjetoExists(int id)

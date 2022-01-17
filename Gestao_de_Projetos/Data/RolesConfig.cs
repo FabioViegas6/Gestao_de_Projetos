@@ -39,14 +39,15 @@ namespace Gestao_de_Projetos.Data
             IdentityUser gestor = await userManager.FindByNameAsync(GESTOR_USER);
             if (gestor == null)
             {
-                gestor = new IdentityUser { UserName = GESTOR_USER };
+               
+                gestor = new IdentityUser { UserName = GESTOR_USER, Email = GESTOR_USER };
                 await userManager.CreateAsync(gestor, GESTOR_PASSWORD); //cria user
             }
 
             IdentityUser membro = await userManager.FindByNameAsync(MEMBRO);
             if (membro == null)
             {
-                membro = new IdentityUser { UserName = MEMBRO };
+                membro = new IdentityUser { Email = MEMBRO, UserName = MEMBRO };
                 await userManager.CreateAsync(membro, MEMBRO_PASSWORD);
             }
 
@@ -54,7 +55,7 @@ namespace Gestao_de_Projetos.Data
 
             if (cliente == null)
             {
-                cliente = new IdentityUser { UserName = CLIENTE };
+                cliente = new IdentityUser { Email = CLIENTE, UserName = CLIENTE };
                 await userManager.CreateAsync(cliente, CLIENTE_PASSWORD);
             }
 

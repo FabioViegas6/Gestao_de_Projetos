@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -48,7 +49,7 @@ namespace Gestao_de_Projetos.Controllers
 
         // GET: MembroProjeto/Create
         [HttpGet]
-        public async Task<IActionResult> Create(int? id)
+        public async Task<IActionResult> Create(int? id, string erro)
         {
             List<MembroProjeto> membroProjetos = new List<MembroProjeto>();
             List<Membros> membros = new List<Membros>();
@@ -70,6 +71,10 @@ namespace Gestao_de_Projetos.Controllers
             //ViewData["MembrosID"] = _context.Membros.Include(b => b.Funcao).ToList();
             ViewData["MembrosID"] = membros_fora_projeto;
 
+            if (erro != null)
+            {
+                ViewBag.Message = erro;
+            }
             return View();
         }
         // GET: MembroProjeto/ShowAllDelete
@@ -99,18 +104,29 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("MembrosID,ProjectID")] MembroProjeto membroProjeto)
+        public async Task<IActionResult> Create([Bind("MembrosID,ProjectID,DataInicio,DataEfetivaFim")] MembroProjeto membroProjeto)
         {
-            if (ModelState.IsValid)
+            string Erro = "";
+
+            if (membroProjeto.DataEfetivaFim < membroProjeto.DataInicio)
             {
-                _context.Add(membroProjeto);
-                await _context.SaveChangesAsync();
-                //    return RedirectToAction(nameof(Index));
+                Erro = "Data Fim tem deve ser maior que a data inicio";
+                //ModelState.AddModelError("Data Fim tem de ser maior que a data inicio", "");
             }
+            else
+            {
+                if (ModelState.IsValid)
+                {
+                    _context.Add(membroProjeto);
+                    await _context.SaveChangesAsync();
+                    //    return RedirectToAction(nameof(Index));
+                }
+            }
+           
             //ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email", membroProjeto.MembrosID);
             //ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", membroProjeto.ProjectID);
             //return View(membroProjeto);
-            return RedirectToAction("Create", "MembroProjeto", new { id = membroProjeto.ProjectID });
+            return RedirectToAction("Create", "MembroProjeto", new { id = membroProjeto.ProjectID,erro= Erro });
         }
 
         // GET: MembroProjeto/Edit/5

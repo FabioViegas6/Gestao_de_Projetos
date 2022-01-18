@@ -45,11 +45,21 @@ namespace Gestao_de_Projetos.Data
                  },
                   new Project
                   {
-                      Nome_projeto = "Contrução do Jardim",
+                      Nome_projeto = "Construção do Jardim",
                       DataInicio = DateTime.Parse("12/12/2021"),
                       DataPrevistaInicio = DateTime.Parse("13/12/2021"),
                       ClientesId = 2,
                       EstadoID = 2,
+                      DataPrevistaFim = DateTime.Parse("30/12/2021")
+                  },
+
+                  new Project
+                  {
+                      Nome_projeto = "Remodelar a sala",
+                      DataInicio = DateTime.Parse("15/12/2020"),
+                      DataPrevistaInicio = DateTime.Parse("13/12/2021"),
+                      ClientesId = 3,
+                      EstadoID = 1,
                       DataPrevistaFim = DateTime.Parse("30/12/2021")
                   },
 
@@ -75,8 +85,8 @@ namespace Gestao_de_Projetos.Data
                 new Clientes
                 {
                     Nome = "José",
-                    Email = "joseraf@gmail.com",
-                    Contacto = "931184481"
+                    Email = "jose@gmail.com",
+                    Contacto = "931156455"
                     
 
                 },
@@ -84,25 +94,34 @@ namespace Gestao_de_Projetos.Data
                    new Clientes
                    {
                        Nome = "Maria",
-                       Email = "joseraf@gmail.com",
-                       Contacto = "931184481"
+                       Email = "ma@gmail.com",
+                       Contacto = "931196481"
 
                    },
 
                      new Clientes
                      {
                          Nome = "Fernando",
-                         Email = "joseraf@gmail.com",
-                         Contacto = "931184481"
+                         Email = "nando@gmail.com",
+                         Contacto = "921184481"
 
                      },
+
+                     new Clientes
+                     {
+                         Nome = "Selmyh",
+                         Email = "selmy@gmail.com",
+                         Contacto = "996184481"
+
+                     },
+
 
 
                      new Clientes
                      {
                          Nome = "Antonio",
-                         Email = "joseraf@gmail.com",
-                         Contacto = "931184481"
+                         Email = "antonio@gmail.com",
+                         Contacto = "963184481"
 
                      }
                      );
@@ -117,9 +136,9 @@ namespace Gestao_de_Projetos.Data
             bd.Membros.AddRange(
                 new Membros
                 {
-                   Nome_membro = "Selmira",
-                   Email = "self@gmail.com",
-                   Telefone = "931184481",
+                   Nome_membro = "Yara",
+                   Email = "Yara@gmail.com",
+                   Telefone = "931184412",
                     FuncaoID = 6
 
                 },
@@ -128,23 +147,23 @@ namespace Gestao_de_Projetos.Data
                 {
                      Nome_membro = "mira ",
                      Email = "mira@gmail.com",
-                     Telefone = "931184481",
+                     Telefone = "931184434",
                     //
                     FuncaoID = 4
                  },
                   new Membros
                   {
                       Nome_membro = "Sel ",
-                      Email = "miraf@gmail.com",
-                      Telefone = "931184481",
+                      Email = "Selff@gmail.com",
+                      Telefone = "931184456",
                       FuncaoID = 5
                   },
 
                    new Membros
                    {
                        Nome_membro = "Selmira ",
-                       Email = "self@gmail.com",
-                       Telefone = "931184481",
+                       Email = "selmira@gmail.com",
+                       Telefone = "931184478",
                        FuncaoID = 5
                    }
                  );

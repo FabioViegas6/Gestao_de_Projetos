@@ -76,14 +76,14 @@ namespace Gestao_de_Projetos.Controllers
             {
                 return NotFound();
             }
-            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
+            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "NomeFuncao");
             return View(membros);
         }
 
         // GET: Membros/Create
         public IActionResult Create()
         {
-            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
+            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "NomeFuncao");
             return View();
         }
 
@@ -103,7 +103,7 @@ namespace Gestao_de_Projetos.Controllers
                 ViewBag.Message = "Membro adicionado com sucesso.";
                 return View("Success");
             }
-            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
+            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "NomeFuncao",membros.FuncaoID);
             return View(membros);
         }
 
@@ -120,7 +120,7 @@ namespace Gestao_de_Projetos.Controllers
             {
                 return NotFound();
             }
-            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
+            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "NomeFuncao");
             return View(membros);
         }
 

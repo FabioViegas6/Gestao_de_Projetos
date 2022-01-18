@@ -15,9 +15,8 @@ namespace Gestao_de_Projetos.Models
 
         [Required]
         [Display(Name = "Nome do Membro")]
-        [RegularExpression(@"^[A-Z]+[a-záéíóúõãçàâêôA-ZÁÉÍÓÚÕÃÇÀÂÊÔ]{1,40}$",
+        [RegularExpression(@"^[A-Z]+[a-záéíóúõãçàâêôA-ZÁÉÍÓÚÕÃÇÀÂ ÊÔ]{1,40}$",
         ErrorMessage = "O nome deve comer pela maiuscula e não deve conter numeros")]
-
         public String Nome_membro { get; set; }
 
         

@@ -1,11 +1,17 @@
 ﻿@model Gestao_de_Projetos.Models.MembroProjeto
 
+
+
 @{ ViewData["Title"] = "Create"; }
+
+
 
 @foreach (var projeto in ViewData["ProjectID"] as List<Project>)
 {
-<h1>@projeto.Nome_projeto</h1>}
+    <h1>@projeto.Nome_projeto</h1>
+}
 <h4>Membros</h4>
+<p>@ViewBag.Message</p>
 <hr />
 
 
@@ -21,44 +27,78 @@
             <th>
                 Função
             </th>
+            <th>
+                Data de Inicio
+            </th>
+            <th>
+                Data de Fim
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-
-        @foreach (var item in ViewData["MembrosID"] as List<Membros>)
-        {
-<tr>
-    <td>
-        @item.Nome_membro
-    </td>
-    <td>
-        @item.Email
-    </td>
-
-    <td>
-        @item.Funcao.NomeFuncao
-    </td>
-
-    <td>
         @using (Html.BeginForm("Create", "MembroProjeto", FormMethod.Post))
         {
-@foreach (var projeto in ViewData["ProjectID"] as List<Project>)
-{
+            @foreach (var item in ViewData["MembrosID"] as List<Membros>)
+            {
+                <tr>
+                    <td>
+                        @item.Nome_membro
+                    </td>
+                    <td>
+                        @item.Email
+                    </td>
 
-                    <input type="hidden" name="ProjectID" value="@projeto.ProjectID" class="btn btn-success">
-                     <input type="hidden" name="MembrosID" value="@item.MembrosID" class="btn btn-success">
-                     <input type="submit" value="Adicionar" class="btn btn-success">}
-}
-    </td>
 
-</tr>}
+
+                    <td>
+                        @item.Funcao.NomeFuncao
+                    </td>
+                    <td>
+                        <input type="date" name="DataInicio">
+                    </td>
+                    <td>
+                        <input type="date" name="DataEfetivaFim">
+                    </td>
+                    <td>
+
+
+
+                        @foreach (var projeto in ViewData["ProjectID"] as List<Project>)
+                        {
+
+
+
+                            <input type="hidden" name="ProjectID" value="@projeto.ProjectID" class="btn btn-success">
+                            <input type="hidden" name="MembrosID" value="@item.MembrosID" class="btn btn-success">
+                            <input type="submit" value="Adicionar" class="btn btn-success">}
+
+
+
+                    </td>
+
+
+
+                </tr>
+            }
+        }
     </tbody>
 </table>
 
+
+
 <div>
-    <a asp-controller="Projects" asp-action="Index">Voltar</a>
+    <a asp-controller="Projects" asp-action="Index">Back to List</a>
 </div>
+
+@if (ViewBag.Message != null)
+{
+    <script type="text/javascript">
+window.onload = function () {
+alert("@ViewBag.Message");
+};
+    </script>
+}
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

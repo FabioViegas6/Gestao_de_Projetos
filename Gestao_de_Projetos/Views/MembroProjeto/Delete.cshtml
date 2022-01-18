@@ -41,6 +41,6 @@
     <form asp-action="Delete">
         <input type="hidden" asp-for="membroProjeto" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Voltar</a>
+        <a asp-controller="MembroProjeto" asp-action="ShowAllDelete" asp-route-id="@Model.ProjectID">Voltar</a>
     </form>
 </div>

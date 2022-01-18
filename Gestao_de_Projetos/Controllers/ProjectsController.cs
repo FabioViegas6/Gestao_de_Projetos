@@ -116,6 +116,8 @@ namespace Gestao_de_Projetos.Controllers
                 {
                     project.EstadoID = 2;
                 }
+         
+
                 _context.Add(project);
                 await _context.SaveChangesAsync();
                 //   return RedirectToAction(nameof(Index));

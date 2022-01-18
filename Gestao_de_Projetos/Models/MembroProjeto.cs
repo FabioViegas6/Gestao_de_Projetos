@@ -27,10 +27,10 @@ namespace Gestao_de_Projetos.Models
         [DataType(DataType.Date)]
         public DateTime DataInicio { get; set; }
 
-
+        [Required]
         [Display(Name = "Data Fim ")]
         [DataType(DataType.Date)]
-        public DateTime? DataEfetivaFim { get; set; }
+        public DateTime DataEfetivaFim { get; set; }
 
 
     }

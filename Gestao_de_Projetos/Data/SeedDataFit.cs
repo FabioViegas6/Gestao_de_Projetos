@@ -11,13 +11,12 @@ namespace Gestao_de_Projetos.Data
         internal static void Populate(Gestao_de_ProjetosContext bd)
         {
             PopulateEstado(bd);
-            PopulateTarefas(bd);
             PopulateClientes(bd);
             PopulateProject(bd);
             PopulateFuncao(bd);
             PopulateMembro(bd);
-            
-            
+            PopulateTarefas(bd);
+
 
         }
 

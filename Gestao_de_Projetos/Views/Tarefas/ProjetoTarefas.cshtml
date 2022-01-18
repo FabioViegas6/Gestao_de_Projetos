@@ -1,0 +1,58 @@
+﻿@model Tarefas
+
+@{
+    ViewData["Title"] = "ProjetoTarefas";
+}
+
+<h1>Tarefas do Projeto</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Nome Tarefa
+            </th>
+            <th>
+                Descricao
+            </th>
+
+            <th>
+                Data Efetiva Inicio
+            </th>
+
+            <th>
+                Data Efetiva Fim
+            </th>
+
+            <th>
+                Membro
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in ViewData["TarefaProjeto"] as List<Tarefas>)
+        {
+        <tr>
+            <td>
+                @item.Nome_Tarefa
+            </td>
+            <td>
+                @item.Descricao
+            </td>
+
+            <td>
+                @item.DataEfetivaInicio.Date.ToString("dd/MM/yyyy")
+            </td>
+
+            <td>
+                @item.DataEfetivaFim.Value.ToString("dd/MM/yyyy")
+            </td>
+            <td>
+                @item.Membros.Nome_membro
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>
+

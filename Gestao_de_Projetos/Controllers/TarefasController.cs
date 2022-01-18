@@ -62,6 +62,21 @@ namespace Gestao_de_Projetos.Controllers
             );
         }
 
+        //Metodo para pegar tarefas consoante o projeto
+        public async Task<IActionResult> ProjetoTarefas(int? id)
+        {
+            ViewData["TarefaProjeto"] = _context.Tarefas.Where(s => s.ProjectID == id)
+                .Include(b => b.Project)
+                .Include(t => t.Estado)
+                .Include(b => b.Membros)
+                .ToList();
+
+
+            return View();
+
+        }
+
+
         // GET: Tarefas/Details/5
         public async Task<IActionResult> Details(int? id)
         {

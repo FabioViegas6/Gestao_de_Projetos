@@ -156,7 +156,7 @@ namespace Gestao_de_Projetos.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
+            ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "NomeFuncao");
             return View(membros);
         }
 

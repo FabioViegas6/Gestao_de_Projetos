@@ -10,16 +10,18 @@ using Gestao_de_Projetos.Models;
 using Gestao_de_Projetos.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 
-namespace Gestao_de_Projetos.Controllers
-{
-    public class TarefasController : Controller
-    {
+
+namespace Gestao_de_Projetos.Controllers {
+
+    [Authorize]
+    public class TarefasController : Controller {
         private readonly Gestao_de_ProjetosContext _context;
 
         public TarefasController(Gestao_de_ProjetosContext context)
         {
             _context = context;
         }
+
 
         // GET: Tarefas
         public async Task<IActionResult> Index(string NomeTarefa, int page = 1)
@@ -100,7 +102,7 @@ namespace Gestao_de_Projetos.Controllers
             return View(tarefas);
         }
 
-
+        [Authorize(Roles = "Gestor")]
         // GET: Tarefas/Create
         public IActionResult Create()
         {
@@ -110,6 +112,7 @@ namespace Gestao_de_Projetos.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Gestor")]
         // POST: Tarefas/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -148,6 +151,7 @@ namespace Gestao_de_Projetos.Controllers
             return View(tarefas);
         }
 
+       
         // GET: Tarefas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -228,6 +232,7 @@ namespace Gestao_de_Projetos.Controllers
             return View(tarefas);
         }
 
+        [Authorize(Roles = "Gestor")]
         // GET: Tarefas/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -256,6 +261,8 @@ namespace Gestao_de_Projetos.Controllers
                 return View("MensagemErro");
             }
         }
+
+        [Authorize(Roles = "Gestor")]
         // POST: Tarefas/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

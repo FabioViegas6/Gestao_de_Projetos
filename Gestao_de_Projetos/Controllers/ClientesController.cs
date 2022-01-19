@@ -78,16 +78,13 @@ namespace Gestao_de_Projetos.Controllers
             {
                 return NotFound();
             }
-            //ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
+         
             return View(clientes);
         }
 
         // GET: Membros/Create
         //public IActionResult Create()
-        //{
-        //    ViewData["FuncaoID"] = new SelectList(_context.Funcao, "FuncaoID", "Nome_Funcao");
-        //    return View();
-        //}
+     
 
         // POST: Clientes/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 

@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Gestao_de_Projetos.Migrations
 {
     [DbContext(typeof(Gestao_de_ProjetosContext))]
-    [Migration("20220118164540_teste3")]
+    [Migration("20220119102643_teste3")]
     partial class teste3
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -87,7 +87,7 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DataEfetivaFim")
+                    b.Property<DateTime>("DataEfetivaFim")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataInicio")
@@ -212,6 +212,9 @@ namespace Gestao_de_Projetos.Migrations
 
                     b.Property<int?>("ProjectID")
                         .HasColumnType("int");
+
+                    b.Property<string>("comentarios")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TarefasID");
 

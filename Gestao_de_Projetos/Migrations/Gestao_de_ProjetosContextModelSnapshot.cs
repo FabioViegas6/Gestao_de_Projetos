@@ -85,7 +85,7 @@ namespace Gestao_de_Projetos.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<DateTime?>("DataEfetivaFim")
+                    b.Property<DateTime>("DataEfetivaFim")
                         .HasColumnType("datetime2");
 
                     b.Property<DateTime>("DataInicio")
@@ -210,6 +210,9 @@ namespace Gestao_de_Projetos.Migrations
 
                     b.Property<int?>("ProjectID")
                         .HasColumnType("int");
+
+                    b.Property<string>("comentarios")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("TarefasID");
 

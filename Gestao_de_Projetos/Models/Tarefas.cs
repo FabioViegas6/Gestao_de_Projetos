@@ -13,10 +13,6 @@ namespace Gestao_de_Projetos.Models
         public int TarefasID { get; set; }
 
 
-        //[ForeignKey("FK_ID_projeto")]
-        //public int ID_projeto { get; set; }
-        //public Projetos Projetos { get; set; }
-
 
 
         [Required]
@@ -52,8 +48,12 @@ namespace Gestao_de_Projetos.Models
         public DateTime? DataEfetivaFim { get; set; }
 
 
-        //[ForeignKey("FK_ProjectID")]
-        public int? ProjectID { get; set; }
+        [Display(Name = "Comentarios")]
+        public String comentarios {get;set;}
+
+
+     //[ForeignKey("FK_ProjectID")]
+         public int? ProjectID { get; set; }
         public Project Project { get; set; }
 
         //[ForeignKey("FK_MembrosID")]

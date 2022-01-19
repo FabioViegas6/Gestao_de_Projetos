@@ -47,7 +47,7 @@
             @Html.DisplayFor(model => model.DataEfetivaFim)
         </dd>
         <dt class="col-sm-2">
-        Projeto
+            Projeto
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Project.Nome_projeto)
@@ -63,6 +63,12 @@
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Estado.NomeEstado)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.comentarios)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.comentarios)
         </dd>
     </dl>
 </div>

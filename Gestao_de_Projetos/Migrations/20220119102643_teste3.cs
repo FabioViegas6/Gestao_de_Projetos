@@ -110,7 +110,7 @@ namespace Gestao_de_Projetos.Migrations
                     MembrosID = table.Column<int>(nullable: false),
                     ProjectID = table.Column<int>(nullable: false),
                     DataInicio = table.Column<DateTime>(nullable: false),
-                    DataEfetivaFim = table.Column<DateTime>(nullable: true)
+                    DataEfetivaFim = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -141,6 +141,7 @@ namespace Gestao_de_Projetos.Migrations
                     DataEfetivaInicio = table.Column<DateTime>(nullable: false),
                     DataPrevistaFim = table.Column<DateTime>(nullable: false),
                     DataEfetivaFim = table.Column<DateTime>(nullable: true),
+                    comentarios = table.Column<string>(nullable: true),
                     ProjectID = table.Column<int>(nullable: true),
                     MembrosID = table.Column<int>(nullable: false),
                     EstadoID = table.Column<int>(nullable: false)

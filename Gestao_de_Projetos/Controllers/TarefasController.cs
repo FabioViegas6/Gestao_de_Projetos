@@ -115,7 +115,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("TarefasID,Nome_Tarefa,Descricao,DataPrevistaInicio,DataEfetivaInicio,DataPrevistaFim,DataEfetivaFim,ProjectID,MembrosID")] Tarefas tarefas)
+        public async Task<IActionResult> Create([Bind("TarefasID,Nome_Tarefa,Descricao,DataPrevistaInicio,DataEfetivaInicio,DataPrevistaFim,DataEfetivaFim,ProjectID,comentarios,MembrosID")] Tarefas tarefas)
         {
             if (tarefas.DataPrevistaFim < tarefas.DataEfetivaInicio || tarefas.DataPrevistaFim < tarefas.DataPrevistaInicio)
             {
@@ -173,7 +173,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("TarefasID,Nome_Tarefa,Descricao,DataPrevistaInicio,DataEfetivaInicio,DataPrevistaFim,DataEfetivaFim,ProjectID,MembrosID")] Tarefas tarefas)
+        public async Task<IActionResult> Edit(int id, [Bind("TarefasID,Nome_Tarefa,Descricao,DataPrevistaInicio,DataEfetivaInicio,DataPrevistaFim,DataEfetivaFim,ProjectID,comentarios,MembrosID")] Tarefas tarefas)
         {
             if (id != tarefas.TarefasID)
             {
@@ -295,10 +295,7 @@ namespace Gestao_de_Projetos.Controllers
         {
             var username = User.Identity.Name;
 
-            //var customer = _context.Customer.SingleOrDefault(c => c.Email == username);
-            //if (customer == null) return NotFound();
-
-            // ...
+            
 
             return "The option for customers to buy books will be added soon !!!";
         }

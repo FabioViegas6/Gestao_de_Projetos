@@ -151,7 +151,7 @@ namespace Gestao_de_Projetos.Controllers {
             return View(tarefas);
         }
 
-       
+        [Authorize(Roles = "Gestor,Membro")]
         // GET: Tarefas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -171,7 +171,7 @@ namespace Gestao_de_Projetos.Controllers {
             ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", tarefas.ProjectID);
             return View(tarefas);
         }
-
+        [Authorize(Roles = "Gestor,Membro")]
         // POST: Tarefas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

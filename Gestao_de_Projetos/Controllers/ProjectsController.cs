@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Gestao_de_Projetos.Controllers
 {
-   // [Authorize]
+   [Authorize]
     public class ProjectsController : Controller
     { public IActionResult Sucess()
         {
@@ -85,7 +85,7 @@ namespace Gestao_de_Projetos.Controllers
 
             return View(project);
         }
-
+        [Authorize(Roles = "Gestor")]
         // GET: Projects/Create
         public IActionResult Create()
         {
@@ -93,7 +93,7 @@ namespace Gestao_de_Projetos.Controllers
             ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado");
             return View();
         }
-
+        [Authorize(Roles = "Gestor")]
         // POST: Projects/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -131,7 +131,7 @@ namespace Gestao_de_Projetos.Controllers
 
             return View(project);
         }
-
+        [Authorize(Roles = "Gestor,Membro")]
         // GET: Projects/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -149,7 +149,7 @@ namespace Gestao_de_Projetos.Controllers
             ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
             return View(project);
         }
-
+        [Authorize(Roles = "Gestor,Membro")]
         // POST: Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -210,7 +210,7 @@ namespace Gestao_de_Projetos.Controllers
             ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
             return View(project);
         }
-
+        [Authorize(Roles = "Gestor")]
         // GET: Projects/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -230,7 +230,7 @@ namespace Gestao_de_Projetos.Controllers
 
             return View(project);
         }
-
+        [Authorize(Roles = "Gestor")]
         // POST: Projects/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]

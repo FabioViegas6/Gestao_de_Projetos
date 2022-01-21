@@ -27,20 +27,23 @@
     <thead>
         <tr>
             <th>
-              Nome Tarefa
+                Nome Tarefa
             </th>
             <th>
-               Descricao
+                Descricao
             </th>
-            
+
             <th>
-               Data Efetiva Inicio
+                Data Efetiva Inicio
             </th>
-           
+
             <th>
-               Data Efetiva Fim
+                Data Efetiva Fim
             </th>
-           
+
+            <th>
+                Projetos
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -65,9 +68,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.DataEfetivaFim)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.ProjectID)
-            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Nome_projeto)
+            </td>
             @*<td>
                 @Html.DisplayFor(modelItem => item.ID_membro)
             </td>*@

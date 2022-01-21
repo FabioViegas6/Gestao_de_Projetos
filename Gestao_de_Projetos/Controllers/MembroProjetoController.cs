@@ -64,11 +64,9 @@ namespace Gestao_de_Projetos.Controllers
                     membros_fora_projeto.Add(item);
                 }
             }
-            // ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email");
-            // ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto");
+            
 
             ViewData["ProjectID"] = _context.Project.Where(p => p.ProjectID == id).ToList();
-            //ViewData["MembrosID"] = _context.Membros.Include(b => b.Funcao).ToList();
             ViewData["MembrosID"] = membros_fora_projeto;
 
             if (erro != null)
@@ -111,7 +109,6 @@ namespace Gestao_de_Projetos.Controllers
             if (membroProjeto.DataEfetivaFim < membroProjeto.DataInicio)
             {
                 Erro = "Data Fim tem deve ser maior que a data inicio";
-                //ModelState.AddModelError("Data Fim tem de ser maior que a data inicio", "");
             }
             else
             {
@@ -119,13 +116,9 @@ namespace Gestao_de_Projetos.Controllers
                 {
                     _context.Add(membroProjeto);
                     await _context.SaveChangesAsync();
-                    //    return RedirectToAction(nameof(Index));
                 }
             }
            
-            //ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email", membroProjeto.MembrosID);
-            //ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", membroProjeto.ProjectID);
-            //return View(membroProjeto);
             return RedirectToAction("Create", "MembroProjeto", new { id = membroProjeto.ProjectID,erro= Erro });
         }
 
@@ -137,7 +130,8 @@ namespace Gestao_de_Projetos.Controllers
                 return NotFound();
             }
 
-            var membroProjeto = await _context.MembroProjeto.FindAsync(id);
+            var membroProjeto = await _context.MembroProjeto.Include(m => m.Membros).Include(m => m.Project).FirstOrDefaultAsync(h => h.membroProjeto==id);
+                 
             if (membroProjeto == null)
             {
                 return NotFound();
@@ -152,23 +146,30 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("membroProjeto,MembrosID,ProjectID,DataInicio,DataPrevistaFim,DataEfetivaFim")] MembroProjeto membroProjeto)
+        public async Task<IActionResult> Edit(int id, [Bind("membroProjeto,MembrosID,ProjectID,DataInicio,DataEfetivaFim")] MembroProjeto Membropros)
         {
-            if (id != membroProjeto.membroProjeto)
+           
+
+            if (id != Membropros.membroProjeto)
             {
+                //membroProjeto,MembrosID,ProjectID,
                 return NotFound();
+
             }
 
+            
+            //membroProjeto.membroProjeto = id;
             if (ModelState.IsValid)
             {
                 try
                 {
-                    _context.Update(membroProjeto);
+                   
+                    _context.Update(Membropros);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!MembroProjetoExists(membroProjeto.membroProjeto))
+                    if (!MembroProjetoExists(Membropros.membroProjeto))
                     {
                         return NotFound();
                     }
@@ -177,12 +178,10 @@ namespace Gestao_de_Projetos.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                //return RedirectToAction(nameof(Index));
             }
-            //ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Email", membroProjeto.MembrosID);
-            //ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", membroProjeto.ProjectID);
-            //return View(membroProjeto);
-            return RedirectToAction("ShowAll", new { id = membroProjeto.ProjectID });
+          
+            return RedirectToAction("ShowAll", new { id = Membropros.ProjectID });
         }
 
         // GET: MembroProjeto/Delete/5

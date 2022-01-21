@@ -4,41 +4,46 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1>Editar</h1>
 
-<h4>MembroProjeto</h4>
+<h4>Membro do Projeto</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="Edit">
+        @using (Html.BeginForm("Edit", "MembroProjeto", FormMethod.Post))
+        {
+
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="membroProjeto" />
+            <input type="hidden" asp-for="membroProjeto"  />
+            <input type="hidden" value="@Model.ProjectID" name="ProjectID" />
+            <input type="hidden" value="@Model.MembrosID" name="MembrosID" />
+            
             <div class="form-group">
-                <label asp-for="MembrosID" class="control-label"></label>
-                <select asp-for="MembrosID" class="form-control" asp-items="ViewBag.MembrosID"></select>
+                <label asp-for="MembrosID" class="control-label">Membro</label><br />
+                <input type="text" value="@Model.Membros.Email" style="border:0 none" readonly>
                 <span asp-validation-for="MembrosID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="ProjectID" class="control-label"></label>
-                <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
+                <label asp-for="ProjectID" class="control-label">Projeto</label><br />
+                <input type="text" value="@Model.Project.Nome_projeto" style="border:0 none" readonly>
                 <span asp-validation-for="ProjectID" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="DataInicio" class="control-label"></label>
+                <label asp-for="DataInicio" class="control-label">Data Inicio</label>
                 <input asp-for="DataInicio" class="form-control" />
                 <span asp-validation-for="DataInicio" class="text-danger"></span>
             </div>
-           
+
             <div class="form-group">
-                <label asp-for="DataEfetivaFim" class="control-label"></label>
+                <label asp-for="DataEfetivaFim" class="control-label">Data Fim</label>
                 <input asp-for="DataEfetivaFim" class="form-control" />
                 <span asp-validation-for="DataEfetivaFim" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
-        </form>
-    </div>
+        }
+        </div>
 </div>
 
 <div>

@@ -42,11 +42,17 @@
             </td>
 
             <td>
-                @item.DataEfetivaInicio.Date.ToString("dd/MM/yyyy")
+                @if (item.DataEfetivaInicio != null)
+                {
+                    @item.DataEfetivaInicio.Date.ToString("dd/MM/yyyy")
+                }
             </td>
 
             <td>
-                @item.DataEfetivaFim.Value.ToString("dd/MM/yyyy")
+                @if (item.DataEfetivaFim != null)
+                {
+                    @item.DataEfetivaFim.Value.ToString("dd/MM/yyyy")
+                }
             </td>
             <td>
                 @item.Membros.Nome_membro
@@ -56,6 +62,6 @@
     </tbody>
 </table>
 <div>
-    <a asp-action="Index">Voltar</a>
+    <a asp-controller="Projects" asp-action="Index">Voltar</a>
 </div>
 

@@ -210,6 +210,34 @@ namespace Gestao_de_Projetos.Controllers
             ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
             return View(project);
         }
+
+        public async Task<IActionResult> ConcluirProjeto (int id)
+        {
+            var projeto = _context.Project.Find(id);
+            var tarefasTotal = _context.Tarefas.Where(s => s.ProjectID == projeto.ProjectID) .Count();
+            var tarefasConcluidas = _context.Tarefas.Where(s => s.ProjectID == projeto.ProjectID && s.EstadoID==3) .Count();
+            
+            if (tarefasConcluidas != tarefasTotal)
+            {
+                ModelState.AddModelError("", "Ainda tem tarefas por concluir");
+            }
+            else if (tarefasTotal == 0)
+            {
+                ModelState.AddModelError("", "Não tem tarefas no projeto para se concluir");
+            }
+            else {
+                projeto.EstadoID = 3;
+                _context.Update(projeto);
+                await _context.SaveChangesAsync();
+
+                ViewBag.Title = "Projeto alterado";
+                ViewBag.Message = "projeto alterado com sucesso!!!.";
+                return View("Sucess");
+            }
+
+            return View("Edit",projeto);
+        }
+
         [Authorize(Roles = "Gestor")]
         // GET: Projects/Delete/5
         public async Task<IActionResult> Delete(int? id)

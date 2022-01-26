@@ -13,54 +13,70 @@
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="TarefasID" />
-            <div class="form-group">
-                <label asp-for="Nome_Tarefa" class="control-label"></label>
-                <input asp-for="Nome_Tarefa" class="form-control" />
-                <span asp-validation-for="Nome_Tarefa" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Descricao" class="control-label"></label>
-                <input asp-for="Descricao" class="form-control" />
-                <span asp-validation-for="Descricao" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataPrevistaInicio" class="control-label"></label>
-                <input asp-for="DataPrevistaInicio" class="form-control" />
-                <span asp-validation-for="DataPrevistaInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataEfetivaInicio" class="control-label"></label>
-                <input asp-for="DataEfetivaInicio" class="form-control" />
-                <span asp-validation-for="DataEfetivaInicio" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataPrevistaFim" class="control-label"></label>
-                <input asp-for="DataPrevistaFim" class="form-control" />
-                <span asp-validation-for="DataPrevistaFim" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DataEfetivaFim" class="control-label"></label>
-                <input asp-for="DataEfetivaFim" class="form-control" />
-                <span asp-validation-for="DataEfetivaFim" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="ProjectID" class="control-label">Projetos</label>
-                <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="MembrosID" class="control-label">Membros</label>
-                <select asp-for="MembrosID" class="form-control" asp-items="ViewBag.MembrosID"></select>
-            </div>
+            @if (User.IsInRole("Gestor") || User.IsInRole("Membro"))
+            {
+                <div class="form-group">
+                    <label asp-for="Nome_Tarefa" class="control-label"></label>
+                    <input asp-for="Nome_Tarefa" class="form-control" />
+                    <span asp-validation-for="Nome_Tarefa" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="Descricao" class="control-label"></label>
+                    <input asp-for="Descricao" class="form-control" />
+                    <span asp-validation-for="Descricao" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataPrevistaInicio" class="control-label"></label>
+                    <input asp-for="DataPrevistaInicio" class="form-control" />
+                    <span asp-validation-for="DataPrevistaInicio" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataEfetivaInicio" class="control-label"></label>
+                    <input asp-for="DataEfetivaInicio" class="form-control" />
+                    <span asp-validation-for="DataEfetivaInicio" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataPrevistaFim" class="control-label"></label>
+                    <input asp-for="DataPrevistaFim" class="form-control" />
+                    <span asp-validation-for="DataPrevistaFim" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="DataEfetivaFim" class="control-label"></label>
+                    <input asp-for="DataEfetivaFim" class="form-control" />
+                    <span asp-validation-for="DataEfetivaFim" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="ProjectID" class="control-label">Projetos</label>
+                    <select asp-for="ProjectID" class="form-control" asp-items="ViewBag.ProjectID"></select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="MembrosID" class="control-label">Membros</label>
+                    <select asp-for="MembrosID" class="form-control" asp-items="ViewBag.MembrosID"></select>
+                </div>
 
-            <div class="form-group">
-                <label for="comentarios">Comentarios</label>
-                <textarea asp-for="comentarios" class="form-control" id="comentarios" rows="3"></textarea>
-            </div>
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            }
 
-            <div class="form-group">
-                <input type="submit" value="Guardar" class="btn btn-primary" />
-            </div>
+
         </form>
+
+        @using (Html.BeginForm("AddComment", "Tarefas", FormMethod.Post))
+        {
+            @if (User.IsInRole("Cliente"))
+            {
+                <input type="hidden" asp-for="TarefasID" />
+                <div class="form-group">
+                    <label for="comentarios">Comentarios</label>
+                    <textarea asp-for="comentarios" class="form-control" id="comentarios" rows="3"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Guardar" class="btn btn-primary" />
+                </div>
+            }
+        }
     </div>
 </div>
 

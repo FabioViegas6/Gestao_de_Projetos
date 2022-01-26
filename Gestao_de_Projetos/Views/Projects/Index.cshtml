@@ -26,20 +26,6 @@
 </div>
 
 
-<div class="card">
-    <div class="card-body">
-        <h5 class="card-title">Pesquisar</h5>
-        <form asp-action="Index" method="get">
-            <label for="NomeEstado" class="control-label">Estado</label>
-            <input name="NomeEstado" type="search" class="form-control" value="@Model.ProjetoSearched" />
-            <div class="mt-3">
-                <input type="submit" value="Pesquisar" class="btn btn-info" />
-                <a asp-action="Index" class="btn btn-secondary">Limpar</a>
-            </div>
-        </form>
-    </div>
-</div>
-
 @foreach (var projetos in Model.ListaProjetos)
 {
    

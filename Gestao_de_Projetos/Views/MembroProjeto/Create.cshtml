@@ -8,11 +8,10 @@
 
 @foreach (var projeto in ViewData["ProjectID"] as List<Project>)
 {
-    <h1>@projeto.Nome_projeto</h1>
-}
+    <h1>@projeto.Nome_projeto</h1>}
 <h4>Membros</h4>
-<p>@ViewBag.Message</p>
 <hr />
+
 
 
 <table class="table">
@@ -37,7 +36,7 @@
         </tr>
     </thead>
     <tbody>
-        @using (Html.BeginForm("Create", "MembroProjeto", FormMethod.Post))
+        @using (Html.BeginForm("Create", "MembroProjeto", FormMethod.Post, new { @id = "membroProjetoForm" }))
         {
             @foreach (var item in ViewData["MembrosID"] as List<Membros>)
             {
@@ -55,10 +54,10 @@
                         @item.Funcao.NomeFuncao
                     </td>
                     <td>
-                        <input type="date" name="DataInicio">
+                        <input id="data_inicio" type="date" name="DataInicio">
                     </td>
                     <td>
-                        <input type="date" name="DataEfetivaFim">
+                        <input id="data_fim" type="date" name="DataEfetivaFim">
                     </td>
                     <td>
 
@@ -80,25 +79,62 @@
 
 
                 </tr>
-            }
-        }
+}}
     </tbody>
 </table>
 
 
 
 <div>
-    <a asp-controller="Projects" asp-action="Index">Back to List</a>
+    <a asp-controller="Projects" asp-action="Index">Voltar</a>
 </div>
 
-@if (ViewBag.Message != null)
-{
-    <script type="text/javascript">
-window.onload = function () {
-alert("@ViewBag.Message");
-};
-    </script>
-}
+
+
+
+<script type="text/javascript">
+    document.addEventListener("DOMContentLoaded", function () {
+
+        var formElement = document.getElementById("membroProjetoForm");
+
+
+
+        formElement.addEventListener("submit", function (e) {
+
+            var dataInicio = Date.parse(document.getElementById("data_inicio").value);
+            var dataFim = Date.parse(document.getElementById("data_fim").value);
+
+
+
+            if (isNaN(dataInicio)) {
+                alert("Selecione a data de inicio");
+                e.preventDefault();
+                return;
+            }
+
+
+
+            if (isNaN(dataFim)) {
+                alert("Selecione a data de fim");
+                e.preventDefault();
+                return;
+            }
+
+
+
+            if (dataFim < dataInicio) {
+                alert("A data de fim deve ser maior que a data de inicio");
+                e.preventDefault();
+            }
+
+
+
+        });
+    });
+
+</script>
+
+
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

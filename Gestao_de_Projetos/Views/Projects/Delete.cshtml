@@ -4,47 +4,58 @@
     ViewData["Title"] = "Delete";
 }
 
-<h1>Apagar</h1>
 
-<h3>Apagar?</h3>
+<h3>Apagar Projeto</h3>
 <div>
-    <h4>Project</h4>
+  
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nome_projeto)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Nome_projeto)
         </dd>
-        
-        <dt class = "col-sm-2">
+
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataInicio)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataInicio)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataPrevistaFim)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataPrevistaFim)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.DataEfetivaFim)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.DataEfetivaFim)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Clientes)
+        <dt class="col-sm-2">
+           Cliente
         </dt>
-        
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Clientes.Nome)
+        </dd>
+
     </dl>
-    
+
     <form asp-action="Delete">
         <input type="hidden" asp-for="ProjectID" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Voltar</a>
     </form>
+
+    @if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+           window.onload = function () {
+          alert("@ViewBag.Message");
+};
+        </script>
+    }
 </div>

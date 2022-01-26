@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
 using Gestao_de_Projetos.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -21,6 +22,7 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Clientes
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Index(string NomeCliente, int page = 1)
         {
             var ClientesSearch = _context.Clientes
@@ -65,6 +67,7 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Clientes/Details/5
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -106,6 +109,7 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Clientes/Edit/5
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -126,6 +130,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Edit(int id, [Bind("ClientesId,Nome,Apelido,Contacto,NIF,Email,Password")] Clientes clientes)
         {
             if (id != clientes.ClientesId)
@@ -157,6 +162,7 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Clientes/Delete/5
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -177,6 +183,7 @@ namespace Gestao_de_Projetos.Controllers
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var clientes = await _context.Clientes.FindAsync(id);

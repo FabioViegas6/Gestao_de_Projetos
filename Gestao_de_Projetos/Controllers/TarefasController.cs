@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Gestao_de_Projetos.Controllers {
 
-    [Authorize]
+    
     public class TarefasController : Controller {
         private readonly Gestao_de_ProjetosContext _context;
 
@@ -22,7 +22,7 @@ namespace Gestao_de_Projetos.Controllers {
             _context = context;
         }
 
-
+        [Authorize(Roles = "Gestor,Membro")]
         // GET: Tarefas
         public async Task<IActionResult> Index(string NomeTarefa, int page = 1)
         {
@@ -78,7 +78,7 @@ namespace Gestao_de_Projetos.Controllers {
 
         }
 
-
+        [Authorize(Roles = "Gestor,Membro,Cliente")]
         // GET: Tarefas/Details/5
         public async Task<IActionResult> Details(int? id)
         {

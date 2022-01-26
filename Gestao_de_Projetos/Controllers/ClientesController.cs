@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
 using Gestao_de_Projetos.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gestao_de_Projetos.Controllers
 {
@@ -19,7 +20,7 @@ namespace Gestao_de_Projetos.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "Gestor")]
         // GET: Clientes
         public async Task<IActionResult> Index(string NomeCliente, int page = 1)
         {
@@ -59,6 +60,7 @@ namespace Gestao_de_Projetos.Controllers
             );
         }
         // GET: Clientes/Create
+        [Authorize(Roles = "Gestor")]
         public IActionResult Create()
         {
             return View();
@@ -91,6 +93,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Create([Bind("ClientesId,Nome,Apelido,Contacto,NIF,Email,Password")] Clientes clientes)
         {
             if (ModelState.IsValid)
@@ -106,6 +109,7 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Clientes/Edit/5
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -126,6 +130,7 @@ namespace Gestao_de_Projetos.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> Edit(int id, [Bind("ClientesId,Nome,Apelido,Contacto,NIF,Email,Password")] Clientes clientes)
         {
             if (id != clientes.ClientesId)
@@ -177,6 +182,7 @@ namespace Gestao_de_Projetos.Controllers
         // POST: Clientes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [Authorize(Roles = "Gestor")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var clientes = await _context.Clientes.FindAsync(id);

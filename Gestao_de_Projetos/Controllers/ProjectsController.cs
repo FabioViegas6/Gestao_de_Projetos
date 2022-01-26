@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace Gestao_de_Projetos.Controllers
 {
-   [Authorize]
+    
     public class ProjectsController : Controller
     { public IActionResult Sucess()
         {
@@ -25,7 +25,7 @@ namespace Gestao_de_Projetos.Controllers
         {
             _context = context;
         }
-
+        [Authorize(Roles = "Gestor,Membro,Cliente")]
         // GET: Projects
         public async Task<IActionResult> Index(string nomeProjeto, int page = 1)
         {
@@ -67,6 +67,7 @@ namespace Gestao_de_Projetos.Controllers
         }
 
         // GET: Projects/Details/5
+        [Authorize(Roles = "Gestor,Membro,Cliente")]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -131,8 +132,9 @@ namespace Gestao_de_Projetos.Controllers
 
             return View(project);
         }
-        [Authorize(Roles = "Gestor,Membro")]
+        [Authorize(Roles = "Gestor")]
         // GET: Projects/Edit/5
+
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -149,7 +151,7 @@ namespace Gestao_de_Projetos.Controllers
             ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", project.EstadoID);
             return View(project);
         }
-        [Authorize(Roles = "Gestor,Membro")]
+        [Authorize(Roles = "Gestor")]
         // POST: Projects/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.

@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using Gestao_de_Projetos.Data;
 using Gestao_de_Projetos.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Gestao_de_Projetos.Controllers
 {
+    [Authorize(Roles = "Gestor")]
     public class MembroProjetoController : Controller
     {
         private readonly Gestao_de_ProjetosContext _context;

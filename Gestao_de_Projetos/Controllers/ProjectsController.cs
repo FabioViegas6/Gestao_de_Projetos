@@ -30,7 +30,7 @@ namespace Gestao_de_Projetos.Controllers
         public async Task<IActionResult> Index(string nomeProjeto, int page = 1)
         {
             var ProjectSearch = _context.Project
-               .Where(b => nomeProjeto == null || b.Nome_projeto.Contains(nomeProjeto));
+               .Where(b => nomeProjeto == null || b.Nome_projeto.Contains(nomeProjeto) || b.Estado.NomeEstado.Contains(nomeProjeto));
 
             var pagingInfo = new PagingInfo
             {
@@ -55,7 +55,7 @@ namespace Gestao_de_Projetos.Controllers
                             .Skip((pagingInfo.CurrentPage - 1) * pagingInfo.PageSize)
                             .Take(pagingInfo.PageSize)
                             .ToListAsync();
-
+          
             return View(
                 new ProjetosListViewModels
                 {
@@ -240,9 +240,17 @@ namespace Gestao_de_Projetos.Controllers
             {
 
                 var project = await _context.Project.FindAsync(id);
-            _context.Project.Remove(project);
-            await _context.SaveChangesAsync();
-                // return RedirectToAction(nameof(Index));
+                var cliente = _context.Clientes.Where(c => c.ClientesId == project.ClientesId);
+                if (cliente != null)
+                {
+
+                    ViewBag.Message = "Nao se pode apagar o projeto, pois o cliente ainda existe na base de dados!";
+                    return View(project);
+                    
+                }
+                _context.Project.Remove(project);
+                await _context.SaveChangesAsync();
+ 
                 ViewBag.Title = "Projeto Apagado";
                 ViewBag.Message = "Projeto apagado com sucesso!!!";
                 return View("Sucess");

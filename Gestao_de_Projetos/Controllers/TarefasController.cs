@@ -106,10 +106,71 @@ namespace Gestao_de_Projetos.Controllers {
         // GET: Tarefas/Create
         public IActionResult Create()
         {
-            ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Nome_membro");
+            List<Project> Lprojects = new List<Project>();
+            Lprojects = _context.Project.OrderBy(t => t.ProjectID).ToList();
+
+
+
+            Project project = new Project();
+            project = Lprojects.FirstOrDefault();
+
+
+
+            List<Membros> membros_dentro_projeto = new List<Membros>();
+            List<Membros> membros = new List<Membros>();
+
+
+
+            membros = _context.Membros.Include(b => b.Funcao).ToList();
+
+
+
+            foreach (var item in membros)
+            {
+                if (_context.MembroProjeto.Any(mp => mp.MembrosID == item.MembrosID && mp.ProjectID == project.ProjectID))
+                {
+                    membros_dentro_projeto.Add(item);
+                }
+            }
+
+
+
+            ViewData["MembrosID"] = new SelectList(membros_dentro_projeto, "MembrosID", "Nome_membro");
             ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado");
-            ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto");
+            ViewData["ProjectID"] = new SelectList(Lprojects, "ProjectID", "Nome_projeto");
+
+
+
             return View();
+        }
+
+
+
+        [HttpGet]
+        public IActionResult Partial(int? id)
+        {
+            List<Membros> membros_dentro_projeto = new List<Membros>();
+            List<Membros> membros = new List<Membros>();
+
+
+
+            membros = _context.Membros.Include(b => b.Funcao).ToList();
+
+
+
+            foreach (var item in membros)
+            {
+                if (_context.MembroProjeto.Any(mp => mp.MembrosID == item.MembrosID && mp.ProjectID == id))
+                {
+                    membros_dentro_projeto.Add(item);
+                }
+            }
+
+
+
+            ViewData["MembrosID"] = new SelectList(membros_dentro_projeto.ToList(), "MembrosID", "Nome_membro");
+            return PartialView("_MembrosTarefa");
+
         }
 
         [Authorize(Roles = "Gestor")]
@@ -151,7 +212,7 @@ namespace Gestao_de_Projetos.Controllers {
             return View(tarefas);
         }
 
-        [Authorize(Roles = "Gestor,Membro")]
+        [Authorize(Roles = "Gestor,Membro,Cliente")]
         // GET: Tarefas/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
@@ -171,7 +232,7 @@ namespace Gestao_de_Projetos.Controllers {
             ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", tarefas.ProjectID);
             return View(tarefas);
         }
-        [Authorize(Roles = "Gestor,Membro")]
+        [Authorize(Roles = "Gestor,Membro,Cliente")]
         // POST: Tarefas/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
@@ -231,6 +292,45 @@ namespace Gestao_de_Projetos.Controllers {
             ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", tarefas.ProjectID);
             return View(tarefas);
         }
+
+
+        [HttpPost]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddComment( [Bind("TarefasID,comentarios")] Tarefas tarefas)
+        {
+            
+            
+                try
+                {
+                    var tarefa = _context.Tarefas.Where(t => t.TarefasID == tarefas.TarefasID).FirstOrDefault();
+
+                    tarefa.comentarios = tarefas.comentarios;
+                    
+                    _context.Update(tarefa);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!TarefasExists(tarefas.TarefasID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+                ViewBag.Title = "Tarefa Alterada";
+                ViewBag.Message = "Tarefa alterada com sucesso!!!.";
+                return View("Success");
+            
+
+            //ViewData["MembrosID"] = new SelectList(_context.Membros, "MembrosID", "Nome_membro", tarefas.MembrosID);
+            //ViewData["EstadoID"] = new SelectList(_context.Estado, "EstadoID", "NomeEstado", tarefas.EstadoID);
+            //ViewData["ProjectID"] = new SelectList(_context.Project, "ProjectID", "Nome_projeto", tarefas.ProjectID);
+            //return View(tarefas);
+        }
+
 
         [Authorize(Roles = "Gestor")]
         // GET: Tarefas/Delete/5

@@ -79,7 +79,6 @@ namespace Gestao_de_Projetos.Controllers
 
             return View(funcao);
         }
-
         // GET: Funcaos/Create
         public IActionResult Create()
         {

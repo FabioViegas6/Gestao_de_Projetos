@@ -22,7 +22,7 @@ namespace Gestao_de_Projetos.Controllers {
             _context = context;
         }
 
-        [Authorize(Roles = "Gestor,Membro")]
+        [Authorize(Roles = "Gestor,Membro,Cliente")]
         // GET: Tarefas
         public async Task<IActionResult> Index(string NomeTarefa, int page = 1)
         {

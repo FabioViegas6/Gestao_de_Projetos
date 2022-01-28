@@ -29,20 +29,24 @@
             <th>
                 Nome Tarefa
             </th>
-            <th>
+            @*<th>
                 Descricao
-            </th>
+            </th>*@
 
             <th>
                 Data Efetiva Inicio
             </th>
 
             <th>
-                Data Efetiva Fim
+                Data Prevista Fim
             </th>
 
             <th>
                 Projetos
+            </th>
+
+            <th>
+                Estado
             </th>
             <th></th>
         </tr>
@@ -53,27 +57,31 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Nome_Tarefa)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Descricao)
-            </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.DataPrevistaInicio)
+                @Html.DisplayFor(modelItem => item.Descricao)
             </td>*@
+            @*<td>
+            @Html.DisplayFor(modelItem => item.DataPrevistaInicio)
+        </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.DataEfetivaInicio)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.DataPrevistaFim)
-            </td>*@
+            @Html.DisplayFor(modelItem => item.DataPrevistaFim)
+        </td>*@
             <td>
-                @Html.DisplayFor(modelItem => item.DataEfetivaFim)
+                @Html.DisplayFor(modelItem => item.DataPrevistaFim)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Project.Nome_projeto)
             </td>
             @*<td>
-                @Html.DisplayFor(modelItem => item.ID_membro)
-            </td>*@
+            @Html.DisplayFor(modelItem => item.ID_membro)
+        </td>*@
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Estado.NomeEstado)
+            </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.TarefasID">Editar</a> |
                 <a asp-action="Details" asp-route-id="@item.TarefasID">Detalhes</a> |
